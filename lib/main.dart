@@ -1,4 +1,5 @@
-import 'package:car_maintanance/home/main.dart';
+import 'package:car_maintanance/routes/app_routes.dart';
+import 'package:car_maintanance/theme/theme_helper.dart';
 
 import 'package:flutter/material.dart';
 
@@ -12,14 +13,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'My Flutter project',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 209, 129, 8)),
-        useMaterial3: true,
-      ),
+      title: 'CARCARE',
+      theme: theme,
+      // ThemeData(
+      //   colorScheme: ColorScheme.fromSeed(
+      //     seedColor: const Color.fromARGB(255, 209, 129, 8),
+      //   ),
+      //   useMaterial3: true,
+      // ),
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      initialRoute: AppRoutes.splashScreen,
+      routes: AppRoutes.routes,
     );
   }
 }
