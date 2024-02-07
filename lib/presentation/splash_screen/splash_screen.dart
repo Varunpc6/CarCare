@@ -18,7 +18,7 @@ class SplashScreen extends StatelessWidget {
       ),
       splashIconSize: 400,
       splashTransition: SplashTransition.fadeTransition,
-      nextScreen:  OnboardingPageState(),
+      nextScreen: OnboardingPageState(),
     );
   }
 }

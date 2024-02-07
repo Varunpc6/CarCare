@@ -6,10 +6,13 @@ class CustomImageView extends StatelessWidget {
   final double width;
   final EdgeInsets margin;
 
-  const CustomImageView({super.key, 
+  const CustomImageView({
+    super.key,
     required this.imagePath,
     required this.height,
     required this.width,
+    required Alignment alignment,
+    required BorderRadius radius,
     this.margin = EdgeInsets.zero,
   });
 

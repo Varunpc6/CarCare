@@ -44,4 +44,18 @@ class ImageConstant {
   static String imgRectangleAbout = '$imagePath/img_rectangle_about.jpg';
 
   static String imgRectangleLogoOut = '$imagePath/img_rectangle_573.jpg';
+
+  // My Account images
+  static String imgMyAccount1 = '$imagePath/img_my_account.png';
+
+  static String imgB20c659c94ea068 = '$imagePath/img_b20c659c94ea068.png';
+
+  static String imgTelevision20x20 = '$imagePath/img_television_20x20.svg';
+
+  // About Screen Image
+  static String logoScreen = '$imagePath/img_free_hdconvert_122x184.png';
+
+  static String instagram = '$imagePath/ instagram-2016-logo-svgrepo-com.svg';
+
+  static String star = '$imagePath/star.png';
 }

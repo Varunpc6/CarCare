@@ -1,6 +1,5 @@
 import 'package:car_maintanance/core/utils/image_constant.dart';
 import 'package:car_maintanance/routes/app_routes.dart';
-
 import 'package:flutter/material.dart';
 
 class UserInScreen extends StatelessWidget {
@@ -12,17 +11,20 @@ class UserInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Stack(
-          children: [
-            // Background Image
-            _buildBackgroundImage(context),
-            _buildFromContainer(),
-            // Circular Image
-            _buildCircularImage(context),
-            // Elevated button
-            _buildElevatedButton(context),
-          ],
+        resizeToAvoidBottomInset:
+            false, // Background Image Rising on TextField click time
+        body: Center(
+          child: Stack(
+            children: [
+              // Background Image
+              _buildBackgroundImage(context),
+              _buildFromContainer(context),
+              // Circular Image
+              _buildCircularImage(context),
+              // Elevated button
+              _buildElevatedButton(context),
+            ],
+          ),
         ),
       ),
     );
@@ -46,23 +48,22 @@ class UserInScreen extends StatelessWidget {
   }
 
   // User Interface
-  _buildFromContainer() {
+  _buildFromContainer(BuildContext context) {
     return Stack(
       children: [
         // Container Hovering over the Image
         Positioned(
-          top: 115,
-          left: 30,
+          top: MediaQuery.of(context).size.height * 0.15,
+          left: MediaQuery.of(context).size.width * 0.1,
           child: Container(
-            width: 300,
-            height: 450,
+            width: MediaQuery.of(context).size.width * 0.8,
+            height: MediaQuery.of(context).size.height * 0.6,
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 68, 65, 65).withOpacity(0.5),
-              borderRadius:
-                  BorderRadius.circular(10.0), // Adjust the radius as needed
+              borderRadius: BorderRadius.circular(10.0),
               border: Border.all(
-                color: Colors.orange, // Set the border color to orange
-                width: 2.0, // Set the border width as needed
+                color: Colors.orange,
+                width: 2.0,
               ),
             ),
             child: Center(
@@ -87,7 +88,6 @@ class UserInScreen extends StatelessWidget {
                               width: 2.0,
                             ),
                           ),
-                          // Person icon
                           prefixIcon: Icon(
                             Icons.person,
                             color: Colors.white,
@@ -97,16 +97,14 @@ class UserInScreen extends StatelessWidget {
                           fillColor: Colors.transparent,
                           labelText: "Username",
                           labelStyle: TextStyle(
-                            color: Colors
-                                .white, // Color of the label when not focused
+                            color: Colors.white,
                           ),
-                          // Customize the hint label style when focused
                           hintStyle: TextStyle(
-                            color: Color(0xFFFB7E3C), // Set the hint text color
+                            color: Color(0xFFFB7E3C),
                           ),
                         ),
                         style: const TextStyle(
-                          color: Colors.white, // Set the initial text color
+                          color: Colors.white,
                         ),
                       ),
                       const SizedBox(height: 16.0),
@@ -133,16 +131,14 @@ class UserInScreen extends StatelessWidget {
                           fillColor: Colors.transparent,
                           labelText: "Car name / no.plate",
                           labelStyle: TextStyle(
-                            color: Colors
-                                .white, // Color of the label when not focused
+                            color: Colors.white,
                           ),
-                          // Customize the hint label style when focused
                           hintStyle: TextStyle(
-                            color: Color(0xFFFB7E3C), // Set the hint text color
+                            color: Color(0xFFFB7E3C),
                           ),
                         ),
                         style: const TextStyle(
-                          color: Colors.white, // Set the initial text color
+                          color: Colors.white,
                         ),
                       ),
                       const SizedBox(height: 16.0),
@@ -213,16 +209,14 @@ class UserInScreen extends StatelessWidget {
                           fillColor: Colors.transparent,
                           labelText: "Model",
                           labelStyle: TextStyle(
-                            color: Colors
-                                .white, // Color of the label when not focused
+                            color: Colors.white,
                           ),
-                          // Customize the hint label style when focused
                           hintStyle: TextStyle(
-                            color: Color(0xFFFB7E3C), // Set the hint text color
+                            color: Color(0xFFFB7E3C),
                           ),
                         ),
                         style: const TextStyle(
-                          color: Colors.white, // Set the initial text color
+                          color: Colors.white,
                         ),
                       ),
                     ],
@@ -242,19 +236,19 @@ class UserInScreen extends StatelessWidget {
         child: Stack(
           children: [
             Positioned(
-              left: 130,
-              top: 70,
+              left: MediaQuery.of(context).size.width * 0.35,
+              top: MediaQuery.of(context).size.height * 0.08,
               child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.25,
-                height: MediaQuery.of(context).size.height * 0.12,
+                width: MediaQuery.of(context).size.width * 0.3,
+                height: MediaQuery.of(context).size.height * 0.15,
                 child: Stack(
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.40,
-                      height: MediaQuery.of(context).size.height * 0.40,
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      height: MediaQuery.of(context).size.height * 0.4,
                       decoration: const ShapeDecoration(
                         color: Color.fromARGB(255, 255, 255, 255),
-                        shape: OvalBorder(
+                        shape: CircleBorder(
                           side: BorderSide(
                             width: 2,
                             color: Color(0xFFFB7E3C),
@@ -269,7 +263,6 @@ class UserInScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      // Rotated Image
                       child: ClipOval(
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.21,
@@ -296,18 +289,17 @@ class UserInScreen extends StatelessWidget {
 
   _buildElevatedButton(BuildContext context) {
     return Positioned(
-      top: 610,
-      left: 100,
+      top: MediaQuery.of(context).size.height * 0.85,
+      left: MediaQuery.of(context).size.width * 0.25,
       child: ElevatedButton(
         onPressed: () {
           onTapCreate(context);
         },
         style: ElevatedButton.styleFrom(
-          elevation: 3, // Customize the elevation
-          minimumSize: const Size(160, 60), // Customize the button size
+          elevation: 3,
+          minimumSize: const Size(160, 60),
           shape: RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.circular(10), // Customize the border radius
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
         child: const Text(
@@ -318,8 +310,8 @@ class UserInScreen extends StatelessWidget {
     );
   }
 
-  /// Navigates to the homeScreen
-  onTapCreate(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.homeScreen);
+  /// Navigates to the homeScreen and replaces the current route
+  void onTapCreate(BuildContext context) {
+    Navigator.pushReplacementNamed(context, AppRoutes.homeScreen);
   }
 }

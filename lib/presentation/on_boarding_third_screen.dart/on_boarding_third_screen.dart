@@ -42,10 +42,10 @@ class OnBoardingThirdScreen extends StatelessWidget {
                       begin: Alignment(0.10, -1.50),
                       end: Alignment(-0.1, 1),
                       colors: [
-                        Color(0xFFFB7E3C),
-                        Color(0x00FFB086),
-                        Color(0x00FB7E3C),
-                        Color(0x00FF6A1C),
+                        Color.fromARGB(255, 53, 37, 29),
+                        Color.fromARGB(0, 29, 20, 15),
+                        Color.fromARGB(0, 119, 60, 29),
+                        Color.fromARGB(0, 48, 30, 21),
                       ],
                     ),
                   ),
@@ -53,17 +53,16 @@ class OnBoardingThirdScreen extends StatelessWidget {
               ),
               // Content Stack
               Positioned(
-                left: MediaQuery.of(context).size.width * 0.15,
-                top: MediaQuery.of(context).size.height *
-                    0.34, // Adjusted for responsiveness
+                left: MediaQuery.of(context).size.width *
+                    0.15, // Adjusted for responsiveness
+                top: MediaQuery.of(context).size.height * 0.34,
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width *
                       0.7, // Adjusted for responsiveness
-                  height: MediaQuery.of(context).size.height *
-                      0.4, // Adjusted for responsiveness
+                  height: MediaQuery.of(context).size.height * 0.3,
                   child: Stack(
                     children: [
-                      // Rounded Container
+                      // Main Container
                       Positioned(
                         left: 0,
                         top: MediaQuery.of(context).size.height *
@@ -72,7 +71,7 @@ class OnBoardingThirdScreen extends StatelessWidget {
                           width: MediaQuery.of(context).size.width *
                               0.7, // Adjusted for responsiveness
                           height: MediaQuery.of(context).size.height *
-                              0.3, // Adjusted for responsiveness
+                              0.25, // Adjusted for responsiveness
                           decoration: ShapeDecoration(
                             color: const Color(0xCCD3D3D3),
                             shape: RoundedRectangleBorder(
@@ -82,24 +81,16 @@ class OnBoardingThirdScreen extends StatelessWidget {
                               ),
                               borderRadius: BorderRadius.circular(16),
                             ),
-                            shadows: const [
-                              BoxShadow(
-                                color: Color(0x33000000),
-                                blurRadius: 15,
-                                offset: Offset(0, 0),
-                                spreadRadius: 0,
-                              ),
-                            ],
                           ),
                         ),
                       ),
                       // Circular Image
                       Positioned(
-                        left: MediaQuery.of(context).size.width * 0.2,
+                        left: MediaQuery.of(context).size.width * 0.22,
                         top: 0,
                         child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.25,
-                          height: MediaQuery.of(context).size.height * 0.12,
+                          width: MediaQuery.of(context).size.width * 0.23,
+                          height: MediaQuery.of(context).size.height * 0.11,
                           child: Stack(
                             children: [
                               Container(
@@ -107,32 +98,24 @@ class OnBoardingThirdScreen extends StatelessWidget {
                                 height:
                                     MediaQuery.of(context).size.height * 0.40,
                                 decoration: const ShapeDecoration(
-                                  color: Color(0xFFD9D9D9),
+                                  color: Color.fromARGB(255, 255, 253, 253),
                                   shape: OvalBorder(
                                     side: BorderSide(
                                       width: 2,
                                       color: Color(0xFFFB7E3C),
                                     ),
                                   ),
-                                  shadows: [
-                                    BoxShadow(
-                                      color: Color(0x3F000000),
-                                      blurRadius: 12,
-                                      offset: Offset(0, 0),
-                                      spreadRadius: 0,
-                                    ),
-                                  ],
                                 ),
                               ),
                               // Rotated Image
                               Positioned(
-                                left: 18,
-                                top: 10,
+                                left: 20,
+                                top: 12,
                                 child: Container(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.15,
+                                      MediaQuery.of(context).size.width * 0.14,
                                   height:
-                                      MediaQuery.of(context).size.height * 0.09,
+                                      MediaQuery.of(context).size.height * 0.08,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
                                       image: AssetImage(ImageConstant.imgR3),
@@ -145,37 +128,31 @@ class OnBoardingThirdScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // Texts
+                      // Head Text
                       const Positioned(
-                        left: 45,
-                        top: 125,
+                        left: 50,
+                        top: 120,
                         child: Text(
                           'Control expenses',
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 20,
-                            fontFamily: 'Poppins',
+                            fontSize: 24,
                             fontWeight: FontWeight.w800,
-                            height: 0.07,
                           ),
                         ),
                       ),
+                      // Sub Title
                       const Positioned(
-                        left: 16,
+                        left: 30,
                         top: 175,
-                        child: SizedBox(
-                          width: 222,
-                          height: 47,
-                          child: Text(
-                            'Record all refueling, expenses, income\nand any other costs related to your\nvehicle.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 11,
-                              fontFamily: 'Paprika',
-                              fontWeight: FontWeight.w400,
-                              height: 1,
-                            ),
+                        child: Text(
+                          'Record all refueling, expenses, income\nand any other costs related to your\nvehicle.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                            height: 1.2,
                           ),
                         ),
                       ),
@@ -186,13 +163,14 @@ class OnBoardingThirdScreen extends StatelessWidget {
               // Skip Button
               Positioned(
                 right: 20, // Adjusted for responsiveness
-                top: 35,
+                top: 20,
                 child: InkResponse(
                   onTap: () {
                     onTapNext(context);
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    width: 76,
+                    height: 38,
                     decoration: ShapeDecoration(
                       shape: RoundedRectangleBorder(
                         side: const BorderSide(
@@ -200,16 +178,17 @@ class OnBoardingThirdScreen extends StatelessWidget {
                           strokeAlign: BorderSide.strokeAlignCenter,
                           color: Colors.white,
                         ),
-                        borderRadius: BorderRadius.circular(100),
+                        borderRadius: BorderRadius.circular(25),
                       ),
                     ),
-                    child: const Text(
-                      'Next',
-                      style: TextStyle(
-                        color: Color(0xFFFB7E3C),
-                        fontSize: 14,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w700,
+                    child: const Center(
+                      child: Text(
+                        'Skip',
+                        style: TextStyle(
+                          color: Color(0xFFFB7E3C),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800,
+                        ),
                       ),
                     ),
                   ),
@@ -224,6 +203,6 @@ class OnBoardingThirdScreen extends StatelessWidget {
 
   /// click Next Button
   onTapNext(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.userInScreen);
+    Navigator.pushReplacementNamed(context, AppRoutes.userInScreen);
   }
 }
