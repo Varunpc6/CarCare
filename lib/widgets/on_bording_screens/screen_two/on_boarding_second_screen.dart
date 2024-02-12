@@ -53,26 +53,24 @@ class OnBoardingSecondScreen extends StatelessWidget {
               ),
               // Content Stack
               Positioned(
-                left: MediaQuery.of(context).size.width *
-                    0.15, // Adjusted for responsiveness
+                // Adjusted for responsiveness
+                left: MediaQuery.of(context).size.width * 0.15,
                 top: MediaQuery.of(context).size.height * 0.34,
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width *
-                      0.7, // Adjusted for responsiveness
-                  height: MediaQuery.of(context).size.height *
-                      0.3, // Adjusted for responsiveness
+                  // Adjusted for responsiveness
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  height: MediaQuery.of(context).size.height * 0.3,
                   child: Stack(
                     children: [
                       // Main Container
                       Positioned(
+                        // Adjusted for responsiveness
                         left: 0,
-                        top: MediaQuery.of(context).size.height *
-                            0.05, // Adjusted for responsiveness
+                        top: MediaQuery.of(context).size.height * 0.05,
                         child: Container(
-                          width: MediaQuery.of(context).size.width *
-                              0.7, // Adjusted for responsiveness
-                          height: MediaQuery.of(context).size.height *
-                              0.25, // Adjusted for responsiveness
+                          // Adjusted for responsiveness
+                          width: MediaQuery.of(context).size.width * 0.7,
+                          height: MediaQuery.of(context).size.height * 0.25,
                           decoration: ShapeDecoration(
                             color: const Color(0xCCD3D3D3),
                             shape: RoundedRectangleBorder(
@@ -90,11 +88,13 @@ class OnBoardingSecondScreen extends StatelessWidget {
                         left: MediaQuery.of(context).size.width * 0.22,
                         top: 0,
                         child: SizedBox(
+                          // Adjusted for responsiveness
                           width: MediaQuery.of(context).size.width * 0.23,
                           height: MediaQuery.of(context).size.height * 0.11,
                           child: Stack(
                             children: [
                               Container(
+                                // Adjusted for responsiveness
                                 width: MediaQuery.of(context).size.width * 0.40,
                                 height:
                                     MediaQuery.of(context).size.height * 0.40,
@@ -110,9 +110,12 @@ class OnBoardingSecondScreen extends StatelessWidget {
                               ),
                               // Rotated Image
                               Positioned(
+                                // Adjusted for responsiveness
                                 left: 5,
                                 top: 20,
+                                // Image container
                                 child: Container(
+                                  // Adjusted for responsiveness
                                   width:
                                       MediaQuery.of(context).size.width * 0.20,
                                   height:
@@ -163,7 +166,8 @@ class OnBoardingSecondScreen extends StatelessWidget {
               ),
               // Skip Button
               Positioned(
-                right: 20, // Adjusted for responsiveness
+                // Adjusted for responsiveness
+                right: 20, 
                 top: 20,
                 child: InkResponse(
                   onTap: () {

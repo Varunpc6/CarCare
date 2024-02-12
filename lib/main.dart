@@ -1,9 +1,14 @@
+import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:car_maintanance/db/models/db_user_reg/user_db.dart';
 import 'package:car_maintanance/routes/app_routes.dart';
 import 'package:car_maintanance/theme/theme_helper.dart';
 
-import 'package:flutter/material.dart';
-
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter(); // Initialize Hive
+  Hive.registerAdapter(UserAdapter()); // Register to Adapter
+  await Hive.openBox<User>('AppUserBox'); // Open the Box in Hive
   runApp(const MyApp());
 }
 
@@ -15,12 +20,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'CARCARE',
       theme: theme,
-      // ThemeData(
-      //   colorScheme: ColorScheme.fromSeed(
-      //     seedColor: const Color.fromARGB(255, 209, 129, 8),
-      //   ),
-      //   useMaterial3: true,
-      // ),
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.splashScreen,
       routes: AppRoutes.routes,

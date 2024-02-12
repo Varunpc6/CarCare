@@ -2,6 +2,9 @@ class ImageConstant {
   // Image folder path
   static String imagePath = 'assets/images';
 
+  // Default image
+  static String defaultImage = '$imagePath/default_image_cartoon.jpg';
+
   // Splash images
   static String imgFreeHdconvert = '$imagePath/white_app_logo.png';
 

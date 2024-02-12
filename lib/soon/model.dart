@@ -1,4 +1,4 @@
-import 'package:car_maintanance/src/main_properties/app_properties.dart';
+// import 'package:car_maintanance/src/main_properties/app_properties.dart';
 import 'package:flutter/material.dart';
 
 class ResponsiveTextFieldForm extends StatelessWidget {
@@ -42,7 +42,7 @@ class ResponsiveTextFieldForm extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         labelText: labelText,
-        labelStyle: TextStyle(color: myColor),
+        // labelStyle: TextStyle(color: myColor),
         prefixIcon: Icon(
           iconData,
           color: const Color.fromARGB(255, 100, 99, 99),
@@ -56,3 +56,6 @@ class ResponsiveTextFieldForm extends StatelessWidget {
     );
   }
 }
+
+
+

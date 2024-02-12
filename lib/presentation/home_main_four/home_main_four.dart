@@ -1,12 +1,45 @@
 import 'package:car_maintanance/core/utils/image_constant.dart';
+import 'package:car_maintanance/db/db_functions/registor_from.dart';
+
 import 'package:car_maintanance/routes/app_routes.dart';
 import 'package:car_maintanance/src/pages/more_page4.dart';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class PageFour extends StatelessWidget {
+class PageFour extends StatefulWidget {
   final String head;
   const PageFour({Key? key, required this.head}) : super(key: key);
+
+  @override
+  State<PageFour> createState() => _PageFourState();
+}
+
+class _PageFourState extends State<PageFour> {
+  UserRegisterApp appUserRegiterApp = UserRegisterApp();
+  late List<String> _userList = []; // Define _userList here
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserList();
+  }
+
+  void _loadUserList() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('nameUser');
+    setState(() {
+      _userList = []; // Initialize _userList here
+    });
+  }
+
+  void _deleteUser(String key) async {
+    // Assuming deleteRegisterDetails(0) deletes from the database
+    await appUserRegiterApp.deleteRegisterDetails(0);
+
+    // Reload the user list after deletion
+    _loadUserList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +49,7 @@ class PageFour extends StatelessWidget {
           top: 15,
           left: 18,
           child: Text(
-            head,
+            widget.head,
             style: const TextStyle(
               fontSize: 30.0,
               color: Colors.orange,
@@ -113,7 +146,21 @@ class PageFour extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () => Navigator.pop(context, 'OK'),
+                onPressed: () async {
+                  // Check if there are users in the list
+                  if (_userList.isNotEmpty) {
+                    // Assuming deleteRegisterDetails(0) deletes from the database
+                    // Delete register details from the database
+                    await appUserRegiterApp.deleteRegisterDetails(0);
+
+                    // Assuming _deleteUser removes the user from the _userList
+                    // Remove the user from the _userList
+                    _deleteUser(_userList[0]);
+                  }
+
+                  // Close the dialog or navigate back after the deletion
+                  Navigator.pop(context, 'OK');
+                },
                 child: const Text(
                   'DELETE ACCOUNT',
                   style: TextStyle(color: Color.fromARGB(236, 255, 0, 0)),

@@ -1,5 +1,5 @@
-import 'package:car_maintanance/src/main_properties/app_properties.dart';
-import 'package:car_maintanance/src/pages/screen_vehicle_details.dart';
+import 'package:car_maintanance/soon/screen_vehicle_details.dart';
+// import 'package:car_maintanance/src/main_properties/app_properties.dart';
 import 'package:flutter/material.dart';
 
 class ManufacturerListPage extends StatelessWidget {
@@ -13,7 +13,7 @@ class ManufacturerListPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: myColor,
+          // backgroundColor: myColor,
           toolbarHeight: screenHeight * 0.15,
           leading: IconButton(
             onPressed: () {
@@ -62,7 +62,7 @@ class ManufacturerListPage extends StatelessWidget {
               MaterialPageRoute(builder: (context) => const DetailPage()),
             );
           },
-          backgroundColor: myColor,
+          // backgroundColor: myColor,
           child: const Icon(
             Icons.add,
             color: Colors.white,

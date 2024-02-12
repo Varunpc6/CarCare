@@ -1,6 +1,3 @@
-
-import 'package:car_maintanance/src/pages/car_list.dart';
-
 import 'package:flutter/material.dart';
 
 class HistoryPage extends StatelessWidget {
@@ -10,10 +7,10 @@ class HistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const ManufacturerListPage()),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) =>  ManufacturerListPage()),
+        // );
       },
       child: Container(
         color: const Color.fromARGB(26, 184, 182, 182),

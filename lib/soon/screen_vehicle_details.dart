@@ -1,5 +1,5 @@
-import 'package:car_maintanance/src/main_properties/app_properties.dart';
-import 'package:car_maintanance/src/pages/model.dart';
+// import 'package:car_maintanance/src/main_properties/app_properties.dart';
+import 'package:car_maintanance/soon/model.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
@@ -10,7 +10,7 @@ class DetailPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: myColor, //---myColor custom variable---
+          // backgroundColor: myColor, //---myColor custom variable---
           leading: IconButton(
             onPressed: () {
               Navigator.of(context).pop();

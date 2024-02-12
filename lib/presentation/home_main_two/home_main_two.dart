@@ -1,3 +1,4 @@
+import 'package:car_maintanance/core/utils/image_constant.dart';
 import 'package:flutter/material.dart';
 
 class PageTwo extends StatelessWidget {
@@ -17,6 +18,13 @@ class PageTwo extends StatelessWidget {
               fontSize: 30.0,
               color: Colors.orange,
             ),
+          ),
+        ),
+        Center(
+          child: SizedBox(
+            width: 160,
+            height: 200,
+            child: Image.asset(ImageConstant.defaultImage),
           ),
         ),
       ],
