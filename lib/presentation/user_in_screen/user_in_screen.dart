@@ -15,7 +15,7 @@ class UserInScreen extends StatefulWidget {
 }
 
 class _UserInScreenState extends State<UserInScreen> {
-  // Dummy brand list for demonstration purpose
+  //  Brand
   List<String> brands = [
     'Brand',
     'AstonMartin',
@@ -65,8 +65,10 @@ class _UserInScreenState extends State<UserInScreen> {
   FocusNode focusFour = FocusNode();
   FocusNode focusBtn = FocusNode();
 
+  // From field
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  // SharedPrefernceAdd
   Future<void> savedUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString("nameUser", userNameController.text);
@@ -86,7 +88,7 @@ class _UserInScreenState extends State<UserInScreen> {
                 // Background Image
                 buildBackgroundImage(context),
                 // Content session
-                _buildFromContainer(context),
+                buildFromContainer(context),
                 // Circular Image
                 buildCircularImage(context),
                 // Elevated button
@@ -100,7 +102,7 @@ class _UserInScreenState extends State<UserInScreen> {
   }
 
   // User Interface
-  _buildFromContainer(BuildContext context) {
+  buildFromContainer(BuildContext context) {
     return Form(
       key: _formKey,
       child: Stack(
@@ -128,6 +130,7 @@ class _UserInScreenState extends State<UserInScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        // UserName
                         customTextFormField(
                           controller: userNameController,
                           labelText: "Username",
@@ -137,6 +140,7 @@ class _UserInScreenState extends State<UserInScreen> {
                           context: context,
                         ),
                         const SizedBox(height: 16.0),
+                        // Car number
                         customTextFormField(
                           controller: carNameController,
                           labelText: "Car Name",
@@ -145,7 +149,6 @@ class _UserInScreenState extends State<UserInScreen> {
                           nextFocusNode: focusThree,
                           context: context,
                         ),
-
                         // Brand Dropdown
                         InputDecorator(
                           decoration: const InputDecoration(
@@ -296,6 +299,7 @@ class _UserInScreenState extends State<UserInScreen> {
                           ),
                         ),
                         const SizedBox(height: 16.0),
+                        // Model
                         customTextFormField(
                           controller: modelNameController,
                           labelText: "Model",
@@ -392,339 +396,326 @@ class _UserInScreenState extends State<UserInScreen> {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
 //=========================================================
 //------TextField---------------
 // Username
-                        // TextFormField(
-                        //   focusNode: focusOne,
-                        //   onFieldSubmitted: (value) {
-                        //     FocusScope.of(context).requestFocus(focusTwo);
-                        //   },
-                        //   controller: userNameController,
-                        //   decoration: const InputDecoration(
-                        //     focusedBorder: UnderlineInputBorder(
-                        //       borderSide: BorderSide(
-                        //         color: Color(0xFFFB7E3C),
-                        //         width: 2.0,
-                        //       ),
-                        //     ),
-                        //     enabledBorder: UnderlineInputBorder(
-                        //       borderSide: BorderSide(
-                        //         color: Color(0xFFFB7E3C),
-                        //         width: 2.0,
-                        //       ),
-                        //     ),
-                        //     prefixIcon: Row(
-                        //       mainAxisSize: MainAxisSize.min,
-                        //       children: [
-                        //         SizedBox(
-                        //           width: 10,
-                        //         ),
-                        //         Icon(
-                        //           Icons.person,
-                        //           color: Colors.white,
-                        //           size: 30,
-                        //         ),
-                        //         SizedBox(
-                        //           width: 25,
-                        //         ), // Adjust the space between icon and text
-                        //       ],
-                        //     ),
-                        //     filled: true,
-                        //     fillColor: Colors.transparent,
-                        //     labelText: "Username",
-                        //     labelStyle: TextStyle(
-                        //       color: Colors.white,
-                        //     ),
-                        //     hintStyle: TextStyle(
-                        //       color: Color(0xFFFB7E3C),
-                        //     ),
-                        //   ),
-                        //   style: const TextStyle(
-                        //     color: Colors.white,
-                        //   ),
-                        //   validator: (value) {
-                        //     if (value!.isEmpty) {
-                        //       return 'Please enter a username';
-                        //     }
-                        //     return null;
-                        //   },
-                        // ),
-                        
+// TextFormField(
+//   focusNode: focusOne,
+//   onFieldSubmitted: (value) {
+//     FocusScope.of(context).requestFocus(focusTwo);
+//   },
+//   controller: userNameController,
+//   decoration: const InputDecoration(
+//     focusedBorder: UnderlineInputBorder(
+//       borderSide: BorderSide(
+//         color: Color(0xFFFB7E3C),
+//         width: 2.0,
+//       ),
+//     ),
+//     enabledBorder: UnderlineInputBorder(
+//       borderSide: BorderSide(
+//         color: Color(0xFFFB7E3C),
+//         width: 2.0,
+//       ),
+//     ),
+//     prefixIcon: Row(
+//       mainAxisSize: MainAxisSize.min,
+//       children: [
+//         SizedBox(
+//           width: 10,
+//         ),
+//         Icon(
+//           Icons.person,
+//           color: Colors.white,
+//           size: 30,
+//         ),
+//         SizedBox(
+//           width: 25,
+//         ), // Adjust the space between icon and text
+//       ],
+//     ),
+//     filled: true,
+//     fillColor: Colors.transparent,
+//     labelText: "Username",
+//     labelStyle: TextStyle(
+//       color: Colors.white,
+//     ),
+//     hintStyle: TextStyle(
+//       color: Color(0xFFFB7E3C),
+//     ),
+//   ),
+//   style: const TextStyle(
+//     color: Colors.white,
+//   ),
+//   validator: (value) {
+//     if (value!.isEmpty) {
+//       return 'Please enter a username';
+//     }
+//     return null;
+//   },
+// ),
 
-                        // const SizedBox(height: 16.0),
-                        // // Carname / no.plate
-                        // TextFormField(
-                        //   focusNode: focusTwo,
-                        //   onFieldSubmitted: (value) {
-                        //     FocusScope.of(context).requestFocus(focusThree);
-                        //   },
-                        //   controller: carNameController,
-                        //   decoration: const InputDecoration(
-                        //     focusedBorder: UnderlineInputBorder(
-                        //       borderSide: BorderSide(
-                        //         color: Color(0xFFFB7E3C),
-                        //         width: 2.0,
-                        //       ),
-                        //     ),
-                        //     enabledBorder: UnderlineInputBorder(
-                        //       borderSide: BorderSide(
-                        //         color: Color(0xFFFB7E3C),
-                        //         width: 2.0,
-                        //       ),
-                        //     ),
-                        //     prefixIcon: Row(
-                        //       mainAxisSize: MainAxisSize.min,
-                        //       children: [
-                        //         SizedBox(
-                        //           width: 10,
-                        //         ),
-                        //         Icon(
-                        //           Icons.no_crash_sharp,
-                        //           color: Colors.white,
-                        //           size: 30,
-                        //         ),
-                        //         SizedBox(
-                        //             width:
-                        //                 25), // Adjust the space between icon and text
-                        //       ],
-                        //     ),
-                        //     filled: true,
-                        //     fillColor: Colors.transparent,
-                        //     labelText: "Car name / no.plate",
-                        //     labelStyle: TextStyle(
-                        //       color: Colors.white,
-                        //     ),
-                        //     hintStyle: TextStyle(
-                        //       color: Color(0xFFFB7E3C),
-                        //     ),
-                        //   ),
-                        //   style: const TextStyle(
-                        //     color: Colors.white,
-                        //   ),
-                        //   validator: (value) {
-                        //     if (value!.isEmpty) {
-                        //       return 'Please enter a car name or number plate';
-                        //     }
-                        //     return null;
-                        //   },
-                        // ),
-                        // const SizedBox(height: 16.0),
-                        // // Brand Dropdown
-                        // InputDecorator(
-                        //   decoration: const InputDecoration(
-                        //     prefixIcon: Icon(
-                        //       Icons.no_crash_sharp,
-                        //       color: Colors.white,
-                        //       size: 30,
-                        //     ),
-                        //     filled: true,
-                        //     fillColor: Colors.transparent,
-                        //     enabledBorder: UnderlineInputBorder(
-                        //       borderSide: BorderSide(
-                        //         color: Color(0xFFFB7E3C),
-                        //         width: 2.0,
-                        //       ),
-                        //     ),
-                        //     focusedBorder: UnderlineInputBorder(
-                        //       borderSide: BorderSide(
-                        //         color: Color(0xFFFB7E3C),
-                        //         width: 2.0,
-                        //       ),
-                        //     ),
-                        //   ),
-                        //   child: DropdownButtonHideUnderline(
-                        //     child: DropdownButton2<String>(
-                        //       isExpanded: true,
-                        //       hint: const Column(
-                        //         children: [
-                        //           SizedBox(
-                        //             height: 12,
-                        //           ),
-                        //           Row(
-                        //             crossAxisAlignment: CrossAxisAlignment.end,
-                        //             children: [
-                        //               Text(
-                        //                 'Brand', // Change the hint text here
-                        //                 style: TextStyle(
-                        //                   fontSize: 15,
-                        //                   color: Color.fromARGB(
-                        //                     255,
-                        //                     255,
-                        //                     255,
-                        //                     255,
-                        //                   ),
-                        //                 ),
-                        //               ),
-                        //             ],
-                        //           ),
-                        //         ],
-                        //       ),
-                        //       items: brands.map((brand) {
-                        //         return DropdownMenuItem<String>(
-                        //           value: brand,
-                        //           child: Text(
-                        //             brand,
-                        //             style: const TextStyle(
-                        //               color: Color.fromARGB(250, 26, 25, 25),
-                        //             ),
-                        //           ),
-                        //         );
-                        //       }).toList(),
-                        //       value: selectedBrand,
-                        //       onChanged: (newValue) {
-                        //         setState(() {
-                        //           selectedBrand = newValue!;
-                        //         });
-                        //       },
-                        //       buttonStyleData: const ButtonStyleData(
-                        //         padding: EdgeInsets.symmetric(horizontal: 16),
-                        //         height: 40,
-                        //         width: 200,
-                        //         elevation: 0,
-                        //       ),
-                        //       dropdownStyleData: DropdownStyleData(
-                        //         maxHeight: 200,
-                        //         elevation: 2,
-                        //         decoration: BoxDecoration(
-                        //           color:
-                        //               const Color.fromARGB(201, 255, 255, 255),
-                        //           borderRadius: BorderRadius.circular(8),
-                        //         ),
-                        //       ),
-                        //       menuItemStyleData: const MenuItemStyleData(
-                        //         height: 40,
-                        //       ),
-                        //       dropdownSearchData: DropdownSearchData(
-                        //         searchController: brandNameController,
-                        //         searchInnerWidgetHeight: 50,
-                        //         searchInnerWidget: Container(
-                        //           height: 50,
-                        //           padding: const EdgeInsets.only(
-                        //             top: 8,
-                        //             bottom: 4,
-                        //             right: 8,
-                        //             left: 8,
-                        //           ),
-                        //           child: TextFormField(
-                        //             focusNode: focusThree,
-                        //             onFieldSubmitted: (value) {
-                        //               FocusScope.of(context)
-                        //                   .requestFocus(focusFour);
-                        //             },
-                        //             expands: true,
-                        //             maxLines: null,
-                        //             controller: brandNameController,
-                        //             decoration: InputDecoration(
-                        //               isDense: true,
-                        //               contentPadding:
-                        //                   const EdgeInsets.symmetric(
-                        //                 horizontal: 10,
-                        //                 vertical: 8,
-                        //               ),
-                        //               hintText: 'Search for a brand...',
-                        //               hintStyle: const TextStyle(fontSize: 12),
-                        //               border: OutlineInputBorder(
-                        //                 borderRadius: BorderRadius.circular(8),
-                        //               ),
-                        //             ),
-                        //             style: const TextStyle(color: Colors.black),
-                        //           ),
-                        //         ),
-                        //         searchMatchFn: (item, searchValue) {
-                        //           return item.value
-                        //               .toString()
-                        //               .contains(searchValue);
-                        //         },
-                        //       ),
-                        //       onMenuStateChange: (isOpen) {
-                        //         if (!isOpen) {
-                        //           brandNameController.clear();
-                        //         }
-                        //       },
-                        //       // Define selectedItemBuilder to set the style of the selected value
-                        //       selectedItemBuilder: (BuildContext context) {
-                        //         return brands.map<Widget>((String value) {
-                        //           return Text(
-                        //             value,
-                        //             style: const TextStyle(
-                        //               height: 2.2,
-                        //               color: Colors.white,
-                        //             ), // Set the color of the selected value
-                        //           );
-                        //         }).toList();
-                        //       },
-                        //       barrierLabel:
-                        //           'Select Brand', // Adding barrier label
-                        //     ),
-                        //   ),
-                        // ),
-                        // const SizedBox(height: 16.0),
-                        // // Model
-                        // TextFormField(
-                        //   focusNode: focusFour,
-                        //   onFieldSubmitted: (value) {
-                        //     FocusScope.of(context).requestFocus(focusBtn);
-                        //   },
-                        //   controller: modelNameController,
-                        //   decoration: const InputDecoration(
-                        //     focusedBorder: UnderlineInputBorder(
-                        //       borderSide: BorderSide(
-                        //         color: Color(0xFFFB7E3C),
-                        //         width: 2.0,
-                        //       ),
-                        //     ),
-                        //     enabledBorder: UnderlineInputBorder(
-                        //       borderSide: BorderSide(
-                        //         color: Color(0xFFFB7E3C),
-                        //         width: 2.0,
-                        //       ),
-                        //     ),
-                        //     prefixIcon: Row(
-                        //       mainAxisSize: MainAxisSize.min,
-                        //       children: [
-                        //         SizedBox(
-                        //           width: 10,
-                        //         ),
-                        //         Icon(
-                        //           Icons.menu_rounded,
-                        //           color: Colors.white,
-                        //           size: 30,
-                        //         ),
-                        //         SizedBox(
-                        //           width: 25,
-                        //         ),
-                        //       ],
-                        //     ),
-                        //     filled: true,
-                        //     fillColor: Colors.transparent,
-                        //     labelText: "Model",
-                        //     labelStyle: TextStyle(
-                        //       color: Colors.white,
-                        //     ),
-                        //     hintStyle: TextStyle(
-                        //       color: Color(0xFFFB7E3C),
-                        //     ),
-                        //   ),
-                        //   style: const TextStyle(
-                        //     color: Colors.white,
-                        //   ),
-                        //   validator: (value) {
-                        //     if (value!.isEmpty) {
-                        //       return 'Please enter a model name';
-                        //     }
-                        //     return null;
-                        //   },
-                        // ),
-                      
+// const SizedBox(height: 16.0),
+// // Carname / no.plate
+// TextFormField(
+//   focusNode: focusTwo,
+//   onFieldSubmitted: (value) {
+//     FocusScope.of(context).requestFocus(focusThree);
+//   },
+//   controller: carNameController,
+//   decoration: const InputDecoration(
+//     focusedBorder: UnderlineInputBorder(
+//       borderSide: BorderSide(
+//         color: Color(0xFFFB7E3C),
+//         width: 2.0,
+//       ),
+//     ),
+//     enabledBorder: UnderlineInputBorder(
+//       borderSide: BorderSide(
+//         color: Color(0xFFFB7E3C),
+//         width: 2.0,
+//       ),
+//     ),
+//     prefixIcon: Row(
+//       mainAxisSize: MainAxisSize.min,
+//       children: [
+//         SizedBox(
+//           width: 10,
+//         ),
+//         Icon(
+//           Icons.no_crash_sharp,
+//           color: Colors.white,
+//           size: 30,
+//         ),
+//         SizedBox(
+//             width:
+//                 25), // Adjust the space between icon and text
+//       ],
+//     ),
+//     filled: true,
+//     fillColor: Colors.transparent,
+//     labelText: "Car name / no.plate",
+//     labelStyle: TextStyle(
+//       color: Colors.white,
+//     ),
+//     hintStyle: TextStyle(
+//       color: Color(0xFFFB7E3C),
+//     ),
+//   ),
+//   style: const TextStyle(
+//     color: Colors.white,
+//   ),
+//   validator: (value) {
+//     if (value!.isEmpty) {
+//       return 'Please enter a car name or number plate';
+//     }
+//     return null;
+//   },
+// ),
+// const SizedBox(height: 16.0),
+// // Brand Dropdown
+// InputDecorator(
+//   decoration: const InputDecoration(
+//     prefixIcon: Icon(
+//       Icons.no_crash_sharp,
+//       color: Colors.white,
+//       size: 30,
+//     ),
+//     filled: true,
+//     fillColor: Colors.transparent,
+//     enabledBorder: UnderlineInputBorder(
+//       borderSide: BorderSide(
+//         color: Color(0xFFFB7E3C),
+//         width: 2.0,
+//       ),
+//     ),
+//     focusedBorder: UnderlineInputBorder(
+//       borderSide: BorderSide(
+//         color: Color(0xFFFB7E3C),
+//         width: 2.0,
+//       ),
+//     ),
+//   ),
+//   child: DropdownButtonHideUnderline(
+//     child: DropdownButton2<String>(
+//       isExpanded: true,
+//       hint: const Column(
+//         children: [
+//           SizedBox(
+//             height: 12,
+//           ),
+//           Row(
+//             crossAxisAlignment: CrossAxisAlignment.end,
+//             children: [
+//               Text(
+//                 'Brand', // Change the hint text here
+//                 style: TextStyle(
+//                   fontSize: 15,
+//                   color: Color.fromARGB(
+//                     255,
+//                     255,
+//                     255,
+//                     255,
+//                   ),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ],
+//       ),
+//       items: brands.map((brand) {
+//         return DropdownMenuItem<String>(
+//           value: brand,
+//           child: Text(
+//             brand,
+//             style: const TextStyle(
+//               color: Color.fromARGB(250, 26, 25, 25),
+//             ),
+//           ),
+//         );
+//       }).toList(),
+//       value: selectedBrand,
+//       onChanged: (newValue) {
+//         setState(() {
+//           selectedBrand = newValue!;
+//         });
+//       },
+//       buttonStyleData: const ButtonStyleData(
+//         padding: EdgeInsets.symmetric(horizontal: 16),
+//         height: 40,
+//         width: 200,
+//         elevation: 0,
+//       ),
+//       dropdownStyleData: DropdownStyleData(
+//         maxHeight: 200,
+//         elevation: 2,
+//         decoration: BoxDecoration(
+//           color:
+//               const Color.fromARGB(201, 255, 255, 255),
+//           borderRadius: BorderRadius.circular(8),
+//         ),
+//       ),
+//       menuItemStyleData: const MenuItemStyleData(
+//         height: 40,
+//       ),
+//       dropdownSearchData: DropdownSearchData(
+//         searchController: brandNameController,
+//         searchInnerWidgetHeight: 50,
+//         searchInnerWidget: Container(
+//           height: 50,
+//           padding: const EdgeInsets.only(
+//             top: 8,
+//             bottom: 4,
+//             right: 8,
+//             left: 8,
+//           ),
+//           child: TextFormField(
+//             focusNode: focusThree,
+//             onFieldSubmitted: (value) {
+//               FocusScope.of(context)
+//                   .requestFocus(focusFour);
+//             },
+//             expands: true,
+//             maxLines: null,
+//             controller: brandNameController,
+//             decoration: InputDecoration(
+//               isDense: true,
+//               contentPadding:
+//                   const EdgeInsets.symmetric(
+//                 horizontal: 10,
+//                 vertical: 8,
+//               ),
+//               hintText: 'Search for a brand...',
+//               hintStyle: const TextStyle(fontSize: 12),
+//               border: OutlineInputBorder(
+//                 borderRadius: BorderRadius.circular(8),
+//               ),
+//             ),
+//             style: const TextStyle(color: Colors.black),
+//           ),
+//         ),
+//         searchMatchFn: (item, searchValue) {
+//           return item.value
+//               .toString()
+//               .contains(searchValue);
+//         },
+//       ),
+//       onMenuStateChange: (isOpen) {
+//         if (!isOpen) {
+//           brandNameController.clear();
+//         }
+//       },
+//       // Define selectedItemBuilder to set the style of the selected value
+//       selectedItemBuilder: (BuildContext context) {
+//         return brands.map<Widget>((String value) {
+//           return Text(
+//             value,
+//             style: const TextStyle(
+//               height: 2.2,
+//               color: Colors.white,
+//             ), // Set the color of the selected value
+//           );
+//         }).toList();
+//       },
+//       barrierLabel:
+//           'Select Brand', // Adding barrier label
+//     ),
+//   ),
+// ),
+// const SizedBox(height: 16.0),
+// // Model
+// TextFormField(
+//   focusNode: focusFour,
+//   onFieldSubmitted: (value) {
+//     FocusScope.of(context).requestFocus(focusBtn);
+//   },
+//   controller: modelNameController,
+//   decoration: const InputDecoration(
+//     focusedBorder: UnderlineInputBorder(
+//       borderSide: BorderSide(
+//         color: Color(0xFFFB7E3C),
+//         width: 2.0,
+//       ),
+//     ),
+//     enabledBorder: UnderlineInputBorder(
+//       borderSide: BorderSide(
+//         color: Color(0xFFFB7E3C),
+//         width: 2.0,
+//       ),
+//     ),
+//     prefixIcon: Row(
+//       mainAxisSize: MainAxisSize.min,
+//       children: [
+//         SizedBox(
+//           width: 10,
+//         ),
+//         Icon(
+//           Icons.menu_rounded,
+//           color: Colors.white,
+//           size: 30,
+//         ),
+//         SizedBox(
+//           width: 25,
+//         ),
+//       ],
+//     ),
+//     filled: true,
+//     fillColor: Colors.transparent,
+//     labelText: "Model",
+//     labelStyle: TextStyle(
+//       color: Colors.white,
+//     ),
+//     hintStyle: TextStyle(
+//       color: Color(0xFFFB7E3C),
+//     ),
+//   ),
+//   style: const TextStyle(
+//     color: Colors.white,
+//   ),
+//   validator: (value) {
+//     if (value!.isEmpty) {
+//       return 'Please enter a model name';
+//     }
+//     return null;
+//   },
+// ),

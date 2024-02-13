@@ -23,10 +23,83 @@ class _HomeScreenState extends State<HomeScreen> {
     pageController = PageController(initialPage: selectedTab);
   }
 
+  Widget _getPageTitle(int index) {
+    switch (index) {
+      case 0:
+        return RichText(
+          text: const TextSpan(
+            style: TextStyle(color: Colors.black),
+            children: [
+              TextSpan(
+                text: 'Welcome to',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 23,
+                    fontWeight: FontWeight.w800),
+              ),
+              TextSpan(
+                text: ' CARCARE',
+                style: TextStyle(
+                    color: Colors.orange,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w500),
+              ),
+              TextSpan(
+                text: "\nLet's Go Forward",
+                style: TextStyle(
+                    color: Color.fromARGB(255, 137, 134, 129),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
+        );
+      case 1:
+        return const Text(
+          'Report',
+          style: TextStyle(
+              color: Colors.orange, fontSize: 24, fontWeight: FontWeight.w600),
+        );
+      case 2:
+        return const Text(
+          'Reminders',
+          style: TextStyle(
+              color: Colors.orange, fontSize: 24, fontWeight: FontWeight.w600),
+        );
+      case 3:
+        return const Text(
+          'More option',
+          style: TextStyle(
+              color: Colors.orange, fontSize: 24, fontWeight: FontWeight.w600),
+        );
+      default:
+        return const Text('');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          elevation: 0,
+          titleSpacing: 0, // Adjust as needed
+          flexibleSpace: Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment:
+                  MainAxisAlignment.end, // Align the title to the bottom
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 0), // Adjust as needed
+                  child: _getPageTitle(selectedTab),
+                ),
+              ],
+            ),
+          ),
+        ),
         body: PageView(
           controller: pageController,
           onPageChanged: (index) {
@@ -70,11 +143,8 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: (index) {
             setState(() {
               selectedTab = index;
-              pageController.animateToPage(
-                index,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-              );
+              pageController.jumpToPage(
+                  index); // Use jumpToPage to switch to the desired page
             });
           },
           pageController: pageController,

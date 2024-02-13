@@ -61,4 +61,7 @@ class ImageConstant {
   static String instagram = '$imagePath/ instagram-2016-logo-svgrepo-com.svg';
 
   static String star = '$imagePath/star.png';
+
+  // Current Car Screen Image
+  static String currentCar = '$imagePath/current_car_white.jpg';
 }

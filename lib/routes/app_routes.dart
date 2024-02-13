@@ -1,4 +1,6 @@
 import 'package:car_maintanance/presentation/about_screen/about_screen.dart';
+import 'package:car_maintanance/presentation/current_car_screen/current_car_screen.dart';
+import 'package:car_maintanance/presentation/edit_car_screen/edit_car_screen.dart';
 import 'package:car_maintanance/presentation/home_screen/home_screen.dart';
 import 'package:car_maintanance/presentation/my_account_screen/my_account_screen.dart';
 import 'package:car_maintanance/presentation/on_boarding_screen_main.dart/on_boarding_screen_main.dart';
@@ -23,6 +25,10 @@ class AppRoutes {
 
   static const String aboutScreen = '/about_screen';
 
+  static const String currentCarScreen = '/current_car_screen';
+
+  static String editCarScreen = '/edit_car_screen';
+
   static Map<String, WidgetBuilder> routes = {
     splashScreen: (context) => const SplashScreen(),
     onBordingScreen: (context) => OnboardingPageState(),
@@ -31,5 +37,7 @@ class AppRoutes {
     myAccountScreen: (context) => const MyAccountScreen(),
     settingsScreen: (context) => const SettingsScreen(),
     aboutScreen: (context) => const AboutScreen(),
+    currentCarScreen: (context) => const CurrentCarScreen(),
+    editCarScreen: (context) => const EditCarScreen(),
   };
 }
