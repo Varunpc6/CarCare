@@ -18,11 +18,13 @@ class UserRegisterApp {
       modelName: modelName,
     );
     await registeredBox.add(newUser);
+    print(newUser.userName);
+    print(registeredBox);
   }
 
-  // Function to add user registration with only the fuel parameter
+  // Add user fuel
   Future<void> userRegisterAddFuel({
-    String? fuel, // Make fuel the only parameter
+    String? fuel,
   }) async {
     final newUser = User(
       fuel: fuel, // Pass fuel parameter to User constructor
@@ -47,9 +49,84 @@ class UserRegisterApp {
     await registeredBox.putAt(index, updatedUser);
   }
 
+  // Update operation for fuel
+  Future<void> updateFuel(int index, String fuel) async {
+    final updatedFuel = User(fuel: fuel);
+    await registeredBox.putAt(index, updatedFuel);
+  }
+
   // Delete operation
   Future<void> deleteRegisterDetails(int index) async {
-    await registeredBox.deleteAt(index);
-    // print('====================Delete the user details===================');
+    var deletedUser = registeredBox.getAt(index);
+    if (deletedUser != null) {
+      print('Deleted user details: $deletedUser');
+      await registeredBox.deleteAt(index);
+      print('User details deleted successfully');
+    } else {
+      print('User details not found at index $index');
+    }
+  }
+}
+
+class UserFuel {
+  final Box<User> registeredBox2 = Hive.box<User>('AppUserBox');
+
+  // Function to add user registration with some parameters required
+  Future<void> fuelAdd({
+    required String fuelName,
+  }) async {
+    final newUser = User(
+      fuel: fuelName,
+    );
+    await registeredBox2.add(newUser);
+    print(newUser.fuel);
+    print(registeredBox2);
+  }
+
+  // Add user fuel
+  Future<void> userRegisterAddFuel({
+    String? fuel,
+  }) async {
+    final newUser = User(
+      fuel: fuel, // Pass fuel parameter to User constructor
+    );
+    await registeredBox2.add(newUser);
+    print('Fuel added');
+  }
+
+  // Read operation
+  List<User> displayRegisterDetails() {
+    return registeredBox2.values.toList();
+    // print("Feul see here");
+  }
+
+  // Update operation
+  Future<void> updateUser(int index, String userName, String carName,
+      String brandName, String modelName) async {
+    final updatedUser = User(
+      userName: userName,
+      carName: carName,
+      brandName: brandName,
+      modelName: modelName,
+    );
+    await registeredBox2.putAt(index, updatedUser);
+  }
+
+  // Update operation for fuel
+  Future<void> updateFuel(int index, String fuel) async {
+    final updatedFuel = User(fuel: fuel);
+    await registeredBox2.putAt(index, updatedFuel);
+  }
+
+  // Delete operation
+  Future<void> deleteRegisterDetails(int index) async {
+    var deletedUser = registeredBox2.getAt(index);
+    if (deletedUser != null) {
+      print('Deleted user details: $deletedUser');
+      await registeredBox2.deleteAt(index);
+      print('User details deleted successfully');
+    } else {
+      print('User details not found at index $index');
+    }
   }
 }

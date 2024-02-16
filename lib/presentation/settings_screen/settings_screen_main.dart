@@ -1,7 +1,5 @@
 import 'package:car_maintanance/routes/app_routes.dart';
 import 'package:car_maintanance/src/pages/widgets/radio_button_settings.dart';
-
-import 'package:car_maintanance/theme/theme_helper.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -11,7 +9,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: appTheme.black900,
+        backgroundColor: Colors.black,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Row(
@@ -55,10 +53,21 @@ class SettingsScreen extends StatelessWidget {
                 "Units",
                 style: TextStyle(color: Colors.orange),
               ),
-              const SizedBox(height: 9),
-              const Text("km / Miles"),
+              const SizedBox(height: 5),
+              Text(
+                "km / Miles",
+                style: TextStyle(
+                  color: Colors.white
+                      .withOpacity(0.5), // Adjust the opacity here (0.0 - 1.0)
+                ),
+              ),
               const SizedBox(height: 10),
-              Text("Fuel efficiency", style: theme.textTheme.titleSmall),
+              const Text(
+                "Fuel efficiency",
+                style: TextStyle(
+                  color: Colors.white, // Adjust the opacity here (0.0 - 1.0)
+                ),
+              ),
               Text(
                 "Km / Litre",
                 style: TextStyle(
@@ -71,7 +80,7 @@ class SettingsScreen extends StatelessWidget {
                 "Reminders",
                 style: TextStyle(color: Colors.orange),
               ),
-              const SizedBox(height: 9),
+              const SizedBox(height: 6),
               GestureDetector(
                 onTap: () {
                   onTapAdvance(context);
@@ -79,8 +88,13 @@ class SettingsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Distance in advance",
-                        style: theme.textTheme.titleSmall),
+                    Text(
+                      "Distance in advance",
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(
+                            0.8), // Adjust the opacity here (0.0 - 1.0)
+                      ),
+                    ),
                     Text(
                       "Show reminder 500 km in advance.",
                       style: TextStyle(
@@ -96,7 +110,13 @@ class SettingsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Days in advance", style: theme.textTheme.titleSmall),
+                    Text(
+                      "Days in advance",
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(
+                            0.8), // Adjust the opacity here (0.0 - 1.0)
+                      ),
+                    ),
                     Text(
                       "Show reminder 30 days in advance.",
                       style: TextStyle(
@@ -139,15 +159,25 @@ class SettingsScreen extends StatelessWidget {
                       ),
                       Align(
                         alignment: Alignment.topLeft,
-                        child: Text("Date format",
-                            style: theme.textTheme.titleSmall),
+                        child: Text(
+                          "Date format",
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(
+                                0.8), // Adjust the opacity here (0.0 - 1.0)
+                          ),
+                        ),
                       )
                     ],
                   ),
                 ),
               ),
               const SizedBox(height: 10),
-              Text("Currency format", style: theme.textTheme.titleSmall),
+              Text(
+                "Currency format",
+                style: TextStyle(
+                  color: Colors.white.withOpacity(0.8),
+                ),
+              ),
               const SizedBox(height: 4),
               Text(
                 "₹10,00,000.000",

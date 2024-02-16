@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:car_maintanance/db/models/db_user_reg/user_db.dart';
 import 'package:car_maintanance/routes/app_routes.dart';
-import 'package:car_maintanance/theme/theme_helper.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +18,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CARCARE',
-      theme: theme,
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.splashScreen,
       routes: AppRoutes.routes,

@@ -9,6 +9,7 @@ Widget customTextFormField({
   required BuildContext context,
 }) {
   return TextFormField(
+    keyboardType: TextInputType.name,
     focusNode: focusNode,
     onFieldSubmitted: (_) {
       FocusScope.of(context).requestFocus(nextFocusNode);

@@ -15,17 +15,17 @@ class _PageThreeState extends State<PageThree> {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned(
-            top: 10,
-            left: 18,
-            child: Text(
-              widget.head,
-              style: const TextStyle(
-                fontSize: 30.0,
-                color: Colors.orange,
-              ),
-            ),
-          ),
+          // Positioned(
+          //   top: 10,
+          //   left: 18,
+          //   child: Text(
+          //     widget.head,
+          //     style: const TextStyle(
+          //       fontSize: 30.0,
+          //       color: Colors.orange,
+          //     ),
+          //   ),
+          // ),
           Center(
             child: Icon(
               Icons.car_repair,

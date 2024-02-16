@@ -1,6 +1,6 @@
 import 'package:car_maintanance/core/utils/image_constant.dart';
 import 'package:car_maintanance/routes/app_routes.dart';
-import 'package:car_maintanance/theme/theme_helper.dart';
+
 import 'package:car_maintanance/widgets/custom_image_view.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +11,7 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: appTheme.black900,
+        backgroundColor: Colors.black,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Row(
@@ -154,9 +154,9 @@ class AboutScreen extends StatelessWidget {
                 const SizedBox(height: 7),
                 const Text("Last Update 30 / 12 / 2024"),
                 const SizedBox(height: 6),
-                Text("Privacy policy and terms of use",
-                    style: theme.textTheme.bodyMedium!
-                        .copyWith(decoration: TextDecoration.underline)),
+                Text(
+                  "Privacy policy and terms of use",
+                ),
                 const SizedBox(height: 6)
               ],
             ),

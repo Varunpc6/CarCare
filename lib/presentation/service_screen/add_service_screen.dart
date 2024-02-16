@@ -1,12 +1,12 @@
 import 'package:car_maintanance/core/utils/image_constant.dart';
-import 'package:car_maintanance/widgets/form/my_form.dart';
 
+import 'package:car_maintanance/widgets/form/my_form.dart';
+import 'package:car_maintanance/widgets/form/my_service_from_widget.dart';
 import 'package:flutter/material.dart';
 
-class EditCarScreen extends StatelessWidget {
-  const EditCarScreen({super.key});
+class AddServicePage extends StatelessWidget {
+  const AddServicePage({super.key});
 
-  // //  Brand
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -59,7 +59,7 @@ class EditCarScreen extends StatelessWidget {
                 child: const Row(
                   children: [
                     Text(
-                      'Add Car',
+                      'Service',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 18.0,
@@ -74,7 +74,7 @@ class EditCarScreen extends StatelessWidget {
                 left: MediaQuery.of(context).size.width *
                     0.06, // Adjusted for responsiveness
                 top: MediaQuery.of(context).size.height * 0.10,
-                child: const MyForm(),
+                child: const MyServiceForm(),
               ),
             ],
           ),

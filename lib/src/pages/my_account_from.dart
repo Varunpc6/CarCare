@@ -1,16 +1,15 @@
-
 import 'package:flutter/material.dart';
 
 class CustomInfoField extends StatelessWidget {
   final IconData icon;
-  final String label;
+  final String labelText;
   final IconData? trailingIcon;
   final VoidCallback? onTrailingIconPressed;
 
   const CustomInfoField({
     Key? key,
     required this.icon,
-    required this.label,
+    required this.labelText,
     this.trailingIcon,
     this.onTrailingIconPressed,
   }) : super(key: key);
@@ -39,7 +38,7 @@ class CustomInfoField extends StatelessWidget {
             const SizedBox(width: 8),
             Expanded(
               child: Text(
-                label,
+                labelText,
                 style: const TextStyle(color: Colors.white),
               ),
             ),

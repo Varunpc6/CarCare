@@ -1,5 +1,6 @@
 import 'package:car_maintanance/core/utils/image_constant.dart';
 import 'package:car_maintanance/db/db_functions/registor_from.dart';
+import 'package:car_maintanance/db/models/db_user_reg/user_db.dart';
 
 import 'package:car_maintanance/routes/app_routes.dart';
 import 'package:car_maintanance/src/pages/more_page4.dart';
@@ -17,47 +18,13 @@ class PageFour extends StatefulWidget {
 
 class _PageFourState extends State<PageFour> {
   UserRegisterApp appUserRegiterApp = UserRegisterApp();
-  late List<String> _userList = []; // Define _userList here
-
-  @override
-  void initState() {
-    super.initState();
-    _loadUserList();
-  }
-
-  void _loadUserList() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove('nameUser');
-    setState(() {
-      _userList = []; // Initialize _userList here
-    });
-  }
-
-  void _deleteUser(String key) async {
-    // Assuming deleteRegisterDetails(0) deletes from the database
-    await appUserRegiterApp.deleteRegisterDetails(0);
-
-    // Reload the user list after deletion
-    _loadUserList();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Positioned(
-          top: 15,
-          left: 18,
-          child: Text(
-            widget.head,
-            style: const TextStyle(
-              fontSize: 30.0,
-              color: Colors.orange,
-            ),
-          ),
-        ),
-        Positioned(
-          top: 80,
+          top: 45,
           left: 18,
           child: ResponsiveClickableContainer(
             backgroundImage: ImageConstant.imgRectangleYellow,
@@ -69,7 +36,7 @@ class _PageFourState extends State<PageFour> {
           ),
         ),
         Positioned(
-          top: 80,
+          top: 45,
           right: 18,
           child: ResponsiveClickableContainer(
             backgroundImage: ImageConstant.imgRectangleSettings,
@@ -109,8 +76,39 @@ class _PageFourState extends State<PageFour> {
   }
 
   /// click Next Button
-  onTapNext1(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.myAccountScreen);
+  void onTapNext1(BuildContext context) async {
+    // Check if there is user data available
+    final List<User> users = appUserRegiterApp.displayRegisterDetails();
+    if (users.isEmpty) {
+      // Show a popup message indicating no user data is available
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text(
+              "No User Data",
+              style: TextStyle(color: Colors.black),
+            ),
+            content: const Text(
+              "There is no user data available. Please register first.",
+              style: TextStyle(color: Colors.black),
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'OK'),
+                child: const Text(
+                  'OK',
+                  style: TextStyle(color: Color.fromARGB(236, 255, 0, 0)),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      // Navigate to the myAccountScreen
+      Navigator.pushNamed(context, AppRoutes.myAccountScreen);
+    }
   }
 
   /// click Next Button
@@ -123,51 +121,51 @@ class _PageFourState extends State<PageFour> {
     Navigator.pushNamed(context, AppRoutes.aboutScreen);
   }
 
-  /// click Next Button
-  onTapNext4ShowAlert(BuildContext context) {
+  void onTapNext4ShowAlert(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text(
-              "Log out ?",
-              style: TextStyle(color: Colors.black),
-            ),
-            content: const Text(
-              "When you log out, all expenses will be deleted from this device. Be sure to synchronise manually, in order to save the latest data to your account!",
-              style: TextStyle(color: Colors.black),
-            ),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'Cancel'),
-                child: const Text(
-                  'Cancel',
-                  style: TextStyle(color: Colors.black),
-                ),
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(
+            "Log out ?",
+            style: TextStyle(color: Colors.black),
+          ),
+          content: const Text(
+            "When you log out, all expenses will be deleted from this device. Be sure to synchronise manually, in order to save the latest data to your account!",
+            style: TextStyle(color: Colors.black),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'Cancel'),
+              child: const Text(
+                'Cancel',
+                style: TextStyle(color: Colors.black),
               ),
-              TextButton(
-                onPressed: () async {
-                  // Check if there are users in the list
-                  if (_userList.isNotEmpty) {
-                    // Assuming deleteRegisterDetails(0) deletes from the database
-                    // Delete register details from the database
-                    await appUserRegiterApp.deleteRegisterDetails(0);
+            ),
+            TextButton(
+              onPressed: () async {
+                removeNameUserFromSharedPreferences();
 
-                    // Assuming _deleteUser removes the user from the _userList
-                    // Remove the user from the _userList
-                    _deleteUser(_userList[0]);
-                  }
-
-                  // Close the dialog or navigate back after the deletion
-                  Navigator.pop(context, 'OK');
-                },
-                child: const Text(
-                  'DELETE ACCOUNT',
-                  style: TextStyle(color: Color.fromARGB(236, 255, 0, 0)),
-                ),
+                // Call deleteRegisterDetails to delete user details
+                UserRegisterApp().deleteRegisterDetails(
+                    0); // Assuming you want to delete details at index 0
+                UserFuel().deleteRegisterDetails(0);
+                Navigator.pop(context); // Close the dialog
+              },
+              child: const Text(
+                'DELETE ACCOUNT',
+                style: TextStyle(color: Color.fromARGB(236, 255, 0, 0)),
               ),
-            ],
-          );
-        });
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // Remove data for the 'nameUser' key from SharedPreferences
+  Future<void> removeNameUserFromSharedPreferences() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('nameUser');
   }
 }

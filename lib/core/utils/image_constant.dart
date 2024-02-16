@@ -49,7 +49,7 @@ class ImageConstant {
   static String imgRectangleLogoOut = '$imagePath/img_rectangle_573.jpg';
 
   // My Account images
-  static String imgMyAccount1 = '$imagePath/img_my_account.png';
+  static String imgMyAccount1 = '$imagePath/user_back_image.jpg';
 
   static String imgB20c659c94ea068 = '$imagePath/img_b20c659c94ea068.png';
 

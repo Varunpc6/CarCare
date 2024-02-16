@@ -1,12 +1,11 @@
 import 'package:car_maintanance/core/utils/image_constant.dart';
-import 'package:car_maintanance/widgets/form/my_form.dart';
-
+import 'package:car_maintanance/widgets/form/my_car_from.dart';
+import 'package:car_maintanance/widgets/form/my_expense_from.dart';
 import 'package:flutter/material.dart';
 
-class EditCarScreen extends StatelessWidget {
-  const EditCarScreen({super.key});
+class AddExpensePage extends StatelessWidget {
+  const AddExpensePage({super.key});
 
-  // //  Brand
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -54,15 +53,15 @@ class EditCarScreen extends StatelessWidget {
               ),
               Positioned(
                 left: MediaQuery.of(context).size.width *
-                    0.25, // Adjusted for responsiveness
+                    0.2, // Adjusted for responsiveness
                 top: MediaQuery.of(context).size.height * 0.04,
                 child: const Row(
                   children: [
                     Text(
-                      'Add Car',
+                      'Refuel',
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 18.0,
+                        fontSize: 22.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -74,7 +73,7 @@ class EditCarScreen extends StatelessWidget {
                 left: MediaQuery.of(context).size.width *
                     0.06, // Adjusted for responsiveness
                 top: MediaQuery.of(context).size.height * 0.10,
-                child: const MyForm(),
+                child: const MyExpenseForm(),
               ),
             ],
           ),

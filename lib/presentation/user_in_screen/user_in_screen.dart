@@ -49,14 +49,14 @@ class _UserInScreenState extends State<UserInScreen> {
   ];
   String? selectedBrand;
 
+  // DataBase instance
+  final UserRegisterApp registerUser = UserRegisterApp();
+
   // Text controller
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController carNameController = TextEditingController();
   final TextEditingController brandNameController = TextEditingController();
   final TextEditingController modelNameController = TextEditingController();
-
-  // DataBase instance
-  final UserRegisterApp registerUser = UserRegisterApp();
 
   // TextField focus Auto jump
   FocusNode focusOne = FocusNode();
@@ -325,7 +325,7 @@ class _UserInScreenState extends State<UserInScreen> {
     return Positioned(
       // Adjust this value as needed
       top: MediaQuery.of(context).size.height * 0.85 - 30,
-      left: MediaQuery.of(context).size.width * 0.5 - 80,
+      left: MediaQuery.of(context).size.width * 0.48 - 80,
       child: ElevatedButton(
         focusNode: focusBtn,
         onPressed: () async {
@@ -351,6 +351,7 @@ class _UserInScreenState extends State<UserInScreen> {
 
               // Optionally, perform any additional actions
               savedUser();
+              // ignore: use_build_context_synchronously
               onTapCreate(context);
             } else {
               // If no brand has been selected, show an error message
@@ -371,12 +372,12 @@ class _UserInScreenState extends State<UserInScreen> {
           }
         },
         style: ElevatedButton.styleFrom(
-          elevation: 1,
-          minimumSize: const Size(160, 60),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
+            elevation: 1,
+            minimumSize: const Size(170, 50),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            backgroundColor: const Color.fromARGB(255, 255, 119, 0)),
         child: const Center(
           child: Text(
             'Create',
