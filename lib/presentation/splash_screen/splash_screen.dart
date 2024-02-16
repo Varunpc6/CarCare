@@ -46,6 +46,7 @@ class SplashScreenContentState extends State<SplashScreenContent> {
   }
 }
 
+// checking the SharedPreferences
 Future<void> checkUser(BuildContext context) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   final userEntered = prefs.getString('nameUser');
