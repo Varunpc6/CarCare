@@ -8,10 +8,10 @@ class PageTwo extends StatefulWidget {
   const PageTwo({Key? key, required this.head}) : super(key: key);
 
   @override
-  _PageTwoState createState() => _PageTwoState();
+  PageTwoState createState() => PageTwoState();
 }
 
-class _PageTwoState extends State<PageTwo> with SingleTickerProviderStateMixin {
+class PageTwoState extends State<PageTwo> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override

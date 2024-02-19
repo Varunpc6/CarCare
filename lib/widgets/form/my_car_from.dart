@@ -1,26 +1,29 @@
+import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/widgets/dropdown_widget/dropdown_widget.dart';
 import 'package:car_maintanance/widgets/text_widget/textfield_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class MyCarForm extends StatefulWidget {
   const MyCarForm({Key? key}) : super(key: key);
 
   @override
-  _MyCarFormState createState() => _MyCarFormState();
+  MyCarFormState createState() => MyCarFormState();
 }
 
-class _MyCarFormState extends State<MyCarForm> {
-  final TextEditingController controller1 = TextEditingController();
-  final TextEditingController controller2 = TextEditingController();
+class MyCarFormState extends State<MyCarForm> {
+  late TextEditingController dateController1 = TextEditingController();
+  late TextEditingController timeController2 = TextEditingController();
+
   // Add the missing controllers and focus nodes here
-  final TextEditingController controller3 = TextEditingController();
-  final TextEditingController controller4 = TextEditingController();
-  final TextEditingController controller5 = TextEditingController();
-  final TextEditingController controller6 = TextEditingController();
-  final TextEditingController controller7 = TextEditingController();
-  final TextEditingController controller8 = TextEditingController();
-  final TextEditingController controller9 = TextEditingController();
-  final TextEditingController controller10 = TextEditingController();
+  late TextEditingController controller3 = TextEditingController();
+  late TextEditingController controller4 = TextEditingController();
+  late TextEditingController controller5 = TextEditingController();
+  late TextEditingController controller6 = TextEditingController();
+  late TextEditingController controller7 = TextEditingController();
+  late TextEditingController controller8 = TextEditingController();
+  late TextEditingController controller9 = TextEditingController();
+  late TextEditingController dateController10 = TextEditingController();
 
   final FocusNode focusNode1 = FocusNode();
   final FocusNode focusNode2 = FocusNode();
@@ -36,10 +39,19 @@ class _MyCarFormState extends State<MyCarForm> {
   final FocusNode focusNodeBtn = FocusNode();
 
   @override
+  void initState() {
+    super.initState();
+    // Initialize the dateController with the current date
+    dateController1 = TextEditingController(text: _formatDate(DateTime.now()));
+    timeController2 =
+        TextEditingController(text: DateFormat.jm().format(DateTime.now()));
+  }
+
+  @override
   void dispose() {
     // Dispose of all the controllers and focus nodes
-    controller1.dispose();
-    controller2.dispose();
+    dateController1.dispose();
+    timeController2.dispose();
     // Dispose of the additional controllers and focus nodes
     controller3.dispose();
     controller4.dispose();
@@ -48,7 +60,7 @@ class _MyCarFormState extends State<MyCarForm> {
     controller7.dispose();
     controller8.dispose();
     controller9.dispose();
-    controller10.dispose();
+    dateController10.dispose();
     focusNode1.dispose();
     focusNode2.dispose();
     // Dispose of the additional focus nodes
@@ -63,6 +75,16 @@ class _MyCarFormState extends State<MyCarForm> {
     super.dispose();
   }
 
+  // Function to format the date as per requirement
+  String _formatDate(DateTime dateTime) {
+    return DateFormat('yyyy-MM-dd').format(dateTime);
+  }
+
+  // Function to format the time as per requirement
+  String format(DateTime dateTime) {
+    return DateFormat('HH:mm').format(dateTime);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -73,22 +95,49 @@ class _MyCarFormState extends State<MyCarForm> {
           Row(
             children: [
               Expanded(
+                // Date Picker
                 child: MyDropdownField(
-                  controller: controller1,
-                  focusNode: focusNode1,
+                  controller: dateController1,
+                  focusNode: FocusNode(),
                   icon: Icons.calendar_today,
-                  labelText: 'Date',
+                  labelText: 'Example Dropdown',
                   items: const ['Option 1', 'Option 2'],
+                  fieldType: FieldType.datePicker,
+                  onDateSelected: (DateTime selectedDate) {
+                    // Update the date controller with the selected date
+                    setState(() {
+                      dateController1.text = _formatDate(selectedDate);
+                    });
+                    // Store the selected date in your Hive database
+                    // Assuming you have a function named storeDateInDatabase to handle this
+                    // storeDateInDatabase(selectedDate);
+                  },
                 ),
+                //  MyDropdownField(
+                //   controller: dateController1,
+                //   focusNode: focusNode1,
+                //   icon: Icons.calendar_today,
+                //   labelText: 'Date',
+                //   items: const ['Option 1', 'Option 2'],
+                // ),
               ),
               const SizedBox(width: 10.0),
               Expanded(
                 child: MyDropdownField(
-                  controller: controller2,
+                  controller: timeController2,
                   focusNode: focusNode2,
                   icon: Icons.access_time,
                   labelText: 'Time',
                   items: const ['Option 1', 'Option 2'],
+                  fieldType: FieldType.timePicker,
+                  onUpdateControllerText: (String formattedTime) {
+                    setState(() {
+                      timeController2.text = formattedTime;
+                    });
+                    // You can also store the selected time in your Hive database here
+                    // Assuming you have a function named storeTimeInDatabase to handle this
+                    // storeTimeInDatabase(formattedTime);
+                  },
                 ),
               ),
             ],
@@ -107,6 +156,7 @@ class _MyCarFormState extends State<MyCarForm> {
             icon: Icons.attach_money,
             labelText: 'Fuel',
             items: const ['Option 1', 'Option 2'],
+            fieldType: FieldType.dropdown,
           ),
           const SizedBox(height: 10.0),
           Row(
@@ -147,18 +197,20 @@ class _MyCarFormState extends State<MyCarForm> {
           ),
           const SizedBox(height: 10.0),
           MyDropdownField(
-              controller: controller9,
-              focusNode: focusNode9,
-              icon: Icons.attach_money,
-              labelText: 'Payment method',
-              items: const ['Option 1', 'Option 2']),
+            controller: controller9,
+            focusNode: focusNode9,
+            icon: Icons.attach_money,
+            labelText: 'Payment method',
+            items: const ['Option 1', 'Option 2'],
+            fieldType: FieldType.dropdown,
+          ),
           const SizedBox(height: 10.0),
           MyTextField(
-              controller: controller10,
+              controller: dateController10,
               focusNode: focusNode10,
               icon: Icons.attach_money,
               labelText: 'Reason'),
-          const SizedBox(height: 10.0),
+          const SizedBox(height: 25.0),
           ElevatedButton(
             focusNode: focusNodeBtn,
             onPressed: () {
@@ -169,93 +221,19 @@ class _MyCarFormState extends State<MyCarForm> {
                 borderRadius: BorderRadius.circular(10), // Radius
               ),
               minimumSize: const Size(500, 60), // Width and height
+              backgroundColor: AppColors.orange,
             ),
-            child: const Text('Done',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                )),
+            child: const Text(
+              'Done',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+            ),
           ),
         ],
       ),
     );
   }
-
-  // Widget _buildTextField(
-  //   TextEditingController controller,
-  //   FocusNode focusNode,
-  //   IconData icon,
-  //   String labelText,
-  // ) {
-  //   return TextFormField(
-  //     controller: controller,
-  //     focusNode: focusNode,
-  //     style: const TextStyle(color: Colors.black),
-  //     decoration: InputDecoration(
-  //       prefixIcon: Icon(
-  //         icon,
-  //         color: Colors.black, // Set icon color to black
-  //       ),
-  //       labelText: labelText,
-  //       labelStyle: const TextStyle(color: Colors.black),
-  //       focusedBorder: const OutlineInputBorder(
-  //         borderSide: BorderSide(color: Colors.orange),
-  //       ),
-  //       enabledBorder: OutlineInputBorder(
-  //         borderSide: BorderSide(
-  //           color: focusNode.hasFocus ? Colors.blue : Colors.orange,
-  //         ),
-  //         borderRadius: BorderRadius.circular(15),
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // Widget _MyDropdownField(
-  //   TextEditingController controller,
-  //   FocusNode focusNode,
-  //   IconData icon,
-  //   String labelText,
-  //   List<String> items,
-  // ) {
-  //   String? selectedValue = controller.text.isNotEmpty ? controller.text : null;
-
-  //   return DropdownButtonFormField<String>(
-  //     value: selectedValue,
-  //     items: items.map((String value) {
-  //       return DropdownMenuItem<String>(
-  //         value: value,
-  //         child: Text(
-  //           value,
-  //           style: const TextStyle(
-  //               color: Colors.black), // Set dropdown item text color
-  //         ),
-  //       );
-  //     }).toList(),
-  //     onChanged: (String? newValue) {
-  //       setState(() {
-  //         controller.text = newValue ?? '';
-  //       });
-  //     },
-  //     decoration: InputDecoration(
-  //       prefixIcon: Icon(
-  //         icon,
-  //         color: Colors.black, // Set icon color to black
-  //       ),
-  //       labelText: labelText,
-  //       labelStyle:
-  //           const TextStyle(color: Colors.black), // Set label color to black
-  //       focusedBorder: OutlineInputBorder(
-  //         borderSide: const BorderSide(
-  //             color: Colors.orange), // Permanently orange border
-  //         borderRadius: BorderRadius.circular(15), // Set border radius
-  //       ),
-  //       enabledBorder: OutlineInputBorder(
-  //         borderSide: const BorderSide(color: Colors.orange),
-  //         borderRadius: BorderRadius.circular(15), // Set border radius
-  //       ),
-  //     ),
-  //   );
-  // }
 }

@@ -1,4 +1,6 @@
+import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/core/utils/image_constant.dart';
+import 'package:car_maintanance/core/utils/responsive_screens.dart';
 import 'package:car_maintanance/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
@@ -10,17 +12,19 @@ class OnBoardingOneScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: SizedBox(
-          width: double.infinity,
-          height: double.infinity,
+          width: ResSize.width(context),
+          height: ResSize.height(context),
           child: Stack(
             children: [
               // Background Image
               Positioned(
-                left: 0,
-                top: 0,
+                left: ResSize.left(context),
+                top: ResSize.top(context),
+                right: ResSize.right(context),
+                bottom: ResSize.bottom(context),
                 child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
+                  width: ResSize.width(context),
+                  height: ResSize.height(context),
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(ImageConstant.imgOnBoardingOne),
@@ -32,51 +36,39 @@ class OnBoardingOneScreen extends StatelessWidget {
               ),
               // Gradient Overlay
               Positioned(
-                left: 0,
-                top: 0,
+                left: ResSize.left(context),
+                top: ResSize.top(context),
                 child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
+                  width: ResSize.width(context),
+                  height: ResSize.height(context),
                   decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment(0.10, -1.50),
-                      end: Alignment(-0.1, 1),
-                      colors: [
-                        Color.fromARGB(255, 53, 37, 29),
-                        Color.fromARGB(0, 29, 20, 15),
-                        Color.fromARGB(0, 119, 60, 29),
-                        Color.fromARGB(0, 48, 30, 21),
-                      ],
-                    ),
+                    gradient: AppGradients.linearGradient,
                   ),
                 ),
               ),
               // Content Stack
               Positioned(
-                left: MediaQuery.of(context).size.width *
-                    0.15, // Adjusted for responsiveness
-                top: MediaQuery.of(context).size.height * 0.34,
+                left: ResSize.left15(context), // Adjusted for responsiveness
+                top: ResSize.top34(context),
+                right: ResSize.right15(context),
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width *
-                      0.7, // Adjusted for responsiveness
-                  height: MediaQuery.of(context).size.height * 0.3,
+                  width: ResSize.width7(context), // Adjusted for responsiveness
+                  height: ResSize.height3(context),
                   child: Stack(
                     children: [
                       // Main Container
                       Positioned(
-                        left: 0,
-                        top: MediaQuery.of(context).size.height *
-                            0.05, // Adjusted for responsiveness
+                        left: ResSize.left(context),
+                        top: ResSize.height05(context),
                         child: Container(
-                          width: MediaQuery.of(context).size.width *
-                              0.7, // Adjusted for responsiveness
-                          height: MediaQuery.of(context).size.height * 0.25,
+                          width: ResSize.width7(context),
+                          height: ResSize.height25(context),
                           decoration: ShapeDecoration(
-                            color: const Color(0xCCD3D3D3),
+                            color: AppColors.bgWhite,
                             shape: RoundedRectangleBorder(
                               side: const BorderSide(
                                 width: 3,
-                                color: Color(0xFFFB7E3C),
+                                color: AppColors.primary,
                               ),
                               borderRadius: BorderRadius.circular(16),
                             ),
@@ -85,40 +77,38 @@ class OnBoardingOneScreen extends StatelessWidget {
                       ),
                       // Circular Image
                       Positioned(
-                        left: MediaQuery.of(context).size.width * 0.22,
-                        top: 0,
+                        left: ResSize.left22(context),
+                        top: ResSize.top(context),
+                        right: ResSize.right25(context),
                         child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.23,
-                          height: MediaQuery.of(context).size.height * 0.11,
+                          width: ResSize.width23(context),
+                          height: ResSize.height11(context),
                           child: Stack(
                             children: [
                               Container(
-                                width: MediaQuery.of(context).size.width * 0.40,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.40,
+                                width: ResSize.width40(context),
+                                height: ResSize.height40(context),
                                 decoration: const ShapeDecoration(
-                                  color: Color(0xFFD9D9D9),
+                                  color: AppColors.circleBgWhite,
                                   shape: OvalBorder(
                                     side: BorderSide(
                                       width: 2,
-                                      color: Color(0xFFFB7E3C),
+                                      color: AppColors.primary,
                                     ),
                                   ),
                                 ),
                               ),
                               // Rotated Image
                               Positioned(
-                                left: -6,
-                                top: -4,
+                                right: ResSize.right03(context),
+                                bottom: ResSize.dotBottom03(context),
                                 child: Transform(
                                   transform: Matrix4.identity()
                                     ..translate(0.0, 0.0)
                                     ..rotateZ(-0.06),
                                   child: Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.21,
-                                    height: MediaQuery.of(context).size.height *
-                                        0.1,
+                                    width: ResSize.width20(context),
+                                    height: ResSize.height1(context),
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: AssetImage(ImageConstant.imgR1),
@@ -133,27 +123,27 @@ class OnBoardingOneScreen extends StatelessWidget {
                         ),
                       ),
                       // Head Text
-                      const Positioned(
-                        left: 17,
-                        top: 120,
-                        child: Text(
+                      Positioned(
+                        left: ResSize.left02(context),
+                        top: ResSize.top25(context),
+                        child: const Text(
                           'Let’s Work with Carcare',
                           style: TextStyle(
-                            color: Colors.black,
+                            color: AppColors.black,
                             fontSize: 24,
                             fontWeight: FontWeight.w800,
                           ),
                         ),
                       ),
                       // Sub Title
-                      const Positioned(
-                        left: 30,
-                        top: 175,
-                        child: Text(
+                      Positioned(
+                        left: ResSize.left07(context),
+                        top: ResSize.top20(context),
+                        child: const Text(
                           'Now you can more quickly and easily\ntrack the expenses of your\nvehicle.',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Colors.black,
+                            color: AppColors.black,
                             fontWeight: FontWeight.w400,
                             fontSize: 14,
                             height: 1.2,
@@ -166,21 +156,22 @@ class OnBoardingOneScreen extends StatelessWidget {
               ),
               // Skip Button
               Positioned(
-                right: 20, // Adjusted for responsiveness
-                top: 20,
+                right: ResSize.right03(context), // Adjusted for responsiveness
+                top: ResSize.top03(context),
+                left: ResSize.left76(context),
                 child: InkResponse(
                   onTap: () {
                     onTapNext(context);
                   },
                   child: Container(
-                    width: 76,
-                    height: 38,
+                    width: ResSize.width14(context),
+                    height: ResSize.height05(context),
                     decoration: ShapeDecoration(
                       shape: RoundedRectangleBorder(
                         side: const BorderSide(
                           width: 2,
                           strokeAlign: BorderSide.strokeAlignCenter,
-                          color: Colors.white,
+                          color: AppColors.white,
                         ),
                         borderRadius: BorderRadius.circular(25),
                       ),
@@ -189,7 +180,7 @@ class OnBoardingOneScreen extends StatelessWidget {
                       child: Text(
                         'Skip',
                         style: TextStyle(
-                          color: Color(0xFFFB7E3C),
+                          color: AppColors.primary,
                           fontSize: 16,
                           fontWeight: FontWeight.w800,
                         ),

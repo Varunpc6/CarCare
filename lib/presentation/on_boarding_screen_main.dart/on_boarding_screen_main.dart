@@ -1,3 +1,5 @@
+import 'package:car_maintanance/core/utils/app_colors.dart';
+import 'package:car_maintanance/core/utils/responsive_screens.dart';
 import 'package:car_maintanance/widgets/on_bording_screens/screen_one/on_boarding_one_screen.dart';
 import 'package:car_maintanance/widgets/on_bording_screens/screen_three.dart/on_boarding_third_screen.dart';
 import 'package:car_maintanance/widgets/on_bording_screens/screen_two/on_boarding_second_screen.dart';
@@ -5,15 +7,15 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingPageState extends StatelessWidget {
-  final PageController controller;  // Control the page navigation
-  final List<Widget> pages;  // List of onboarding screens
+  final PageController controller; // Control the page navigation
+  final List<Widget> pages; // List of onboarding screens
 
   OnboardingPageState({Key? key})
-      : controller = PageController(),  // Initialize the page controller
+      : controller = PageController(), // Initialize the page controller
         pages = [
-          const OnBoardingOneScreen(),  // First onboarding screen
-          const OnBoardingSecondScreen(),  // Second onboarding screen
-          const OnBoardingThirdScreen(),  // Third onboarding screen
+          const OnBoardingOneScreen(), // First onboarding screen
+          const OnBoardingSecondScreen(), // Second onboarding screen
+          const OnBoardingThirdScreen(), // Third onboarding screen
         ],
         super(key: key);
 
@@ -35,14 +37,14 @@ class OnboardingPageState extends StatelessWidget {
           ),
           // SmoothPageIndication dots
           Positioned(
-            bottom: 50,
-            left: MediaQuery.of(context).size.width * 0.5 - 15,
+            bottom: ResSize.dotBottom(context),
+            left: ResSize.dotLeft(context, 60),
             child: SmoothPageIndicator(
               controller: controller, //
               count: 3,
               effect: const ScrollingDotsEffect(
-                dotColor: Color.fromARGB(255, 255, 255, 255),
-                activeDotColor: Color.fromARGB(255, 208, 112, 9),
+                dotColor: AppColors.white,
+                activeDotColor: AppColors.primary,
                 activeStrokeWidth: 2.6,
                 activeDotScale: 1.3,
                 maxVisibleDots: 5,

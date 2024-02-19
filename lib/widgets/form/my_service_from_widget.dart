@@ -6,10 +6,10 @@ class MyServiceForm extends StatefulWidget {
   const MyServiceForm({Key? key}) : super(key: key);
 
   @override
-  _MyServiceFormState createState() => _MyServiceFormState();
+  MyServiceFormState createState() => MyServiceFormState();
 }
 
-class _MyServiceFormState extends State<MyServiceForm> {
+class MyServiceFormState extends State<MyServiceForm> {
   final TextEditingController controller1 = TextEditingController();
   final TextEditingController controller2 = TextEditingController();
   final TextEditingController controller3 = TextEditingController();
@@ -72,6 +72,7 @@ class _MyServiceFormState extends State<MyServiceForm> {
                 icon: Icons.calendar_today,
                 labelText: 'Date',
                 items: const ['Option 1', 'Option 2'],
+                fieldType: FieldType.datePicker,
               ),
             ),
             const SizedBox(width: 10.0),
@@ -82,6 +83,7 @@ class _MyServiceFormState extends State<MyServiceForm> {
                 icon: Icons.access_time,
                 labelText: 'Time',
                 items: const ['Option 1', 'Option 2'],
+                fieldType: FieldType.dropdown,
               ),
             ),
           ],
@@ -106,6 +108,7 @@ class _MyServiceFormState extends State<MyServiceForm> {
             'Belts',
             'Brake Fluid'
           ],
+          fieldType: FieldType.dropdown,
         ),
         const SizedBox(height: 10.0),
         MyTextField(
@@ -121,6 +124,7 @@ class _MyServiceFormState extends State<MyServiceForm> {
           icon: Icons.attach_money,
           labelText: 'Payment method',
           items: const ['Debit', 'Credit', 'Cash on hand'],
+          fieldType: FieldType.dropdown,
         ),
         const SizedBox(height: 10.0),
         MyTextField(
@@ -144,7 +148,7 @@ class _MyServiceFormState extends State<MyServiceForm> {
             ),
             minimumSize: const Size(
                 double.infinity, 55), // Set the minimum height of the button
-            primary:
+            backgroundColor:
                 const Color.fromARGB(48, 0, 0, 0), // Transparent body color
           ),
           child: const Text(

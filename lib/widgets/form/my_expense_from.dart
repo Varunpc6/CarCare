@@ -6,10 +6,10 @@ class MyExpenseForm extends StatefulWidget {
   const MyExpenseForm({Key? key}) : super(key: key);
 
   @override
-  _MyExpenseFormState createState() => _MyExpenseFormState();
+  MyExpenseFormState createState() => MyExpenseFormState();
 }
 
-class _MyExpenseFormState extends State<MyExpenseForm> {
+class MyExpenseFormState extends State<MyExpenseForm> {
   final TextEditingController controller1 = TextEditingController();
   final TextEditingController controller2 = TextEditingController();
   final TextEditingController controller3 = TextEditingController();
@@ -72,6 +72,7 @@ class _MyExpenseFormState extends State<MyExpenseForm> {
                 icon: Icons.calendar_today,
                 labelText: 'Date',
                 items: const ['Option 1', 'Option 2'],
+                fieldType: FieldType.datePicker,
               ),
             ),
             const SizedBox(width: 10.0),
@@ -82,6 +83,7 @@ class _MyExpenseFormState extends State<MyExpenseForm> {
                 icon: Icons.access_time,
                 labelText: 'Time',
                 items: const ['Option 1', 'Option 2'],
+                fieldType: FieldType.dropdown,
               ),
             ),
           ],
@@ -100,6 +102,7 @@ class _MyExpenseFormState extends State<MyExpenseForm> {
           icon: Icons.attach_money,
           labelText: 'Type of expense',
           items: const ['Option 1', 'Option 2'],
+          fieldType: FieldType.dropdown,
         ),
         const SizedBox(height: 10.0),
         MyTextField(
@@ -115,6 +118,7 @@ class _MyExpenseFormState extends State<MyExpenseForm> {
           icon: Icons.attach_money,
           labelText: 'Payment method',
           items: const ['Debit', 'Credit', 'Cash on hand'],
+          fieldType: FieldType.dropdown,
         ),
         const SizedBox(height: 10.0),
         MyTextField(

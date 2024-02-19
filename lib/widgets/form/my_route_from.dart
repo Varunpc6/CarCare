@@ -6,10 +6,10 @@ class MyRoteForm extends StatefulWidget {
   const MyRoteForm({Key? key}) : super(key: key);
 
   @override
-  _MyRoteFormState createState() => _MyRoteFormState();
+  MyRoteFormState createState() => MyRoteFormState();
 }
 
-class _MyRoteFormState extends State<MyRoteForm> {
+class MyRoteFormState extends State<MyRoteForm> {
   final TextEditingController controller1 = TextEditingController();
   final TextEditingController controller2 = TextEditingController();
   final TextEditingController controller3 = TextEditingController();
@@ -82,7 +82,7 @@ class _MyRoteFormState extends State<MyRoteForm> {
                 focusNode: focusNode2,
                 icon: Icons.calendar_today,
                 labelText: 'Date',
-                items: const ['Option 1', 'Option 2'],
+                items: const ['Option 1', 'Option 2'], fieldType: FieldType.datePicker,
               ),
             ),
             const SizedBox(width: 10.0),
@@ -92,7 +92,7 @@ class _MyRoteFormState extends State<MyRoteForm> {
                 focusNode: focusNode3,
                 icon: Icons.access_time,
                 labelText: 'Time',
-                items: const ['Option 1', 'Option 2'],
+                items: const ['Option 1', 'Option 2'], fieldType: FieldType.dropdown,
               ),
             ),
           ],
@@ -120,7 +120,7 @@ class _MyRoteFormState extends State<MyRoteForm> {
                 focusNode: focusNode6,
                 icon: Icons.calendar_today,
                 labelText: 'Date',
-                items: const ['Option 1', 'Option 2'],
+                items: const ['Option 1', 'Option 2'], fieldType: FieldType.dropdown,
               ),
             ),
             const SizedBox(width: 15.0),
@@ -130,7 +130,7 @@ class _MyRoteFormState extends State<MyRoteForm> {
                 focusNode: focusNode7,
                 icon: Icons.access_time,
                 labelText: 'Time',
-                items: const ['Option 1', 'Option 2'],
+                items: const ['Option 1', 'Option 2'], fieldType: FieldType.dropdown,
               ),
             ),
           ],
@@ -162,7 +162,7 @@ class _MyRoteFormState extends State<MyRoteForm> {
                 focusNode: focusNode10,
                 icon: Icons.attach_money,
                 labelText: 'Payment ',
-                items: const ['Debit', 'Credit', 'Cash on hand'],
+                items: const ['Debit', 'Credit', 'Cash on hand'], fieldType: FieldType.dropdown,
               ),
             )
           ],
@@ -190,7 +190,7 @@ class _MyRoteFormState extends State<MyRoteForm> {
             minimumSize: const Size(
                 double.infinity, 55), // Set the minimum height of the button
             primary:
-                Color.fromARGB(17, 128, 127, 127), // Transparent body color
+                const Color.fromARGB(17, 128, 127, 127), // Transparent body color
           ),
           child: const Text(
             'Done',

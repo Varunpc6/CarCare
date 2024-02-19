@@ -4,10 +4,10 @@ class MyForm extends StatefulWidget {
   const MyForm({Key? key}) : super(key: key);
 
   @override
-  _MyFormState createState() => _MyFormState();
+  MyFormState createState() => MyFormState();
 }
 
-class _MyFormState extends State<MyForm> {
+class MyFormState extends State<MyForm> {
   final TextEditingController _controller1 = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
   final TextEditingController _controller3 = TextEditingController();

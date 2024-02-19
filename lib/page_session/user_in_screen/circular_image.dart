@@ -1,5 +1,7 @@
 // Round Image
+import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/core/utils/image_constant.dart';
+import 'package:car_maintanance/core/utils/responsive_screens.dart';
 import 'package:flutter/material.dart';
 
 buildCircularImage(BuildContext context) {
@@ -8,35 +10,30 @@ buildCircularImage(BuildContext context) {
       child: Stack(
         children: [
           Positioned(
-            left: MediaQuery.of(context).size.width * 0.35,
-            top: MediaQuery.of(context).size.height * 0.126,
+            left: ResSize.left36(context),
+            top: ResSize.top125(context),
+            right: ResSize.right33(context),
             child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.3,
-              height: MediaQuery.of(context).size.height * 0.15,
+              width: ResSize.width14(context),
+              height: ResSize.height15(context),
               child: Stack(
                 children: [
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    height: MediaQuery.of(context).size.height * 0.4,
+                    width: ResSize.width40(context),
+                    height: ResSize.height15(context),
                     decoration: const ShapeDecoration(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: AppColors.white,
                       shape: CircleBorder(
                         side: BorderSide(
                           width: 2,
-                          color: Color(0xFFFB7E3C),
+                          color: AppColors.orange,
                         ),
                       ),
-                      shadows: [
-                        BoxShadow(
-                          color: Color(0x3F000000),
-                          spreadRadius: 3,
-                        ),
-                      ],
                     ),
                     child: ClipOval(
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 0.21,
-                        height: MediaQuery.of(context).size.height * 0.1,
+                        width: ResSize.width40(context),
+                        height: ResSize.height1(context),
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image:

@@ -4,10 +4,10 @@ class MyDropdown extends StatefulWidget {
   const MyDropdown({super.key});
 
   @override
-  _MyDropdownState createState() => _MyDropdownState();
+  MyDropdownState createState() => MyDropdownState();
 }
 
-class _MyDropdownState extends State<MyDropdown> {
+class MyDropdownState extends State<MyDropdown> {
   String? _selectedItem;
 
   final List<String> _dropdownItems = [

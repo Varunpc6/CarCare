@@ -6,10 +6,10 @@ class MyIncomeForm extends StatefulWidget {
   const MyIncomeForm({Key? key}) : super(key: key);
 
   @override
-  _MyIncomeFormState createState() => _MyIncomeFormState();
+  MyIncomeFormState createState() => MyIncomeFormState();
 }
 
-class _MyIncomeFormState extends State<MyIncomeForm> {
+class MyIncomeFormState extends State<MyIncomeForm> {
   final TextEditingController controller1 = TextEditingController();
   final TextEditingController controller2 = TextEditingController();
   final TextEditingController controller3 = TextEditingController();
@@ -71,7 +71,7 @@ class _MyIncomeFormState extends State<MyIncomeForm> {
                 focusNode: focusNode1,
                 icon: Icons.calendar_today,
                 labelText: 'Date',
-                items: const ['Option 1', 'Option 2'],
+                items: const ['Option 1', 'Option 2'], fieldType: FieldType.datePicker,
               ),
             ),
             const SizedBox(width: 10.0),
@@ -81,7 +81,7 @@ class _MyIncomeFormState extends State<MyIncomeForm> {
                 focusNode: focusNode2,
                 icon: Icons.access_time,
                 labelText: 'Time',
-                items: const ['Option 1', 'Option 2'],
+                items: const ['Option 1', 'Option 2'], fieldType: FieldType.dropdown,
               ),
             ),
           ],
@@ -105,7 +105,7 @@ class _MyIncomeFormState extends State<MyIncomeForm> {
             'Ride',
             'Transport application',
             'vehicle sale'
-          ],
+          ], fieldType: FieldType.dropdown,
         ),
         const SizedBox(height: 10.0),
         MyTextField(
@@ -120,7 +120,7 @@ class _MyIncomeFormState extends State<MyIncomeForm> {
           focusNode: focusNode9,
           icon: Icons.attach_money,
           labelText: 'Payment method',
-          items: const ['Debit', 'Credit', 'Cash on hand'],
+          items: const ['Debit', 'Credit', 'Cash on hand'], fieldType: FieldType.dropdown,
         ),
         const SizedBox(height: 10.0),
         MyTextField(

@@ -154,7 +154,7 @@ class AboutScreen extends StatelessWidget {
                 const SizedBox(height: 7),
                 const Text("Last Update 30 / 12 / 2024"),
                 const SizedBox(height: 6),
-                Text(
+                const Text(
                   "Privacy policy and terms of use",
                 ),
                 const SizedBox(height: 6)

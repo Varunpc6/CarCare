@@ -1,4 +1,6 @@
+import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/core/utils/image_constant.dart';
+import 'package:car_maintanance/core/utils/responsive_screens.dart';
 import 'package:car_maintanance/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
@@ -10,17 +12,17 @@ class OnBoardingSecondScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: SizedBox(
-          width: double.infinity,
-          height: double.infinity,
+          width: ResSize.width(context),
+          height: ResSize.height(context),
           child: Stack(
             children: [
               // Background Image
               Positioned(
-                left: 0,
-                top: 0,
+                left: ResSize.left(context),
+                top: ResSize.top(context),
                 child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
+                  width: ResSize.width(context),
+                  height: ResSize.height(context),
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(ImageConstant.imgOnBoardingSecond),
@@ -32,11 +34,11 @@ class OnBoardingSecondScreen extends StatelessWidget {
               ),
               // Gradient Overlay
               Positioned(
-                left: 0,
-                top: 0,
+                left: ResSize.left(context),
+                top: ResSize.top(context),
                 child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
+                  width: ResSize.width(context),
+                  height: ResSize.height(context),
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment(0.10, -1.50),
@@ -54,29 +56,27 @@ class OnBoardingSecondScreen extends StatelessWidget {
               // Content Stack
               Positioned(
                 // Adjusted for responsiveness
-                left: MediaQuery.of(context).size.width * 0.15,
-                top: MediaQuery.of(context).size.height * 0.34,
+                left: ResSize.left15(context), // Adjusted for responsiveness
+                top: ResSize.top34(context),
                 child: SizedBox(
                   // Adjusted for responsiveness
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  height: MediaQuery.of(context).size.height * 0.3,
+                  width: ResSize.width7(context), // Adjusted for responsiveness
+                  height: ResSize.height3(context),
                   child: Stack(
                     children: [
                       // Main Container
                       Positioned(
-                        // Adjusted for responsiveness
-                        left: 0,
-                        top: MediaQuery.of(context).size.height * 0.05,
+                        left: ResSize.left(context),
+                        top: ResSize.height05(context),
                         child: Container(
-                          // Adjusted for responsiveness
-                          width: MediaQuery.of(context).size.width * 0.7,
-                          height: MediaQuery.of(context).size.height * 0.25,
+                          width: ResSize.width7(context),
+                          height: ResSize.height25(context),
                           decoration: ShapeDecoration(
-                            color: const Color(0xCCD3D3D3),
+                            color: AppColors.bgWhite,
                             shape: RoundedRectangleBorder(
                               side: const BorderSide(
                                 width: 3,
-                                color: Color(0xFFFB7E3C),
+                                color: AppColors.primary,
                               ),
                               borderRadius: BorderRadius.circular(16),
                             ),
@@ -149,8 +149,9 @@ class OnBoardingSecondScreen extends StatelessWidget {
                       const Positioned(
                         left: 30,
                         top: 175,
+                        right: 30,
                         child: Text(
-                          'It allows you to have total control over\nyour vehicle costs',
+                          'It allows you to have total control over your vehicle costs',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black,
@@ -166,22 +167,22 @@ class OnBoardingSecondScreen extends StatelessWidget {
               ),
               // Skip Button
               Positioned(
-                // Adjusted for responsiveness
-                right: 20, 
-                top: 20,
+                right: ResSize.right03(context), // Adjusted for responsiveness
+                top: ResSize.top03(context),
+                left: ResSize.left76(context),
                 child: InkResponse(
                   onTap: () {
                     onTapNext(context);
                   },
                   child: Container(
-                    width: 76,
-                    height: 38,
+                    width: ResSize.width14(context),
+                    height: ResSize.height05(context),
                     decoration: ShapeDecoration(
                       shape: RoundedRectangleBorder(
                         side: const BorderSide(
                           width: 2,
                           strokeAlign: BorderSide.strokeAlignCenter,
-                          color: Colors.white,
+                          color: AppColors.white,
                         ),
                         borderRadius: BorderRadius.circular(25),
                       ),
@@ -190,7 +191,7 @@ class OnBoardingSecondScreen extends StatelessWidget {
                       child: Text(
                         'Skip',
                         style: TextStyle(
-                          color: Color(0xFFFB7E3C),
+                          color: AppColors.primary,
                           fontSize: 16,
                           fontWeight: FontWeight.w800,
                         ),

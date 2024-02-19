@@ -2,30 +2,42 @@ import 'package:flutter/material.dart';
 
 class PageThree extends StatefulWidget {
   final String head;
-  const PageThree({super.key, required this.head});
+  const PageThree({Key? key, required this.head}) : super(key: key);
 
   @override
   State<PageThree> createState() => _PageThreeState();
 }
 
 class _PageThreeState extends State<PageThree> {
+  int? typeValue = 1;
   String? carCost;
+
+  Widget _buildTextField() {
+    if (typeValue == 1) {
+      return TextFormField(
+        decoration: const InputDecoration(
+          hintText: 'Type of Expense',
+          labelText: 'Type of Expense',
+        ),
+      );
+    } else if (typeValue == 2) {
+      return TextFormField(
+        decoration: const InputDecoration(
+          hintText: 'Type of Services',
+          labelText: 'Type of Services',
+        ),
+      );
+    } else {
+      return const SizedBox
+          .shrink(); // Hide text field when no radio button is selected
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          // Positioned(
-          //   top: 10,
-          //   left: 18,
-          //   child: Text(
-          //     widget.head,
-          //     style: const TextStyle(
-          //       fontSize: 30.0,
-          //       color: Colors.orange,
-          //     ),
-          //   ),
-          // ),
           Center(
             child: Icon(
               Icons.car_repair,
@@ -40,83 +52,87 @@ class _PageThreeState extends State<PageThree> {
           showModalBottomSheet<void>(
             context: context,
             builder: (BuildContext context) {
-              return SizedBox(
-                height: 500,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Container(
-                        color: Colors.amber,
-                        width: 300,
-                        height: 30,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Radio(
-                                value: 3,
-                                groupValue: 1,
-                                onChanged: (value) {},
-                              ),
-                              const Text(
-                                'Expense',
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Radio(
-                                value: 2,
-                                groupValue: 1,
-                                onChanged: (value) {},
-                              ),
-                              const Text(
-                                'Service',
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ]),
-                      ),
-                      // Add TextFormField at the top
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: 'Type of Services',
-                            labelText: 'Type of Services',
+              return Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const Text(
+                      'Select Type',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Radio(
+                          value: 1,
+                          groupValue: typeValue,
+                          onChanged: (value) {
+                            setState(() {
+                              typeValue = value;
+                            });
+                          },
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              typeValue = 1;
+                            });
+                          },
+                          child: const Text(
+                            'Expense',
+                            style: TextStyle(fontSize: 16),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: 'Date',
-                            labelText: 'Date',
+                        const SizedBox(width: 20),
+                        Radio(
+                          value: 2,
+                          groupValue: typeValue,
+                          onChanged: (value) {
+                            setState(() {
+                              typeValue = value;
+                            });
+                          },
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              typeValue = 2;
+                            });
+                          },
+                          child: const Text(
+                            'Service',
+                            style: TextStyle(fontSize: 16),
                           ),
                         ),
-                      ),
-                      const Text('Modal BottomSheet'),
-                      TextButton(
-                        onPressed: () => Navigator.pop(context),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    _buildTextField(),
+                    const SizedBox(height: 20),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.orange,
+                        ),
                         child: const Text(
                           'Done',
-                          style: TextStyle(
-                            color: Colors.orange,
-                            fontSize: 22,
-                          ),
+                          style: TextStyle(fontSize: 18),
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    ),
+                  ],
                 ),
               );
             },
           );
         },
+        backgroundColor: Colors.white,
         child: const Icon(
           Icons.read_more_sharp,
           size: 26,

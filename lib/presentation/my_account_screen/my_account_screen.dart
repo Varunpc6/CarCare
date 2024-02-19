@@ -472,10 +472,10 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
           TextButton(
             onPressed: () {
               // Update username when OK is pressed
-              String NewModelName = modelController.text;
+              String newModelName = modelController.text;
               // Add logic to update username in your database or wherever user data is stored
               setState(() {
-                _user?.modelName = NewModelName;
+                _user?.modelName = newModelName;
               });
               Navigator.pop(context, 'OK');
             },
