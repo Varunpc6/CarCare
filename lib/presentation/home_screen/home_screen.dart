@@ -1,9 +1,11 @@
+import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/presentation/home_main_four/home_main_four.dart';
 import 'package:car_maintanance/presentation/home_main_one/home_main_one.dart';
 import 'package:car_maintanance/presentation/home_main_three/home_main_three.dart';
 import 'package:car_maintanance/presentation/home_main_two/home_main_two.dart';
 import 'package:car_maintanance/src/nav.dart';
 import 'package:car_maintanance/widgets/home_screen/floating_popup.dart';
+import 'package:car_maintanance/widgets/home_screen/text_style_widget/text_style.dart';
 
 import 'package:flutter/material.dart';
 
@@ -29,26 +31,26 @@ class _HomeScreenState extends State<HomeScreen> {
       case 0:
         return RichText(
           text: const TextSpan(
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: AppColors.black),
             children: [
               TextSpan(
                 text: 'Welcome to',
                 style: TextStyle(
-                    color: Colors.black,
+                    color: AppColors.black,
                     fontSize: 23,
                     fontWeight: FontWeight.w800),
               ),
               TextSpan(
                 text: ' CARCARE',
                 style: TextStyle(
-                    color: Colors.orange,
-                    fontSize: 22,
+                    color: AppColors.orange,
+                    fontSize: 23,
                     fontWeight: FontWeight.w500),
               ),
               TextSpan(
                 text: "\nLet's Go Forward",
                 style: TextStyle(
-                    color: Color.fromARGB(255, 137, 134, 129),
+                    color: AppColors.subtitleGray,
                     fontSize: 16,
                     fontWeight: FontWeight.w500),
               ),
@@ -58,20 +60,17 @@ class _HomeScreenState extends State<HomeScreen> {
       case 1:
         return const Text(
           'Report',
-          style: TextStyle(
-              color: Colors.orange, fontSize: 24, fontWeight: FontWeight.w600),
+          style: textStyle,
         );
       case 2:
         return const Text(
           'Reminders',
-          style: TextStyle(
-              color: Colors.orange, fontSize: 24, fontWeight: FontWeight.w600),
+          style: textStyle,
         );
       case 3:
         return const Text(
           'More option',
-          style: TextStyle(
-              color: Colors.orange, fontSize: 24, fontWeight: FontWeight.w600),
+          style: textStyle,
         );
       default:
         return const Text('');
@@ -82,25 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-          elevation: 0,
-          titleSpacing: 0, // Adjust as needed
-          flexibleSpace: Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment:
-                  MainAxisAlignment.end, // Align the title to the bottom
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 0), // Adjust as needed
-                  child: _getPageTitle(selectedTab),
-                ),
-              ],
-            ),
-          ),
-        ),
+        appBar: cAppBar(),
         body: PageView(
           controller: pageController,
           onPageChanged: (index) {
@@ -128,6 +109,28 @@ class _HomeScreenState extends State<HomeScreen> {
             });
           },
           pageController: pageController,
+        ),
+      ),
+    );
+  }
+
+  AppBar cAppBar() {
+    return AppBar(
+      backgroundColor: AppColors.white1,
+      elevation: 0,
+      titleSpacing: 0, // Adjust as needed
+      flexibleSpace: Padding(
+        padding: const EdgeInsets.only(left: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment:
+              MainAxisAlignment.end, // Align the title to the bottom
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 0), // Adjust as needed
+              child: _getPageTitle(selectedTab),
+            ),
+          ],
         ),
       ),
     );

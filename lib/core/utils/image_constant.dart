@@ -64,4 +64,11 @@ class ImageConstant {
 
   // Current Car Screen Image
   static String currentCar = '$imagePath/current_car_white.jpg';
+
+  //----------------------------------------------------------------------------
+
+  // Brand Image Path
+  static String brandImage = 'assets/brand';
+
+  static String bmw = '$brandImage/36825eafea6580cf679f8c758246c43f.jpg';
 }

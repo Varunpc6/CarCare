@@ -8,13 +8,19 @@ class AppColors {
   static const Color orange = Color.fromARGB(231, 255, 117, 19);
   // ARGB colors
   static const Color white = Color.fromARGB(255, 255, 255, 255);
+  static const Color white1 = Color.fromARGB(255, 255, 255, 255);
   static const Color circleBgWhite = Color.fromARGB(244, 255, 254, 254);
+  static const Color subtitleGray = Color.fromARGB(255, 137, 134, 129);
   static const Color bgWhite = Color(0xCCD3D3D3);
+  static const Color whitesf5 = Color(0xFFF5F5F5);
 
   // DropDown
   static const Color ddownBg = Color.fromARGB(255, 255, 255, 255);
   static const Color txtColor = Color.fromARGB(250, 26, 25, 25);
   static const Color dpdBg = Color.fromARGB(201, 255, 255, 255);
+
+  // Shade Color
+  static Color ornages500 = Colors.orange.shade500;
 }
 
 // Gradtients colors

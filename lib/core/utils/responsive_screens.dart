@@ -11,20 +11,16 @@ class ResSize {
     return MediaQuery.of(context).size.width * 0.14;
   }
 
-  static double width22(BuildContext context) {
-    return MediaQuery.of(context).size.width * 0.22;
-  }
-
-  static double width7(BuildContext context) {
-    return MediaQuery.of(context).size.width * 0.7;
-  }
-
-  static double width8(BuildContext context) {
-    return MediaQuery.of(context).size.width * 0.8;
-  }
+  // static double width12(BuildContext context) {
+  //   return MediaQuery.of(context).size.width * 0.12;
+  // }
 
   static double width20(BuildContext context) {
     return MediaQuery.of(context).size.width * 0.20;
+  }
+
+  static double width22(BuildContext context) {
+    return MediaQuery.of(context).size.width * 0.22;
   }
 
   static double width23(BuildContext context) {
@@ -33,6 +29,14 @@ class ResSize {
 
   static double width40(BuildContext context) {
     return MediaQuery.of(context).size.width * 0.40;
+  }
+
+  static double width7(BuildContext context) {
+    return MediaQuery.of(context).size.width * 0.7;
+  }
+
+  static double width8(BuildContext context) {
+    return MediaQuery.of(context).size.width * 0.8;
   }
 
   // Left
@@ -44,12 +48,20 @@ class ResSize {
     return MediaQuery.of(context).size.height * 0.02;
   }
 
+  static double left03(BuildContext context) {
+    return MediaQuery.of(context).size.height * 0.03;
+  }
+
   static double left05(BuildContext context) {
     return MediaQuery.of(context).size.height * 0.05;
   }
 
   static double left06(BuildContext context) {
     return MediaQuery.of(context).size.height * 0.06;
+  }
+
+  static double left064(BuildContext context) {
+    return MediaQuery.of(context).size.width * 0.064;
   }
 
   static double dotLeft(BuildContext context, double itemWidth) {
@@ -91,6 +103,10 @@ class ResSize {
 
   static double right04(BuildContext context) {
     return MediaQuery.of(context).size.width * 0.04;
+  }
+
+  static double right064(BuildContext context) {
+    return MediaQuery.of(context).size.width * 0.064;
   }
 
   static double right15(BuildContext context) {
@@ -136,6 +152,10 @@ class ResSize {
 
   static double bottom64(BuildContext context) {
     return MediaQuery.of(context).size.width * 0.64;
+  }
+
+  static double bottom8(BuildContext context) {
+    return MediaQuery.of(context).size.width * 0.8;
   }
 
   // Height
@@ -187,6 +207,18 @@ class ResSize {
 
   static double top03(BuildContext context) {
     return MediaQuery.of(context).size.height * 0.03;
+  }
+
+  static double top033(BuildContext context) {
+    return MediaQuery.of(context).size.height * 0.033;
+  }
+
+  static double top04(BuildContext context) {
+    return MediaQuery.of(context).size.height * 0.04;
+  }
+
+  static double top1(BuildContext context) {
+    return MediaQuery.of(context).size.height * 0.1;
   }
 
   static double top125(BuildContext context) {

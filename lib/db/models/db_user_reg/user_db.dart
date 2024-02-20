@@ -17,6 +17,7 @@ class User {
 
   @HiveField(4)
   String? fuel;
+  
 
   User({
     this.userName,
