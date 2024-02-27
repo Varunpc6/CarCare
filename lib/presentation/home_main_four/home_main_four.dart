@@ -78,7 +78,7 @@ class _PageFourState extends State<PageFour> {
   /// click Next Button
   void onTapNext1(BuildContext context) async {
     // Check if there is user data available
-    final List<User> users = appUserRegiterApp.displayRegisterDetails();
+    final List<MainUser> users = appUserRegiterApp.displayRegisterDetails();
     if (users.isEmpty) {
       // Show a popup message indicating no user data is available
       showDialog(
@@ -149,8 +149,6 @@ class _PageFourState extends State<PageFour> {
                 // Call deleteRegisterDetails to delete user details
                 UserRegisterApp().deleteRegisterDetails(
                     0); // Assuming you want to delete details at index 0
-                UserFuel().deleteRegisterDetails(0);
-                Navigator.pop(context); // Close the dialog
               },
               child: const Text(
                 'DELETE ACCOUNT',

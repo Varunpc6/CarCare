@@ -60,7 +60,9 @@ class ResponsiveClickableContainer extends StatelessWidget {
               containerName,
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 16,
+                fontSize: 21,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 2,
               ),
             ),
           ],

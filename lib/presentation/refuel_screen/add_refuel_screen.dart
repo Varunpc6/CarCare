@@ -68,9 +68,9 @@ class AddRefuelPage extends StatelessWidget {
                 ),
               ),
               Positioned(
-                right: MediaQuery.of(context).size.width * 0.06,
+                right: MediaQuery.of(context).size.width * 0.02,
                 left: MediaQuery.of(context).size.width *
-                    0.06, // Adjusted for responsiveness
+                    0.02, // Adjusted for responsiveness
                 top: MediaQuery.of(context).size.height * 0.10,
                 child: const MyCarForm(),
               ),

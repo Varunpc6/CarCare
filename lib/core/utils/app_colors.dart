@@ -11,8 +11,10 @@ class AppColors {
   static const Color white1 = Color.fromARGB(255, 255, 255, 255);
   static const Color circleBgWhite = Color.fromARGB(244, 255, 254, 254);
   static const Color subtitleGray = Color.fromARGB(255, 137, 134, 129);
+  static const Color white208 = Color.fromARGB(208, 242, 242, 242);
   static const Color bgWhite = Color(0xCCD3D3D3);
   static const Color whitesf5 = Color(0xFFF5F5F5);
+  static const Color orange225 = Color.fromARGB(225, 43, 26, 0);
 
   // DropDown
   static const Color ddownBg = Color.fromARGB(255, 255, 255, 255);

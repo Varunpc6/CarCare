@@ -13,7 +13,7 @@ class CarCard extends StatelessWidget {
         onTapNext(context);
       },
       child: Container(
-        width: 125,
+        width: 130,
         height: 45,
         decoration: BoxDecoration(
             color: AppColors.orange, borderRadius: BorderRadius.circular(30)),
@@ -31,7 +31,7 @@ class CarCard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Image.asset(
-                  ImageConstant.bmw,
+                  ImageConstant.defaultImage,
                   width: 38,
                   height: 38,
                   fit: BoxFit.cover, // Adjust BoxFit as needed
@@ -39,7 +39,7 @@ class CarCard extends StatelessWidget {
               ),
             ),
             const Text(
-              ' BMW ',
+              ' CAR ',
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 color: AppColors.white1,

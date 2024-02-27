@@ -20,11 +20,10 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
 
   // Database instance
   final UserRegisterApp userRegisterApp = UserRegisterApp();
-  final UserFuel fuelApp = UserFuel();
 
   // Holds the currently displayed user data
-  User? _user;
-  User? _fuelD;
+  MainUser? _user;
+  MainUser? _fuelD;
 
   // Load user data when the widget initializes
   @override
@@ -40,6 +39,9 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
     setState(() {
       if (pickedImage != null) {
         _image = File(pickedImage.path);
+        final imagePath = _image!.path;
+        // Add the image to Hive database
+        userRegisterApp.userRegisterAdd(image: imagePath);
       } else {
         print('No image selected.');
       }
@@ -48,8 +50,8 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
 
   // Method to load user data
   void _loadUserData() {
-    final List<User> users = userRegisterApp.displayRegisterDetails();
-    final List<User> fueluser = fuelApp.displayRegisterDetails();
+    final List<MainUser> users = userRegisterApp.displayRegisterDetails();
+    final List<MainUser> fueluser = userRegisterApp.displayRegisterDetails();
 
     if (users.isNotEmpty) {
       setState(() {
@@ -153,20 +155,32 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                               fit: BoxFit.cover,
                             ),
                           )
-                        : Container(
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image:
-                                    AssetImage(ImageConstant.imgRectangleAbout),
-                                fit: BoxFit.cover,
+                        : _user?.image !=
+                                null // Check if _user?.image is not null
+                            ? ClipOval(
+                                child: Image.file(
+                                  File(_user!
+                                      .image!), // Use ! to assert non-nullability
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : Container(
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        ImageConstant.imgRectangleAbout),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
                   ),
                   const SizedBox(height: 5),
+                  // icon camera
                   GestureDetector(
                     onTap: () {
                       showModalBottomSheet(
@@ -178,6 +192,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
+                                // photo
                                 ListTile(
                                   leading: const Icon(Icons.camera_alt),
                                   title: const Text('Take a Photo'),
@@ -186,6 +201,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                     _getImage(ImageSource.camera);
                                   },
                                 ),
+                                // Folder
                                 ListTile(
                                   leading: const Icon(Icons.photo_library),
                                   title: const Text('Choose from Gallery'),
@@ -275,7 +291,6 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                   // Fuel
                   CustomInfoField(
                     icon: Icons.local_gas_station,
-                    // labelText: _user!.fuel ?? '',
                     labelText: _fuelD!.fuel ?? 'fuel',
                     trailingIcon: Icons.edit,
                     onTrailingIconPressed: () {
@@ -520,19 +535,14 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
             onPressed: () async {
               // Get the new fuel value entered by the user
               String newFuel = fuelController.text.trim();
-              final UserFuel carFuel = UserFuel();
 
               if (newFuel.isNotEmpty) {
                 setState(() {
                   _fuelD?.fuel = newFuel;
-                  carFuel.userRegisterAddFuel(
-                    fuel: newFuel,
-                  );
+                  userRegisterApp.userRegisterAdd(fuel: _fuelD?.fuel);
                 });
+                Navigator.pop(context, 'OK');
               }
-
-              // Close the dialog
-              Navigator.pop(context, 'OK');
             },
             child: const Text(
               'Ok',

@@ -1,5 +1,6 @@
 import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/core/utils/responsive_screens.dart';
+import 'package:car_maintanance/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class AppBarCurrentSrn extends StatelessWidget {
@@ -14,7 +15,8 @@ class AppBarCurrentSrn extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.pop(context);
+              // Navigator.pop(context);
+              onTap(context);
             },
             child: Container(
               width: 35,
@@ -47,5 +49,10 @@ class AppBarCurrentSrn extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  // click Next Button
+  onTap(BuildContext context) {
+    Navigator.pushReplacementNamed(context, AppRoutes.homeScreen);
   }
 }

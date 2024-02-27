@@ -6,6 +6,7 @@ import 'package:car_maintanance/page_session/user_in_screen/circular_image.dart'
 import 'package:car_maintanance/page_session/user_in_screen/text_field_model.dart';
 import 'package:car_maintanance/routes/app_routes.dart';
 import 'package:car_maintanance/widgets/on_bording_screens/box_decoration_widget.dart';
+import 'package:car_maintanance/widgets/user_in_widget/user_in_widget.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,38 +19,6 @@ class UserInScreen extends StatefulWidget {
 }
 
 class _UserInScreenState extends State<UserInScreen> {
-  //  Brand
-  List<String> brands = [
-    'Brand',
-    'AstonMartin',
-    'Audi',
-    'BMW',
-    'Bentley',
-    'Chevrolet',
-    'Ferrari',
-    'Fiat',
-    'Ford',
-    'Honda',
-    'Hyundai',
-    'Jaguar',
-    'Kia',
-    'LandRover',
-    'Lamborghini',
-    'Lexus',
-    'MahindraAndMahindra',
-    'Maserati',
-    'MercedesBenz',
-    'Nissan',
-    'Porsche',
-    'Renault',
-    'RollsRoyce',
-    'Skoda',
-    'Tata Motors',
-    'Toyota',
-    'Volkswagen',
-    'Volvo',
-    'Other',
-  ];
   String? selectedBrand;
 
   // DataBase instance
@@ -347,6 +316,7 @@ class _UserInScreenState extends State<UserInScreen> {
 
               // Optionally, perform any additional actions
               savedUser();
+
               // ignore: use_build_context_synchronously
               onTapCreate(context);
             } else {

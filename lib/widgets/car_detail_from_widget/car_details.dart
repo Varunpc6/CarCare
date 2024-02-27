@@ -1,14 +1,12 @@
 import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/db/db_functions/registor_from.dart';
-import 'package:car_maintanance/routes/app_routes.dart';
-import 'package:car_maintanance/src/list/fuel_items.dart';
 import 'package:car_maintanance/widgets/form/my_from_widget/custom_brand_dropdown.dart';
 import 'package:car_maintanance/widgets/form/my_from_widget/custom_dropdown.dart';
 import 'package:car_maintanance/widgets/form/my_from_widget/custom_textfield.dart';
 import 'package:flutter/material.dart';
 
-class MyForm extends StatefulWidget {
-  MyForm({Key? key}) : super(key: key);
+class CarDetail extends StatefulWidget {
+  CarDetail({Key? key}) : super(key: key);
   // TextField focus Auto jump
   final FocusNode _focusNode1 = FocusNode();
   final FocusNode _focusNode2 = FocusNode();
@@ -18,15 +16,15 @@ class MyForm extends StatefulWidget {
   final FocusNode _focusNode8 = FocusNode();
   final FocusNode _focusNodeBtn = FocusNode();
   @override
-  MyFormState createState() => MyFormState();
+  CarDetailState createState() => CarDetailState();
 }
 
-class MyFormState extends State<MyForm> {
+class CarDetailState extends State<CarDetail> {
   bool showMainTank = false;
   String? selectedBrand;
   String? selectedValue;
   String? selectedValue2;
-  // List<String> items = ['Liquids', 'LPG', 'CNG', 'Electrical'];
+  List<String> items = ['Liquids', 'LPG', 'CNG', 'Electrical'];
 
   // DataBase instance
   final UserRegisterApp registerCar = UserRegisterApp();
@@ -280,8 +278,7 @@ class MyFormState extends State<MyForm> {
                           note: note,
                         );
                         // ignore: use_build_context_synchronously
-                        // onTap(context);
-                        onTapNext(context);
+                        onTap(context);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
@@ -317,13 +314,8 @@ class MyFormState extends State<MyForm> {
     );
   }
 
-  // /// Navigates to the homeScreen and replaces the current route
-  // void onTap(BuildContext context) {
-  //   Navigator.pop(context);
-  // }
-
-  /// click Next Button
-  onTapNext(BuildContext context) {
-    Navigator.pushReplacementNamed(context, AppRoutes.currentCarScreen);
+  /// Navigates to the homeScreen and replaces the current route
+  void onTap(BuildContext context) {
+    Navigator.pop(context);
   }
 }

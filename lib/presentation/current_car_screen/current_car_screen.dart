@@ -13,6 +13,8 @@ class CurrentCarScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        // Background Image Rising on TextField click time
+        resizeToAvoidBottomInset: false,
         backgroundColor: AppColors.whitesf5,
         body: SizedBox(
           width: ResSize.width(context),

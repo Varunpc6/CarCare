@@ -1,14 +1,12 @@
 import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/core/utils/responsive_screens.dart';
+import 'package:car_maintanance/widgets/car_detail_from_widget/car_details.dart';
 import 'package:car_maintanance/widgets/current_car_widgets/background_image_widget.dart';
-import 'package:car_maintanance/widgets/form/my_form.dart';
-
 import 'package:flutter/material.dart';
 
-class EditCarScreen extends StatelessWidget {
-  const EditCarScreen({super.key});
+class ShowCarDetails extends StatelessWidget {
+  const ShowCarDetails({super.key});
 
-  // //  Brand
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -32,7 +30,6 @@ class EditCarScreen extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           Navigator.pop(context);
-                          // onTapNext(context);
                         },
                         child: Container(
                           width: 35,
@@ -71,7 +68,7 @@ class EditCarScreen extends StatelessWidget {
                   top: ResSize.top1(context),
                   right: ResSize.right064(context),
                   bottom: ResSize.dotBottom02(context),
-                  child: MyForm(),
+                  child: CarDetail(),
                 ),
               ],
             ),
@@ -80,9 +77,4 @@ class EditCarScreen extends StatelessWidget {
       ),
     );
   }
-
-  // /// click Next Button
-  // onTapNext(BuildContext context) {
-  //   Navigator.pushNamed(context, AppRoutes.currentCarScreen);
-  // }
 }

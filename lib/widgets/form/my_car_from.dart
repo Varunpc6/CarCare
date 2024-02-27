@@ -1,6 +1,8 @@
 import 'package:car_maintanance/core/utils/app_colors.dart';
+import 'package:car_maintanance/src/list/fuel_items.dart';
 import 'package:car_maintanance/widgets/dropdown_widget/dropdown_widget.dart';
-import 'package:car_maintanance/widgets/text_widget/textfield_model.dart';
+import 'package:car_maintanance/widgets/form/my_from_widget/custom_dropdown.dart';
+import 'package:car_maintanance/widgets/form/my_from_widget/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -12,31 +14,34 @@ class MyCarForm extends StatefulWidget {
 }
 
 class MyCarFormState extends State<MyCarForm> {
+  String? selectedValue;
+  String? selectedvalu2;
+
   late TextEditingController dateController1 = TextEditingController();
   late TextEditingController timeController2 = TextEditingController();
 
   // Add the missing controllers and focus nodes here
-  late TextEditingController controller3 = TextEditingController();
-  late TextEditingController controller4 = TextEditingController();
-  late TextEditingController controller5 = TextEditingController();
-  late TextEditingController controller6 = TextEditingController();
-  late TextEditingController controller7 = TextEditingController();
-  late TextEditingController controller8 = TextEditingController();
-  late TextEditingController controller9 = TextEditingController();
+  late TextEditingController _controller3 = TextEditingController();
+  late TextEditingController _controller4 = TextEditingController();
+  late TextEditingController _controller5 = TextEditingController();
+  late TextEditingController _controller6 = TextEditingController();
+  late TextEditingController _controller7 = TextEditingController();
+  late TextEditingController _controller8 = TextEditingController();
+  late TextEditingController _controller9 = TextEditingController();
   late TextEditingController dateController10 = TextEditingController();
 
-  final FocusNode focusNode1 = FocusNode();
-  final FocusNode focusNode2 = FocusNode();
+  final FocusNode _focusNode1 = FocusNode();
+  final FocusNode _focusNode2 = FocusNode();
   // Add the missing focus nodes here
-  final FocusNode focusNode3 = FocusNode();
-  final FocusNode focusNode4 = FocusNode();
-  final FocusNode focusNode5 = FocusNode();
-  final FocusNode focusNode6 = FocusNode();
-  final FocusNode focusNode7 = FocusNode();
-  final FocusNode focusNode8 = FocusNode();
-  final FocusNode focusNode9 = FocusNode();
-  final FocusNode focusNode10 = FocusNode();
-  final FocusNode focusNodeBtn = FocusNode();
+  final FocusNode _focusNode3 = FocusNode();
+  final FocusNode _focusNode4 = FocusNode();
+  final FocusNode _focusNode5 = FocusNode();
+  final FocusNode _focusNode6 = FocusNode();
+  final FocusNode _focusNode7 = FocusNode();
+  final FocusNode _focusNode8 = FocusNode();
+  final FocusNode _focusNode9 = FocusNode();
+  final FocusNode _focusNode10 = FocusNode();
+  final FocusNode _focusNodeBtn = FocusNode();
 
   @override
   void initState() {
@@ -53,25 +58,25 @@ class MyCarFormState extends State<MyCarForm> {
     dateController1.dispose();
     timeController2.dispose();
     // Dispose of the additional controllers and focus nodes
-    controller3.dispose();
-    controller4.dispose();
-    controller5.dispose();
-    controller6.dispose();
-    controller7.dispose();
-    controller8.dispose();
-    controller9.dispose();
+    _controller3.dispose();
+    _controller4.dispose();
+    _controller5.dispose();
+    _controller6.dispose();
+    _controller7.dispose();
+    _controller8.dispose();
+    _controller9.dispose();
     dateController10.dispose();
-    focusNode1.dispose();
-    focusNode2.dispose();
+    _focusNode1.dispose();
+    _focusNode2.dispose();
     // Dispose of the additional focus nodes
-    focusNode3.dispose();
-    focusNode4.dispose();
-    focusNode5.dispose();
-    focusNode6.dispose();
-    focusNode7.dispose();
-    focusNode8.dispose();
-    focusNode9.dispose();
-    focusNode10.dispose();
+    _focusNode3.dispose();
+    _focusNode4.dispose();
+    _focusNode5.dispose();
+    _focusNode6.dispose();
+    _focusNode7.dispose();
+    _focusNode8.dispose();
+    _focusNode9.dispose();
+    _focusNode10.dispose();
     super.dispose();
   }
 
@@ -113,19 +118,12 @@ class MyCarFormState extends State<MyCarForm> {
                     // storeDateInDatabase(selectedDate);
                   },
                 ),
-                //  MyDropdownField(
-                //   controller: dateController1,
-                //   focusNode: focusNode1,
-                //   icon: Icons.calendar_today,
-                //   labelText: 'Date',
-                //   items: const ['Option 1', 'Option 2'],
-                // ),
               ),
               const SizedBox(width: 10.0),
               Expanded(
                 child: MyDropdownField(
                   controller: timeController2,
-                  focusNode: focusNode2,
+                  focusNode: _focusNode2,
                   icon: Icons.access_time,
                   labelText: 'Time',
                   items: const ['Option 1', 'Option 2'],
@@ -143,76 +141,131 @@ class MyCarFormState extends State<MyCarForm> {
             ],
           ),
           const SizedBox(height: 10.0),
-          MyTextField(
-            controller: controller3,
-            focusNode: focusNode3,
-            icon: Icons.attach_money,
+          // Odometer
+          // MyTextField(
+          //   controller: _controller3,
+          //   focusNode: _focusNode3,
+          //   icon: Icons.attach_money,
+          //   labelText: 'Odometer',
+          // ),
+          CustomTextField(
+            controller: _controller3,
+            focusNode: _focusNode1,
+            prefixIcon: Icons.car_rental,
             labelText: 'Odometer',
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Please enter Odometer';
+              }
+              return null;
+            },
           ),
           const SizedBox(height: 10.0),
-          MyDropdownField(
-            controller: controller4,
-            focusNode: focusNode4,
-            icon: Icons.attach_money,
-            labelText: 'Fuel',
-            items: const ['Option 1', 'Option 2'],
-            fieldType: FieldType.dropdown,
+          // Fuel
+          CustomDropdown(
+            items: items,
+            selectedValue: selectedValue,
+            prefixIcon: Icons.menu_outlined,
+            labelText: 'Fuel type',
+            onChanged: (newValue) {
+              setState(() {
+                selectedValue = newValue;
+              });
+            },
           ),
           const SizedBox(height: 10.0),
           Row(
             children: [
               Expanded(
-                child: MyTextField(
-                    controller: controller5,
-                    focusNode: focusNode5,
-                    icon: Icons.attach_money,
-                    labelText: 'Price'),
-              ),
-              const SizedBox(width: 10.0),
-              Expanded(
-                child: MyTextField(
-                  controller: controller6,
-                  focusNode: focusNode6,
-                  icon: Icons.monetization_on,
-                  labelText: 'Total Cost',
+                child:
+                    // Price
+                    //  MyTextField(
+                    //     controller: _controller5,
+                    //     focusNode: _focusNode5,
+                    //     icon: Icons.attach_money,
+                    //     labelText: 'Price'),CustomTextField(
+                    CustomTextField(
+                  controller: _controller4,
+                  focusNode: _focusNode2,
+                  prefixIcon: Icons.car_rental,
+                  labelText: 'price',
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter Price';
+                    }
+                    return null;
+                  },
                 ),
               ),
               const SizedBox(width: 10.0),
               Expanded(
-                child: MyTextField(
-                  controller: controller7,
-                  focusNode: focusNode7,
-                  icon: Icons.local_gas_station,
+                child:
+                    //  MyTextField(
+                    //   controller: _controller6,
+                    //   focusNode: _focusNode6,
+                    //   icon: Icons.monetization_on,
+                    //   labelText: 'Total Cost',
+                    // ),/
+                    CustomTextField(
+                  controller: _controller5,
+                  focusNode: _focusNode3,
+                  prefixIcon: Icons.car_rental,
+                  labelText: 'Total Cost',
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter Total price';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              const SizedBox(width: 10.0),
+              Expanded(
+                child: CustomTextField(
+                  controller: _controller6,
+                  focusNode: _focusNode4,
+                  prefixIcon: Icons.car_rental,
                   labelText: 'Gallon',
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter Total price';
+                    }
+                    return null;
+                  },
                 ),
               ),
             ],
           ),
           const SizedBox(height: 10.0),
-          MyTextField(
-            controller: controller8,
-            focusNode: focusNode8,
-            icon: Icons.attach_money,
+          CustomTextField(
+            controller: _controller7,
+            focusNode: _focusNode6,
+            prefixIcon: Icons.attach_money,
             labelText: 'Gas Station',
           ),
           const SizedBox(height: 10.0),
-          MyDropdownField(
-            controller: controller9,
-            focusNode: focusNode9,
-            icon: Icons.attach_money,
+          CustomDropdown(
+            items: cashM,
+            selectedValue: selectedvalu2,
+            prefixIcon: Icons.menu_outlined,
             labelText: 'Payment method',
-            items: const ['Option 1', 'Option 2'],
-            fieldType: FieldType.dropdown,
+            onChanged: (newValue) {
+              setState(() {
+                selectedvalu2 = newValue;
+              });
+            },
           ),
+
           const SizedBox(height: 10.0),
-          MyTextField(
-              controller: dateController10,
-              focusNode: focusNode10,
-              icon: Icons.attach_money,
-              labelText: 'Reason'),
+          CustomTextField(
+            controller: _controller8,
+            focusNode: _focusNode7,
+            prefixIcon: Icons.attach_money,
+            labelText: 'Reason',
+          ),
           const SizedBox(height: 25.0),
           ElevatedButton(
-            focusNode: focusNodeBtn,
+            focusNode: _focusNodeBtn,
             onPressed: () {
               // Handle button press
             },

@@ -10,6 +10,7 @@ import 'package:car_maintanance/presentation/refuel_screen/add_refuel_screen.dar
 import 'package:car_maintanance/presentation/route_screen/add_route_screen.dart';
 import 'package:car_maintanance/presentation/service_screen/add_service_screen.dart';
 import 'package:car_maintanance/presentation/settings_screen/settings_screen_main.dart';
+import 'package:car_maintanance/presentation/show_car_screen/show_car_detail_screen.dart';
 
 import 'package:car_maintanance/presentation/splash_screen/splash_screen.dart';
 import 'package:car_maintanance/presentation/user_in_screen/user_in_screen.dart';
@@ -44,6 +45,8 @@ class AppRoutes {
 
   static String addRouteScreen = '/add_route_screen';
 
+  static String showCarDetailScreen = '/show_car_detail_screen';
+
   static Map<String, WidgetBuilder> routes = {
     splashScreen: (context) => const SplashScreen(),
     onBordingScreen: (context) => OnboardingPageState(),
@@ -59,5 +62,6 @@ class AppRoutes {
     addIncomeScreen: (context) => const AddIncomePage(),
     addServiceScreen: (context) => const AddServicePage(),
     addRouteScreen: (context) => const AddRoutePage(),
+    showCarDetailScreen: (context) => const ShowCarDetails(),
   };
 }

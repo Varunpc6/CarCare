@@ -102,12 +102,12 @@ class FloatDialog extends StatelessWidget {
     Navigator.pushNamed(context, AppRoutes.addIncomeScreen);
   }
 
-  /// Navigates to the Income Page
+  /// Navigates to the Service Page
   void addService(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.addServiceScreen);
   }
 
-  /// Navigates to the Income Page
+  /// Navigates to the Route Page
   void addRoute(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.addRouteScreen);
   }

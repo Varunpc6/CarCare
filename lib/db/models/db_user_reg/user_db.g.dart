@@ -6,29 +6,34 @@ part of 'user_db.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class UserAdapter extends TypeAdapter<User> {
+class MainUserAdapter extends TypeAdapter<MainUser> {
   @override
   final int typeId = 0;
 
   @override
-  User read(BinaryReader reader) {
+  MainUser read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return User(
+    return MainUser(
       userName: fields[0] as String?,
       carName: fields[1] as String?,
       brandName: fields[2] as String?,
       modelName: fields[3] as String?,
       fuel: fields[4] as String?,
+      image: fields[5] as String?,
+      fuelCapacity: fields[6] as String?,
+      sFuel: fields[7] as String?,
+      sFuelCapacity: fields[8] as String?,
+      note: fields[9] as String?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, User obj) {
+  void write(BinaryWriter writer, MainUser obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.userName)
       ..writeByte(1)
@@ -38,7 +43,17 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(3)
       ..write(obj.modelName)
       ..writeByte(4)
-      ..write(obj.fuel);
+      ..write(obj.fuel)
+      ..writeByte(5)
+      ..write(obj.image)
+      ..writeByte(6)
+      ..write(obj.fuelCapacity)
+      ..writeByte(7)
+      ..write(obj.sFuel)
+      ..writeByte(8)
+      ..write(obj.sFuelCapacity)
+      ..writeByte(9)
+      ..write(obj.note);
   }
 
   @override
@@ -47,7 +62,7 @@ class UserAdapter extends TypeAdapter<User> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is UserAdapter &&
+      other is MainUserAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
