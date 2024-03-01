@@ -6,48 +6,51 @@ part of 'refuel_db.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class RefuelAdapter extends TypeAdapter<Refuel> {
+class RefuelModelAdapter extends TypeAdapter<RefuelModel> {
   @override
-  final int typeId = 0;
+  final int typeId = 4;
 
   @override
-  Refuel read(BinaryReader reader) {
+  RefuelModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Refuel(
-      fuelDate: fields[0] as String?,
-      fuelTime: fields[1] as String?,
-      fuelOdomerter: fields[2] as String?,
-      fuelType: fields[3] as String?,
-      fuelPrice: fields[4] as String?,
-      fuelStation: fields[5] as String?,
-      fuelPayment: fields[6] as String?,
-      fuelReason: fields[7] as String?,
+    return RefuelModel(
+      date: fields[0] as String?,
+      time: fields[1] as String?,
+      odometer: fields[2] as int?,
+      typeFuel: fields[3] as String?,
+      price: fields[4] as int?,
+      totalCost: fields[5] as int?,
+      gallon: fields[6] as int?,
+      paymentMethod: fields[7] as String?,
+      reason: fields[8] as String?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Refuel obj) {
+  void write(BinaryWriter writer, RefuelModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
-      ..write(obj.fuelDate)
+      ..write(obj.date)
       ..writeByte(1)
-      ..write(obj.fuelTime)
+      ..write(obj.time)
       ..writeByte(2)
-      ..write(obj.fuelOdomerter)
+      ..write(obj.odometer)
       ..writeByte(3)
-      ..write(obj.fuelType)
+      ..write(obj.typeFuel)
       ..writeByte(4)
-      ..write(obj.fuelPrice)
+      ..write(obj.price)
       ..writeByte(5)
-      ..write(obj.fuelStation)
+      ..write(obj.totalCost)
       ..writeByte(6)
-      ..write(obj.fuelPayment)
+      ..write(obj.gallon)
       ..writeByte(7)
-      ..write(obj.fuelReason);
+      ..write(obj.paymentMethod)
+      ..writeByte(8)
+      ..write(obj.reason);
   }
 
   @override
@@ -56,7 +59,7 @@ class RefuelAdapter extends TypeAdapter<Refuel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is RefuelAdapter &&
+      other is RefuelModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

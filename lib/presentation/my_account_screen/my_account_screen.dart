@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:car_maintanance/core/utils/image_constant.dart';
+import 'package:car_maintanance/hive_main/db/db_functions/user_from.dart';
+import 'package:car_maintanance/hive_main/db/models/user_db_reg/user_main_db.dart';
 import 'package:car_maintanance/src/pages/my_account_from.dart';
 import 'package:flutter/material.dart';
-import 'package:car_maintanance/db/models/db_user_reg/user_db.dart';
-import 'package:car_maintanance/db/db_functions/registor_from.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -19,11 +19,11 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
   File? _image;
 
   // Database instance
-  final UserRegisterApp userRegisterApp = UserRegisterApp();
+  final User userRegisterApp = User();
 
   // Holds the currently displayed user data
-  MainUser? _user;
-  MainUser? _fuelD;
+  MainBoxUser? _user;
+  MainBoxUser? _fuelD;
 
   // Load user data when the widget initializes
   @override
@@ -41,17 +41,17 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
         _image = File(pickedImage.path);
         final imagePath = _image!.path;
         // Add the image to Hive database
-        userRegisterApp.userRegisterAdd(image: imagePath);
+        userRegisterApp.userAdd(image: imagePath);
       } else {
-        print('No image selected.');
+        stdout.write('No image selected.');
       }
     });
   }
 
   // Method to load user data
   void _loadUserData() {
-    final List<MainUser> users = userRegisterApp.displayRegisterDetails();
-    final List<MainUser> fueluser = userRegisterApp.displayRegisterDetails();
+    final List<MainBoxUser> users = userRegisterApp.displayRegisterDetails();
+    final List<MainBoxUser> fueluser = userRegisterApp.displayRegisterDetails();
 
     if (users.isNotEmpty) {
       setState(() {
@@ -146,7 +146,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                         width: 2.5,
                       ),
                     ),
-                    child: _image != null
+                    child: (_image != null)
                         ? ClipOval(
                             child: Image.file(
                               _image!,
@@ -155,12 +155,10 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                               fit: BoxFit.cover,
                             ),
                           )
-                        : _user?.image !=
-                                null // Check if _user?.image is not null
+                        : (_user?.image != null && _user!.image!.isNotEmpty)
                             ? ClipOval(
                                 child: Image.file(
-                                  File(_user!
-                                      .image!), // Use ! to assert non-nullability
+                                  File(_user!.image!),
                                   width: 100,
                                   height: 100,
                                   fit: BoxFit.cover,
@@ -172,8 +170,8 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
-                                    image: AssetImage(
-                                        ImageConstant.imgRectangleAbout),
+                                    image: AssetImage(ImageConstant
+                                        .imgRectangleAbout), // Default image asset
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -539,7 +537,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
               if (newFuel.isNotEmpty) {
                 setState(() {
                   _fuelD?.fuel = newFuel;
-                  userRegisterApp.userRegisterAdd(fuel: _fuelD?.fuel);
+                  userRegisterApp.userAdd(fuel: _fuelD?.fuel);
                 });
                 Navigator.pop(context, 'OK');
               }

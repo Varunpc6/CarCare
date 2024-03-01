@@ -1,9 +1,6 @@
 import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/core/utils/responsive_screens.dart';
 import 'package:car_maintanance/routes/app_routes.dart';
-import 'package:car_maintanance/widgets/current_car_widgets/app_bar_widgets.dart';
-import 'package:car_maintanance/widgets/current_car_widgets/background_image_widget.dart';
-import 'package:car_maintanance/widgets/current_car_widgets/car_list_widget.dart';
 import 'package:flutter/material.dart';
 
 class CurrentCarScreen extends StatelessWidget {
@@ -17,16 +14,18 @@ class CurrentCarScreen extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         backgroundColor: AppColors.whitesf5,
         body: SizedBox(
-          width: ResSize.width(context),
-          height: ResSize.height(context),
-          child: const Stack(
-            children: [
-              BgImage(), // Background Image
-              AppBarCurrentSrn(), // AppBar
-              CarListCurrentSn(), // CarList
-            ],
-          ),
-        ),
+            width: ResSize.width(context),
+            height: ResSize.height(context),
+            child:
+                Container() // ********************Container temp**************
+            // const Stack(
+            //   children: [
+            //     BgImage(), // Background Image
+            //     AppBarCurrentSrn(), // AppBar
+            //     CarListCurrentSn(), // CarList
+            //   ],
+            // ),
+            ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             onTap(context);

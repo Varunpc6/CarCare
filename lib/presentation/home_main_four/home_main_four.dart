@@ -1,7 +1,6 @@
 import 'package:car_maintanance/core/utils/image_constant.dart';
-import 'package:car_maintanance/db/db_functions/registor_from.dart';
-import 'package:car_maintanance/db/models/db_user_reg/user_db.dart';
-
+import 'package:car_maintanance/hive_main/db/db_functions/user_from.dart';
+import 'package:car_maintanance/hive_main/db/models/user_db_reg/user_main_db.dart';
 import 'package:car_maintanance/routes/app_routes.dart';
 import 'package:car_maintanance/src/pages/more_page4.dart';
 
@@ -17,7 +16,7 @@ class PageFour extends StatefulWidget {
 }
 
 class _PageFourState extends State<PageFour> {
-  UserRegisterApp appUserRegiterApp = UserRegisterApp();
+  User appUserRegiterApp = User();
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +77,7 @@ class _PageFourState extends State<PageFour> {
   /// click Next Button
   void onTapNext1(BuildContext context) async {
     // Check if there is user data available
-    final List<MainUser> users = appUserRegiterApp.displayRegisterDetails();
+    final List<MainBoxUser> users = appUserRegiterApp.displayRegisterDetails();
     if (users.isEmpty) {
       // Show a popup message indicating no user data is available
       showDialog(
@@ -144,11 +143,12 @@ class _PageFourState extends State<PageFour> {
             ),
             TextButton(
               onPressed: () async {
-                removeNameUserFromSharedPreferences();
-
                 // Call deleteRegisterDetails to delete user details
-                UserRegisterApp().deleteRegisterDetails(
-                    0); // Assuming you want to delete details at index 0
+                appUserRegiterApp.deleteRegisterDetails(0);
+
+                removeNameUserFromSharedPreferences(); // Remove the key
+
+                Navigator.pop(context);
               },
               child: const Text(
                 'DELETE ACCOUNT',

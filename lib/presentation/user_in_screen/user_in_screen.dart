@@ -1,6 +1,6 @@
 import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/core/utils/responsive_screens.dart';
-import 'package:car_maintanance/db/db_functions/registor_from.dart';
+import 'package:car_maintanance/hive_main/db/db_functions/user_from.dart';
 import 'package:car_maintanance/page_session/user_in_screen/background_image.dart';
 import 'package:car_maintanance/page_session/user_in_screen/circular_image.dart';
 import 'package:car_maintanance/page_session/user_in_screen/text_field_model.dart';
@@ -22,7 +22,7 @@ class _UserInScreenState extends State<UserInScreen> {
   String? selectedBrand;
 
   // DataBase instance
-  final UserRegisterApp registerUser = UserRegisterApp();
+  final User registerUser = User();
 
   // Text controller
   final TextEditingController userNameController = TextEditingController();
@@ -307,7 +307,7 @@ class _UserInScreenState extends State<UserInScreen> {
               final modelName = modelNameController.text.trim();
 
               // Call userRegisterAdd with parameter names
-              await registerUser.userRegisterAdd(
+              await registerUser.userAdd(
                 userName: userName,
                 carName: carName,
                 brandName: brandName,

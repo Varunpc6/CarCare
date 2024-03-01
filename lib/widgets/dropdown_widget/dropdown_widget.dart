@@ -8,7 +8,7 @@ class MyDropdownField extends StatelessWidget {
   final FocusNode focusNode;
   final IconData icon;
   final String labelText;
-  final List<String> items;
+  final List<String>? items;
   final FieldType fieldType;
   final Function(DateTime)? onDateSelected; // Make it optional
   final Function(String)?
@@ -20,8 +20,8 @@ class MyDropdownField extends StatelessWidget {
     required this.focusNode,
     required this.icon,
     required this.labelText,
-    required this.items,
     required this.fieldType,
+    this.items,
     this.onDateSelected, // Make it nullable
     this.onUpdateControllerText,
   }) : super(key: key);
@@ -35,7 +35,7 @@ class MyDropdownField extends StatelessWidget {
 
         return DropdownButtonFormField<String>(
           value: selectedValue,
-          items: items.map((String value) {
+          items: items?.map((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Text(

@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/core/utils/responsive_screens.dart';
-import 'package:car_maintanance/db/db_functions/registor_from.dart';
+import 'package:car_maintanance/hive_main/db/db_functions/user_from.dart';
 import 'package:flutter/material.dart';
 
 class CarListCurrentSn extends StatefulWidget {
@@ -11,7 +13,7 @@ class CarListCurrentSn extends StatefulWidget {
 }
 
 class _CarListCurrentSnState extends State<CarListCurrentSn> {
-  UserRegisterApp _addCar = UserRegisterApp();
+  User _addCar = User();
   final border = OutlineInputBorder(
     borderSide: const BorderSide(color: AppColors.orange),
     borderRadius: BorderRadius.circular(10.0),
@@ -23,7 +25,7 @@ class _CarListCurrentSnState extends State<CarListCurrentSn> {
   );
   @override
   void initState() {
-    _addCar = UserRegisterApp();
+    _addCar = User();
     super.initState();
   }
 
@@ -60,7 +62,7 @@ class _CarListCurrentSnState extends State<CarListCurrentSn> {
                     child: GestureDetector(
                       onTap: () {
                         // Single tap action
-                        print('Single tap on $name');
+                        stdout.write('Single tap on $name');
                         Navigator.of(context).pop();
                       },
                       child: Container(
@@ -94,6 +96,7 @@ class _CarListCurrentSnState extends State<CarListCurrentSn> {
                                         // Call the deleteRegisterDetails function with the current index
                                         await _addCar
                                             .deleteRegisterDetails(index);
+                                        // ignore: use_build_context_synchronously
                                         Navigator.of(context).pop();
                                       },
                                     ),
