@@ -57,7 +57,7 @@ class AddExpensePage extends StatelessWidget {
                 child: const Row(
                   children: [
                     Text(
-                      'Refuel',
+                      'Expense',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 22.0,

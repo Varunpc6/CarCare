@@ -132,9 +132,6 @@ class MyCarFormState extends State<MyCarForm> {
                     setState(() {
                       timeController2.text = formattedTime;
                     });
-                    // You can also store the selected time in your Hive database here
-                    // Assuming you have a function named storeTimeInDatabase to handle this
-                    // storeTimeInDatabase(formattedTime);
                   },
                 ),
               ),
