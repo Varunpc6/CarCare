@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:car_maintanance/core/utils/responsive_screens.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget {
@@ -15,18 +15,14 @@ class NavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(
-        left: 16,
-        right: 16,
-        bottom: Platform.isAndroid ? 16 : 0,
-      ),
+    return Padding(
+      padding: const EdgeInsets.only(left: 15, right: 15, bottom: 20),
       child: BottomAppBar(
         elevation: 0.0,
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(22),
+          borderRadius: BorderRadius.circular(24),
           child: Container(
-            height: 60,
+            height: ResSize.navH(context),
             color: Colors.orange,
             child: Row(
               children: [
@@ -40,7 +36,9 @@ class NavBar extends StatelessWidget {
                   pageIndex == 1,
                   onTap: () => onTap(1),
                 ),
-                const SizedBox(width: 80),
+                SizedBox(
+                  width: ResSize.width20(context),
+                ),
                 navItem(
                   Icons.notifications_none_outlined,
                   pageIndex == 2,

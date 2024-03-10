@@ -77,7 +77,7 @@ class _PageFourState extends State<PageFour> {
   /// click Next Button
   void onTapNext1(BuildContext context) async {
     // Check if there is user data available
-    final List<MainBoxUser> users = appUserRegiterApp.displayRegisterDetails();
+    final List<MainBoxUser> users = await appUserRegiterApp.displayRegisterDetails();
     if (users.isEmpty) {
       // Show a popup message indicating no user data is available
       showDialog(

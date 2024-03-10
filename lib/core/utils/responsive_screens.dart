@@ -11,10 +11,6 @@ class ResSize {
     return MediaQuery.of(context).size.width * 0.14;
   }
 
-  // static double width12(BuildContext context) {
-  //   return MediaQuery.of(context).size.width * 0.12;
-  // }
-
   static double width20(BuildContext context) {
     return MediaQuery.of(context).size.width * 0.20;
   }
@@ -144,6 +140,10 @@ class ResSize {
 
   static double dotBottom19(BuildContext context) {
     return MediaQuery.of(context).size.width * 0.19;
+  }
+
+  static double navH(BuildContext context) {
+    return MediaQuery.of(context).size.width * 0.146;
   }
 
   static double dotBottom4(BuildContext context) {

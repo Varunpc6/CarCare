@@ -1,8 +1,9 @@
-import 'dart:io';
-
+import 'dart:developer';
 import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/core/utils/responsive_screens.dart';
 import 'package:car_maintanance/hive_main/db/db_functions/user_from.dart';
+import 'package:car_maintanance/hive_main/db/models/user_db_reg/user_main_db.dart';
+import 'package:car_maintanance/shared_Pref/shared_class.dart';
 import 'package:flutter/material.dart';
 
 class CarListCurrentSn extends StatefulWidget {
@@ -13,21 +14,7 @@ class CarListCurrentSn extends StatefulWidget {
 }
 
 class _CarListCurrentSnState extends State<CarListCurrentSn> {
-  User _addCar = User();
-  final border = OutlineInputBorder(
-    borderSide: const BorderSide(color: AppColors.orange),
-    borderRadius: BorderRadius.circular(10.0),
-  );
-  final boxDecoration = BoxDecoration(
-    border: Border.all(color: AppColors.orange),
-    borderRadius: BorderRadius.circular(10.0),
-    color: AppColors.white208,
-  );
-  @override
-  void initState() {
-    _addCar = User();
-    super.initState();
-  }
+  final User _user = User();
 
   @override
   Widget build(BuildContext context) {
@@ -37,89 +24,80 @@ class _CarListCurrentSnState extends State<CarListCurrentSn> {
       right: ResSize.right064(context),
       bottom: ResSize.dotBottom02(context),
       child: SizedBox(
-        child: Column(
-          children: [
-            // TextField(
-            //   decoration: InputDecoration(
-            //     filled: true,
-            //     fillColor: AppColors.bgWhite,
-            //     hintText: 'Search',
-            //     hintStyle: const TextStyle(color: AppColors.black),
-            //     border: border,
-            //     enabledBorder: border,
-            //   ),
-            // ),
-            const SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  final total = _addCar.displayRegisterDetails()[index];
-                  final name = total.carName ?? 'A';
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 6, bottom: 6),
-                    child: GestureDetector(
-                      onTap: () {
-                        // Single tap action
-                        stdout.write('Single tap on $name');
-                        Navigator.of(context).pop();
-                      },
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        decoration: boxDecoration,
-                        child: SingleChildScrollView(
-                          child: ExpansionTile(
-                            leading: const Icon(
-                              Icons.directions_car,
-                              color: AppColors.black,
-                            ),
-                            title: Center(
-                              child: Text(
-                                name,
-                                style: const TextStyle(
-                                  color: AppColors.orange225,
-                                  fontSize: 17,
-                                ),
-                                textAlign: TextAlign.center,
+        child: ValueListenableBuilder(
+          valueListenable: _user.carListNotifier,
+          builder: (context, List<MainBoxUser> newList, _) {
+            final cars = newList;
+            print("hello ----- ${cars.length}--------------");
+            return Column(
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      final data = newList[index];
+                      // Check if index is not 0, render delete button
+                      final bool canDelete = index != 0;
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 6, bottom: 6),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.orange),
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: AppColors.white208,
+                          ),
+                          child: SingleChildScrollView(
+                            child: ListTile(
+                              leading: const Icon(
+                                Icons.directions_car,
+                                color: AppColors.black,
                               ),
-                            ),
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  // Check if index is not the first index before displaying delete button
-                                  if (index != 0)
-                                    IconButton(
+                              title: Center(
+                                child: Text(
+                                  data.brandName!,
+                                  style: const TextStyle(
+                                    color: AppColors.orange225,
+                                    fontSize: 17,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              // Render delete button only if index is not 0
+                              trailing: canDelete
+                                  ? IconButton(
                                       icon: const Icon(Icons.delete),
                                       onPressed: () async {
-                                        // Call the deleteRegisterDetails function with the current index
-                                        await _addCar
+                                        await _user
                                             .deleteRegisterDetails(index);
-                                        // ignore: use_build_context_synchronously
-                                        Navigator.of(context).pop();
                                       },
-                                    ),
-                                ],
-                              ),
-                            ],
+                                    )
+                                  : null,
+                              onTap: () {
+                                log("${data.id.toString()} data : ${data.brandName!}");
+
+                                SharedPref().setCarBrand(
+                                    brandName: data.brandName,
+                                    id: '${data.id}');
+
+                                // Single tap action
+                                Navigator.of(context).pop(data.brandName);
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  );
-                },
-                itemCount: _addCar.displayRegisterDetails().length,
-              ),
-            ),
-          ],
+                      );
+                    },
+                    itemCount: cars.length,
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
   }
-
-  // // click Next Button
-  // onTap(BuildContext context) {
-  //   Navigator.pushNamed(context, AppRoutes.currentCarScreen);
-  // }
 }

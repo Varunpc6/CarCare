@@ -30,15 +30,16 @@ class MainBoxUserAdapter extends TypeAdapter<MainBoxUser> {
       expenses: (fields[10] as List?)?.cast<ExpenseModel>(),
       refuels: (fields[11] as List?)?.cast<RefuelModel>(),
       services: (fields[12] as List?)?.cast<ServiceModel>(),
-    )
-      ..route = (fields[13] as List?)?.cast<RouteModel>()
-      ..income = (fields[14] as List?)?.cast<IncomeModel>();
+      route: (fields[13] as List?)?.cast<RouteModel>(),
+      income: (fields[14] as List?)?.cast<IncomeModel>(),
+      id: fields[15] as int?,
+    );
   }
 
   @override
   void write(BinaryWriter writer, MainBoxUser obj) {
     writer
-      ..writeByte(15)
+      ..writeByte(16)
       ..writeByte(0)
       ..write(obj.userName)
       ..writeByte(1)
@@ -68,7 +69,9 @@ class MainBoxUserAdapter extends TypeAdapter<MainBoxUser> {
       ..writeByte(13)
       ..write(obj.route)
       ..writeByte(14)
-      ..write(obj.income);
+      ..write(obj.income)
+      ..writeByte(15)
+      ..write(obj.id);
   }
 
   @override

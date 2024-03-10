@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/core/utils/responsive_screens.dart';
 import 'package:car_maintanance/hive_main/db/db_functions/user_from.dart';
@@ -5,6 +8,7 @@ import 'package:car_maintanance/page_session/user_in_screen/background_image.dar
 import 'package:car_maintanance/page_session/user_in_screen/circular_image.dart';
 import 'package:car_maintanance/page_session/user_in_screen/text_field_model.dart';
 import 'package:car_maintanance/routes/app_routes.dart';
+import 'package:car_maintanance/widgets/home_screen/car_card/current_car_widget.dart';
 import 'package:car_maintanance/widgets/on_bording_screens/box_decoration_widget.dart';
 import 'package:car_maintanance/widgets/user_in_widget/user_in_widget.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -40,10 +44,18 @@ class _UserInScreenState extends State<UserInScreen> {
   // From field
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  // SharedPrefernceAdd
-  Future<void> savedUser() async {
+  // SharedPrefernceAdd in Login Setup
+  Future<void> savedUser({required brandName}) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // -for Login time-
     await prefs.setString("nameUser", userNameController.text);
+    // -first car Activation-
+    await prefs.setStringList(Constants.firtCar, ['1', brandName]);
+
+    //************************************************************
+    List<String>? data = prefs.getStringList(Constants.firtCar);
+    log("data kitti ${data![1]}----");
+    //************************************************************
   }
 
   @override
@@ -315,7 +327,7 @@ class _UserInScreenState extends State<UserInScreen> {
               );
 
               // Optionally, perform any additional actions
-              savedUser();
+              savedUser(brandName: brandName);
 
               // ignore: use_build_context_synchronously
               onTapCreate(context);

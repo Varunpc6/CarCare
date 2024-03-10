@@ -5,10 +5,14 @@ import 'package:car_maintanance/widgets/form/my_form.dart';
 
 import 'package:flutter/material.dart';
 
-class EditCarScreen extends StatelessWidget {
+class EditCarScreen extends StatefulWidget {
   const EditCarScreen({super.key});
 
-  
+  @override
+  State<EditCarScreen> createState() => _EditCarScreenState();
+}
+
+class _EditCarScreenState extends State<EditCarScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -80,9 +84,4 @@ class EditCarScreen extends StatelessWidget {
       ),
     );
   }
-
-  // /// click Next Button
-  // onTapNext(BuildContext context) {
-  //   Navigator.pushNamed(context, AppRoutes.currentCarScreen);
-  // }
 }

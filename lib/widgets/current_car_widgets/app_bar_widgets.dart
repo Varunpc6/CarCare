@@ -53,6 +53,6 @@ class AppBarCurrentSrn extends StatelessWidget {
 
   // click Next Button
   onTap(BuildContext context) {
-    Navigator.pushReplacementNamed(context, AppRoutes.homeScreen);
+    Navigator.pop(context);
   }
 }

@@ -49,9 +49,9 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
   }
 
   // Method to load user data
-  void _loadUserData() {
-    final List<MainBoxUser> users = userRegisterApp.displayRegisterDetails();
-    final List<MainBoxUser> fueluser = userRegisterApp.displayRegisterDetails();
+  void _loadUserData() async{
+    final List<MainBoxUser> users = await userRegisterApp.displayRegisterDetails();
+    final List<MainBoxUser> fueluser = await userRegisterApp.displayRegisterDetails();
 
     if (users.isNotEmpty) {
       setState(() {

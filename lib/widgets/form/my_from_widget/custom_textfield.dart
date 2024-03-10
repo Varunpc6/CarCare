@@ -25,7 +25,7 @@ class CustomTextField extends StatelessWidget {
       child: TextFormField(
         keyboardType: keyboardType, // Use keyboardType here
         controller: controller,
-        focusNode: focusNode,
+        // focusNode: focusNode,
         style: const TextStyle(color: Colors.black, height: 1.6),
         decoration: InputDecoration(
           prefixIcon: Icon(

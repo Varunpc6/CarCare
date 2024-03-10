@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:car_maintanance/core/utils/app_colors.dart';
-import 'package:car_maintanance/routes/app_routes.dart';
+import 'package:car_maintanance/hive_main/db/db_functions/user_from.dart';
 import 'package:car_maintanance/src/list/fuel_items.dart';
 import 'package:car_maintanance/widgets/form/my_from_widget/custom_brand_dropdown.dart';
 import 'package:car_maintanance/widgets/form/my_from_widget/custom_dropdown.dart';
@@ -9,7 +9,8 @@ import 'package:car_maintanance/widgets/form/my_from_widget/custom_textfield.dar
 import 'package:flutter/material.dart';
 
 class MyForm extends StatefulWidget {
-  MyForm({Key? key}) : super(key: key);
+  final VoidCallback? refreshCallback;
+  MyForm({Key? key, this.refreshCallback}) : super(key: key);
   // TextField focus Auto jump
   final FocusNode _focusNode1 = FocusNode();
   final FocusNode _focusNode2 = FocusNode();
@@ -28,8 +29,8 @@ class MyFormState extends State<MyForm> {
   String? selectedValue;
   String? selectedValue2;
 
-  // // DataBase instance
-  // final User registerdCar = User();
+  // DataBase instance
+  final User registerdCar = User();
 
   // Text Controller
   final TextEditingController _controller1 = TextEditingController();
@@ -43,29 +44,6 @@ class MyFormState extends State<MyForm> {
 
   // From field
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  // void saveFormDataToHive() async {
-  //   final carName = _controller1.text.trim();
-  //   final brandName = selectedBrand!;
-  //   final modelName = _controller3.text.trim();
-  //   final fuelType = _controller4.text.trim();
-  //   final fuelCapacity = _controller5.text.trim();
-  //   final sFuelType = _controller6.text.trim();
-  //   final sFuelCapacity = _controller7.text.trim();
-  //   final note = _controller8.text.trim();
-
-  //   // Call the addCarRegister function
-  //   await registerdCar.userAdd(
-  //     carName: carName,
-  //     brandName: brandName,
-  //     modelName: modelName,
-  //     fuel: fuelType,
-  //     fuelCapacity: fuelCapacity,
-  //     sFuel: sFuelType,
-  //     sFuelCapacity: sFuelCapacity,
-  //     note: note,
-  //   );
-  // }
 
   @override
   void dispose() {
@@ -115,8 +93,7 @@ class MyFormState extends State<MyForm> {
                       });
                     },
                     focusNode: widget._focusNode2,
-                    controller:
-                        _controller2, // Pass your TextEditingController here
+                    controller: _controller2,
                   ),
                   const SizedBox(height: 12.0),
                   // Model
@@ -248,50 +225,51 @@ class MyFormState extends State<MyForm> {
               child: ElevatedButton(
                 focusNode: widget._focusNodeBtn,
                 onPressed: () async {
-                  onTapNext(context); // **********NewAdded*****************
-                  // if (_formKey.currentState!.validate()) {
-                  //   // Validate dropdown selection
-                  //   if (selectedBrand == 'Brand' || selectedBrand!.isEmpty) {
-                  //     ScaffoldMessenger.of(context).showSnackBar(
-                  //       const SnackBar(
-                  //         content: Text('Please select a brand'),
-                  //       ),
-                  //     );
-                  //   } else {
-                  //     if (!showMainTank ||
-                  //         (showMainTank && _controller7.text.isNotEmpty)) {
-                  //       final carName = _controller1.text.trim();
-                  //       final brandName = selectedBrand!;
-                  //       final modelName = _controller3.text.trim();
-                  //       final fuelM = selectedValue!;
-                  //       final fuelCapacityM = _controller5.text.trim();
-                  //       final fuelS = items.first;
-                  //       final fuelCapacityS = _controller7.text.trim();
-                  //       final note = _controller8.text.trim();
+                  if (_formKey.currentState!.validate()) {
+                    // Validate dropdown selection
+                    if (selectedBrand == 'Brand' || selectedBrand!.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please select a brand'),
+                        ),
+                      );
+                    } else {
+                      if (!showMainTank ||
+                          (showMainTank && _controller7.text.isNotEmpty)) {
+                        final carName = _controller1.text.trim();
+                        final brandName = selectedBrand!;
+                        final modelName = _controller3.text.trim();
+                        final fuelM = selectedValue!;
+                        final fuelCapacityM = _controller5.text.trim();
+                        final fuelS = items.first;
+                        final fuelCapacityS = _controller7.text.trim();
+                        final note = _controller8.text.trim();
 
-                  //       // Call userRegisterAdd with parameter names
-                  //       await registerdCar.userAdd(
-                  //         carName: carName,
-                  //         brandName: brandName,
-                  //         modelName: modelName,
-                  //         fuel: fuelM,
-                  //         fuelCapacity: fuelCapacityM,
-                  //         sFuel: fuelS,
-                  //         sFuelCapacity: fuelCapacityS,
-                  //         note: note,
-                  //       );
-                  //       // ignore: use_build_context_synchronously
-                  //       onTapNext(context);
-                  //     } else {
-                  //       ScaffoldMessenger.of(context).showSnackBar(
-                  //         const SnackBar(
-                  //           content: Text(
-                  //               'Please enter secondary tank fuel capacity'),
-                  //         ),
-                  //       );
-                  //     }
-                  //   }
-                  // }
+                        // Call userRegisterAdd with parameter names
+                        await registerdCar.userAdd(
+                          carName: carName,
+                          brandName: brandName,
+                          modelName: modelName,
+                          fuel: fuelM,
+                          fuelCapacity: fuelCapacityM,
+                          sFuel: fuelS,
+                          sFuelCapacity: fuelCapacityS,
+                          note: note,
+                        );
+                        await registerdCar.fetchAllData();
+
+                        // ignore: use_build_context_synchronously
+                        onTapNext(context);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                                'Please enter secondary tank fuel capacity'),
+                          ),
+                        );
+                      }
+                    }
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
@@ -317,13 +295,8 @@ class MyFormState extends State<MyForm> {
     );
   }
 
-  // /// Navigates to the homeScreen and replaces the current route
-  // void onTap(BuildContext context) {
-  //   Navigator.pop(context);
-  // }
-
   /// click Next Button
   onTapNext(BuildContext context) {
-    Navigator.pushReplacementNamed(context, AppRoutes.currentCarScreen);
+    Navigator.pop(context);
   }
 }

@@ -11,8 +11,8 @@ class FloatDialog extends StatelessWidget {
       padding: const EdgeInsets.only(top: 50),
       child: Container(
         margin: const EdgeInsets.only(top: 10),
-        height: 70,
-        width: 70,
+        height: 75,
+        width: 75,
         decoration: BoxDecoration(
           border: const Border.fromBorderSide(
               BorderSide(width: 5.5, color: Color.fromARGB(212, 255, 153, 0))),
