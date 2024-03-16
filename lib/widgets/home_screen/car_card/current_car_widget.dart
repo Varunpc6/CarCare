@@ -1,6 +1,4 @@
 import 'dart:developer';
-
-import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/core/utils/image_constant.dart';
 import 'package:car_maintanance/routes/app_routes.dart';
@@ -15,7 +13,8 @@ class CarCard extends StatefulWidget {
 }
 
 // Globel type ValueNotifier for CarName Showing the Homepage
-ValueNotifier<String> carNameNotifier = ValueNotifier('');
+ValueNotifier<String> carNameNotifier = ValueNotifier<String>('');
+
 
 class _CarCardState extends State<CarCard> {
   String? carName;
@@ -38,8 +37,8 @@ class _CarCardState extends State<CarCard> {
         valueListenable: carNameNotifier,
         builder: (BuildContext context, dynamic val, Widget? _) {
           return Container(
-            width: 130,
-            height: 45,
+            width: 150,
+            height: 46,
             decoration: BoxDecoration(
               color: AppColors.orange,
               borderRadius: BorderRadius.circular(30),
@@ -66,12 +65,16 @@ class _CarCardState extends State<CarCard> {
                   ),
                 ),
                 // Display carName fetched from SharedPreferences
-                Text(
-                  val,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                    fontSize: 14,
+                ConstrainedBox(
+                  constraints:
+                      const BoxConstraints(maxHeight: 46, maxWidth: 60),
+                  child: Text(
+                    val,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
                   ),
                 ),
                 const Icon(
@@ -87,27 +90,28 @@ class _CarCardState extends State<CarCard> {
     );
   }
 
-  Future<void> firstCar() async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      List<String>? data = prefs.getStringList(Constants.firtCar);
+  // Future<void> firstCar() async {
+  //   try {
+  //     final prefs = await SharedPreferences.getInstance();
+  //     List<String>? data = prefs.getStringList(Constants.firtCar);
 
-      if (data != null && data.length > 1) {
-        String brandName = data[1];
-        log("Brand name retrieved from shared preferences: $brandName");
-        carNameNotifier.value = brandName;
-      } else {
-        log('Error: No or insufficient data found in shared preferences');
-        // Handle the case where there are no elements or only one element in the list
-      }
-    } catch (e) {
-      log('Error in firstCar function: $e');
-    }
-  }
+  //     if (data != null && data.length > 1) {
+  //       String brandName = data[1];
+  //       log("Brand name retrieved from shared preferences: $brandName");
+  //       // carNameNotifier.value = brandName;
+  //       // carNameNotifier.notifyListeners();
+  //     } else {
+  //       log('Error: No or insufficient data found in shared preferences');
+  //       // Handle the case where there are no elements or only one element in the list
+  //     }
+  //   } catch (e) {
+  //     log('Error in firstCar function: $e');
+  //   }
+  // }
 
   Future<void> showCarName() async {
     try {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final prefs = await SharedPreferences.getInstance();
       if (prefs.containsKey("carName")) {
         List<String>? data = prefs.getStringList("carName");
         if (data != null && data.length > 1) {
@@ -115,9 +119,10 @@ class _CarCardState extends State<CarCard> {
         } else {
           log('Error: No or insufficient data found in shared preferences');
         }
-      } else {
-        await firstCar();
       }
+      // else {
+      //   await firstCar();
+      // }
     } catch (e) {
       log('Error in showCarName function: $e');
     }

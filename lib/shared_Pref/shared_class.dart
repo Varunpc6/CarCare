@@ -16,8 +16,6 @@ class SharedPref {
     try {
       // Get an Instance of SharedPreferences
       final SharedPreferences carActive = await SharedPreferences.getInstance();
-
-      //  saved as a list to ShraredPreference
       carActive.setStringList(Constants.carName, [brandName, id]);
       //  NotifierListeners are notified of the change
       carNameNotifier.value = brandName;

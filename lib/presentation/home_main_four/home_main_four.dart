@@ -80,6 +80,7 @@ class _PageFourState extends State<PageFour> {
     final List<MainBoxUser> users = await appUserRegiterApp.displayRegisterDetails();
     if (users.isEmpty) {
       // Show a popup message indicating no user data is available
+      // ignore: use_build_context_synchronously
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -106,6 +107,7 @@ class _PageFourState extends State<PageFour> {
       );
     } else {
       // Navigate to the myAccountScreen
+      // ignore: use_build_context_synchronously
       Navigator.pushNamed(context, AppRoutes.myAccountScreen);
     }
   }

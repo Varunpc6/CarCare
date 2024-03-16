@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/hive_main/db/db_functions/user_from.dart';
 import 'package:car_maintanance/src/list/fuel_items.dart';
@@ -75,7 +76,7 @@ class MyFormState extends State<MyForm> {
                     controller: _controller1,
                     focusNode: widget._focusNode1,
                     prefixIcon: Icons.car_rental,
-                    labelText: 'Car name',
+                    labelText: Constants.mainCarName,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter a car name';
@@ -101,7 +102,7 @@ class MyFormState extends State<MyForm> {
                     controller: _controller3,
                     focusNode: widget._focusNode3,
                     prefixIcon: Icons.oil_barrel_outlined,
-                    labelText: 'Model',
+                    labelText: Constants.model,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter a model';
@@ -112,7 +113,7 @@ class MyFormState extends State<MyForm> {
                   const SizedBox(height: 15.0),
                   // Main Tank
                   const Text(
-                    'MAIN TANK',
+                    Constants.mainTank,
                     style: TextStyle(
                       color: Colors.orange,
                       fontWeight: FontWeight.w700,
@@ -127,7 +128,7 @@ class MyFormState extends State<MyForm> {
                           items: items,
                           selectedValue: selectedValue,
                           prefixIcon: Icons.menu_outlined,
-                          labelText: 'Fuel type',
+                          labelText: Constants.fuletype,
                           onChanged: (newValue) {
                             setState(() {
                               selectedValue = newValue;
@@ -142,7 +143,7 @@ class MyFormState extends State<MyForm> {
                           controller: _controller5,
                           focusNode: widget._focusNode5,
                           prefixIcon: Icons.category,
-                          labelText: 'Fuel Capaity',
+                          labelText: Constants.fuleCapacity,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Please enter Fuel Capacity';
@@ -157,7 +158,7 @@ class MyFormState extends State<MyForm> {
                   Row(
                     children: [
                       const Text(
-                        'SECONDARY TANK',
+                        Constants.secondaryTank,
                         style: TextStyle(
                           color: Colors.orange,
                           fontWeight: FontWeight.w700,
@@ -183,7 +184,7 @@ class MyFormState extends State<MyForm> {
                             selectedValue:
                                 items.first, // Set the initial selected value
                             prefixIcon: Icons.menu_outlined,
-                            labelText: 'Fuel type',
+                            labelText: Constants.fuletype,
                             onChanged: (newValue) {
                               // Handle the onChanged event here
                               stdout.write('Selected fuel type: $newValue');
@@ -197,7 +198,7 @@ class MyFormState extends State<MyForm> {
                             controller: _controller7,
                             focusNode: widget._focusNode7,
                             prefixIcon: Icons.category,
-                            labelText: 'Fuel Capaity',
+                            labelText: Constants.fuleCapacity,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Please enter Fuel Capacity';
@@ -215,7 +216,7 @@ class MyFormState extends State<MyForm> {
                     controller: _controller8,
                     focusNode: widget._focusNode8,
                     prefixIcon: Icons.note,
-                    labelText: 'Note',
+                    labelText: Constants.note,
                   ),
                   const SizedBox(height: 80.0),
                 ],
@@ -279,7 +280,7 @@ class MyFormState extends State<MyForm> {
                   backgroundColor: AppColors.orange,
                 ),
                 child: const Text(
-                  'Done',
+                  Constants.done,
                   style: TextStyle(
                     fontSize: 20,
                     letterSpacing: 1.2,

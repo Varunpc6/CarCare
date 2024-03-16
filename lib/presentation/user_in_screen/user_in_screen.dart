@@ -52,10 +52,9 @@ class _UserInScreenState extends State<UserInScreen> {
     // -first car Activation-
     await prefs.setStringList(Constants.firtCar, ['1', brandName]);
 
-    //************************************************************
-    List<String>? data = prefs.getStringList(Constants.firtCar);
-    log("data kitti ${data![1]}----");
-    //************************************************************
+    carNameNotifier.value = brandName;
+    carNameNotifier.notifyListeners();
+
   }
 
   @override

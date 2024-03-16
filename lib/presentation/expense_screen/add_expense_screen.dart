@@ -1,3 +1,4 @@
+import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:car_maintanance/core/utils/image_constant.dart';
 import 'package:car_maintanance/widgets/form/my_expense_from.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class AddExpensePage extends StatelessWidget {
                 child: const Row(
                   children: [
                     Text(
-                      'Expense',
+                      Constants.expense,
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 22.0,

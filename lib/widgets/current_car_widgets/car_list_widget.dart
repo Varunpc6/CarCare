@@ -28,7 +28,8 @@ class _CarListCurrentSnState extends State<CarListCurrentSn> {
           valueListenable: _user.carListNotifier,
           builder: (context, List<MainBoxUser> newList, _) {
             final cars = newList;
-            print("hello ----- ${cars.length}--------------");
+
+            print("hello ---------- ${cars.length}---------");
             return Column(
               children: [
                 const SizedBox(
@@ -38,6 +39,7 @@ class _CarListCurrentSnState extends State<CarListCurrentSn> {
                   child: ListView.builder(
                     itemBuilder: (context, index) {
                       final data = newList[index];
+                      log("***********-----------${data.id}-----*********");
                       // Check if index is not 0, render delete button
                       final bool canDelete = index != 0;
                       return Padding(

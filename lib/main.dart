@@ -1,3 +1,4 @@
+import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:car_maintanance/hive_main/db/db_functions/user_from.dart';
 import 'package:car_maintanance/hive_main/main.dart';
 import 'package:car_maintanance/shared_Pref/shared_class.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'CARCARE',
+      title: Constants.appName,
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.splashScreen,
       routes: AppRoutes.routes,

@@ -11,7 +11,6 @@ import 'package:car_maintanance/presentation/route_screen/add_route_screen.dart'
 import 'package:car_maintanance/presentation/service_screen/add_service_screen.dart';
 import 'package:car_maintanance/presentation/settings_screen/settings_screen_main.dart';
 import 'package:car_maintanance/presentation/show_car_screen/show_car_detail_screen.dart';
-
 import 'package:car_maintanance/presentation/splash_screen/splash_screen.dart';
 import 'package:car_maintanance/presentation/user_in_screen/user_in_screen.dart';
 import 'package:flutter/material.dart';

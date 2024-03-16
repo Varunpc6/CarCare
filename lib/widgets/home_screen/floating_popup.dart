@@ -20,11 +20,9 @@ class FloatDialog extends StatelessWidget {
         ),
         child: SpeedDial(
           animatedIcon: AnimatedIcons.add_event,
-          animatedIconTheme: const IconThemeData(size: 24),
+          animatedIconTheme: const IconThemeData(size: 30),
           curve: Curves.bounceIn,
           overlayColor: Colors.black,
-          tooltip: 'Speed Dial',
-          heroTag: 'speed-dial-hero-tag',
           backgroundColor: const Color.fromARGB(255, 250, 245, 245),
           foregroundColor: Colors.orange[600],
           elevation: 2.0,
@@ -32,7 +30,7 @@ class FloatDialog extends StatelessWidget {
           children: [
             SpeedDialChild(
               onTap: () => addRoute(context),
-              child: const Icon(Icons.access_alarms_sharp, color: Colors.white),
+              child: const Icon(Icons.room_outlined, color: Colors.white),
               backgroundColor: Colors.green[800],
               label: 'Routes',
               labelStyle: const TextStyle(
@@ -43,7 +41,8 @@ class FloatDialog extends StatelessWidget {
             ),
             SpeedDialChild(
               onTap: () => addService(context),
-              child: const Icon(Icons.access_alarms_sharp, color: Colors.white),
+              child: const Icon(Icons.miscellaneous_services_rounded,
+                  color: Colors.white),
               backgroundColor: const Color.fromARGB(255, 21, 118, 192),
               label: 'Services',
               labelStyle: const TextStyle(
@@ -53,7 +52,8 @@ class FloatDialog extends StatelessWidget {
             ),
             SpeedDialChild(
               onTap: () => addIncome(context),
-              child: const Icon(Icons.access_alarms_sharp, color: Colors.white),
+              child:
+                  const Icon(Icons.card_membership_sharp, color: Colors.white),
               backgroundColor: Colors.pink[800],
               label: 'Incomes',
               labelStyle: const TextStyle(
@@ -63,7 +63,8 @@ class FloatDialog extends StatelessWidget {
             ),
             SpeedDialChild(
               onTap: () => addExpense(context),
-              child: const Icon(Icons.access_alarms_sharp, color: Colors.white),
+              child:
+                  const Icon(Icons.credit_card_outlined, color: Colors.white),
               backgroundColor: const Color.fromARGB(255, 80, 46, 125),
               label: 'Expense',
               labelStyle: const TextStyle(
@@ -73,7 +74,8 @@ class FloatDialog extends StatelessWidget {
             ),
             SpeedDialChild(
               onTap: () => addRefule(context),
-              child: const Icon(Icons.access_alarms_sharp, color: Colors.white),
+              child: const Icon(Icons.local_gas_station_rounded,
+                  color: Colors.white),
               backgroundColor: const Color.fromARGB(255, 125, 46, 46),
               label: 'Refueling',
               labelStyle: const TextStyle(

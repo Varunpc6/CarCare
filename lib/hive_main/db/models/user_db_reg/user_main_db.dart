@@ -40,19 +40,19 @@ class MainBoxUser extends HiveObject {
   String? note;
 
   @HiveField(10)
-  List<ExpenseModel>? expenses;
+  List<ExpenseModel>? expenses = [];
 
   @HiveField(11)
-  List<RefuelModel>? refuels;
+  List<RefuelModel>? refuels = [];
 
   @HiveField(12)
-  List<ServiceModel>? services;
+  List<ServiceModel>? services = [];
 
   @HiveField(13)
-  List<RouteModel>? route;
+  List<RouteModel>? route = [];
 
   @HiveField(14)
-  List<IncomeModel>? income;
+  List<IncomeModel>? income = [];
 
   @HiveField(15)
   int? id;

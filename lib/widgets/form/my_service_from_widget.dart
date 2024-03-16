@@ -1,7 +1,7 @@
-import 'dart:io';
-
+import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:car_maintanance/core/utils/app_colors.dart';
-import 'package:car_maintanance/routes/app_routes.dart';
+import 'package:car_maintanance/hive_main/db/db_functions/user_from.dart';
+import 'package:car_maintanance/hive_main/db/models/service_db/service_db.dart';
 import 'package:car_maintanance/src/list/fuel_items.dart';
 import 'package:car_maintanance/widgets/dropdown_widget/dropdown_widget.dart';
 import 'package:car_maintanance/widgets/form/my_from_widget/custom_dropdown.dart';
@@ -34,8 +34,8 @@ class MyServiceFormState extends State<MyServiceForm> {
   final FocusNode _focusNode5 = FocusNode();
   final FocusNode _focusNodeBtn = FocusNode();
 
-  // // DataBase instance
-  // final ServicePlan serviceService = ServicePlan();
+  // DataBase instance
+  final User serviceService = User();
 
   // From field
   final GlobalKey<FormState> _formKeyS = GlobalKey<FormState>();
@@ -90,8 +90,7 @@ class MyServiceFormState extends State<MyServiceForm> {
                   controller: dateController1,
                   focusNode: _focusNode1,
                   icon: Icons.calendar_today,
-                  labelText: 'Example Dropdown',
-                  items: const ['Option 1', 'Option 2'],
+                  labelText: Constants.date,
                   fieldType: FieldType.datePicker,
                   onDateSelected: (DateTime selectedDate) {
                     // Update the date controller with the selected date
@@ -107,8 +106,7 @@ class MyServiceFormState extends State<MyServiceForm> {
                   controller: timeController2,
                   focusNode: _focusNode2,
                   icon: Icons.access_time,
-                  labelText: 'Time',
-                  items: const ['Option 1', 'Option 2'],
+                  labelText: Constants.time,
                   fieldType: FieldType.timePicker,
                   onUpdateControllerText: (String formattedTime) {
                     setState(() {
@@ -119,13 +117,12 @@ class MyServiceFormState extends State<MyServiceForm> {
               ),
             ],
           ),
-
           // Odometer
           CustomTextField(
             controller: _controller3,
             focusNode: _focusNode3,
             prefixIcon: Icons.car_rental,
-            labelText: 'Odometer',
+            labelText: Constants.odometer,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Please enter Odometer';
@@ -139,20 +136,19 @@ class MyServiceFormState extends State<MyServiceForm> {
             items: service,
             selectedValue: selectedValue,
             prefixIcon: Icons.menu_outlined,
-            labelText: 'Type of Service',
+            labelText: Constants.typeService,
             onChanged: (newValue) {
               setState(() {
                 selectedValue = newValue;
               });
             },
           ),
-
           // Place
           CustomTextField(
             controller: _controller4,
             focusNode: _focusNode4,
             prefixIcon: Icons.attach_money,
-            labelText: 'Place',
+            labelText: Constants.place,
           ),
           const SizedBox(height: 10.0),
           // Payment method
@@ -160,7 +156,7 @@ class MyServiceFormState extends State<MyServiceForm> {
             items: cashM,
             selectedValue: selectedValue2,
             prefixIcon: Icons.menu_outlined,
-            labelText: 'Payment method',
+            labelText: Constants.paymentMethod,
             onChanged: (newValue) {
               setState(() {
                 selectedValue2 = newValue;
@@ -173,41 +169,39 @@ class MyServiceFormState extends State<MyServiceForm> {
             controller: _controller5,
             focusNode: _focusNode5,
             prefixIcon: Icons.attach_money,
-            labelText: 'Reason',
+            labelText: Constants.reason,
           ),
           const SizedBox(height: 60.0),
           ElevatedButton(
             focusNode: _focusNodeBtn,
             onPressed: () async {
-              tapBtn(context); // *****************NewAdded****************
+              // Validate the form
+              if (_formKeyS.currentState!.validate()) {
+                _formKeyS.currentState!.save(); // Optionally save form data
+                final date = dateController1.text;
+                final time = timeController2.text;
+                final odometer = _parseToInt(_controller3.text.trim());
+                final service = selectedValue;
+                final place = _controller4.text.trim();
+                final paymentMethod = selectedValue2;
+                final reason = _controller5.text.trim();
 
-              // // Validate the form
-              // if (_formKeyS.currentState!.validate()) {
-              //   _formKeyS.currentState!.save(); // Optionally save form data
+                final updatedService = ServiceModel(
+                  date: date,
+                  time: time,
+                  odometer: odometer,
+                  service: service,
+                  place: place,
+                  paymentMethod: paymentMethod,
+                  reason: reason,
+                );
 
-              //   final date = dateController1.text;
-              //   final time = timeController2.text;
-              //   final odometer = _parseToInt(_controller3.text.trim());
-              //   final service = selectedValue;
-              //   final place = _controller4.text.trim();
-              //   final paymentMethod = selectedValue2;
-              //   final reason = _controller5.text.trim();
-
-              //   // adding the Data
-              //   await serviceService.addService(
-              //     date: date,
-              //     time: time,
-              //     odometer: odometer,
-              //     service: service,
-              //     place: place,
-              //     paymentMethod: paymentMethod,
-              //     reason: reason,
-              //   );
-
-              //   // Navigation to the next page
-              //   // ignore: use_build_context_synchronously
-              //   tapBtn(context);
-              // }
+                // adding the Data
+                await serviceService.updateUserService(updatedService);
+                // Navigation to the next page
+                // ignore: use_build_context_synchronously
+                tapBtn(context);
+              }
             },
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
@@ -217,7 +211,7 @@ class MyServiceFormState extends State<MyServiceForm> {
               backgroundColor: AppColors.orange,
             ),
             child: const Text(
-              'Done',
+              Constants.reason,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
@@ -236,8 +230,7 @@ class MyServiceFormState extends State<MyServiceForm> {
   }
 
   void tapBtn(BuildContext context) {
-    stdout.write(
-        "Button tapped"); // Check if this message is printed in the console
-    Navigator.pushReplacementNamed(context, AppRoutes.homeScreen);
+    // Navigator.pushReplacementNamed(context, AppRoutes.homeScreen);
+    Navigator.of(context).pop();
   }
 }

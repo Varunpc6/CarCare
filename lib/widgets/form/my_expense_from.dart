@@ -1,7 +1,7 @@
-import 'dart:io';
-
+import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:car_maintanance/core/utils/app_colors.dart';
-import 'package:car_maintanance/routes/app_routes.dart';
+import 'package:car_maintanance/hive_main/db/db_functions/user_from.dart';
+import 'package:car_maintanance/hive_main/db/models/expense_db/expense_db.dart';
 import 'package:car_maintanance/src/list/fuel_items.dart';
 import 'package:car_maintanance/widgets/dropdown_widget/dropdown_widget.dart';
 import 'package:car_maintanance/widgets/form/my_from_widget/custom_dropdown.dart';
@@ -22,7 +22,6 @@ class MyExpenseFormState extends State<MyExpenseForm> {
 
   late TextEditingController dateController1 = TextEditingController();
   late TextEditingController timeController2 = TextEditingController();
-  // Add the missing controllers and focus nodes here
   final TextEditingController _controller3 = TextEditingController();
   final TextEditingController _controller4 = TextEditingController();
   final TextEditingController _controller5 = TextEditingController();
@@ -33,8 +32,8 @@ class MyExpenseFormState extends State<MyExpenseForm> {
   final FocusNode _focusNode5 = FocusNode();
   final FocusNode _focusNodeBtn = FocusNode();
 
-  // // DataBase instance
-  // final ExpensePlan expenseExpense = ExpensePlan();
+  // DataBase instance
+  final User expenseExpense = User();
 
   // From field
   final GlobalKey<FormState> _formKeyE = GlobalKey<FormState>();
@@ -91,8 +90,7 @@ class MyExpenseFormState extends State<MyExpenseForm> {
                   controller: dateController1,
                   focusNode: _focusNode1,
                   icon: Icons.calendar_today,
-                  labelText: 'Example Dropdown',
-                  items: const ['Option 1', 'Option 2'],
+                  labelText: Constants.date,
                   fieldType: FieldType.datePicker,
                   onDateSelected: (DateTime selectedDate) {
                     // Update the date controller with the selected date
@@ -108,8 +106,7 @@ class MyExpenseFormState extends State<MyExpenseForm> {
                   controller: timeController2,
                   focusNode: _focusNode2,
                   icon: Icons.access_time,
-                  labelText: 'Time',
-                  items: const ['Option 1', 'Option 2'],
+                  labelText: Constants.time,
                   fieldType: FieldType.timePicker,
                   onUpdateControllerText: (String formattedTime) {
                     setState(() {
@@ -126,7 +123,7 @@ class MyExpenseFormState extends State<MyExpenseForm> {
             focusNode: _focusNode3,
             keyboardType: TextInputType.number,
             prefixIcon: Icons.car_rental,
-            labelText: 'Odometer',
+            labelText: Constants.odometer,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Please enter Odometer';
@@ -140,73 +137,71 @@ class MyExpenseFormState extends State<MyExpenseForm> {
             items: expense,
             selectedValue: selectedValue,
             prefixIcon: Icons.menu_outlined,
-            labelText: 'Fuel type',
+            labelText: Constants.fuletype,
             onChanged: (newValue) {
               setState(() {
                 selectedValue = newValue;
               });
             },
           ),
-
           // Place
           CustomTextField(
             controller: _controller4,
             focusNode: _focusNode4,
             prefixIcon: Icons.location_on,
-            labelText: 'Place',
+            labelText: Constants.place,
           ),
           const SizedBox(height: 10.0),
           CustomDropdown(
             items: cashM,
             selectedValue: selectedvalu2,
             prefixIcon: Icons.menu_outlined,
-            labelText: 'Payment method',
+            labelText: Constants.paymentMethod,
             onChanged: (newValue) {
               setState(() {
                 selectedvalu2 = newValue;
               });
             },
           ),
-
           // Reason
           CustomTextField(
             controller: _controller5,
             focusNode: _focusNode5,
             prefixIcon: Icons.attach_money,
-            labelText: 'Reason',
+            labelText: Constants.reason,
           ),
           const SizedBox(height: 60.0),
           ElevatedButton(
             focusNode: _focusNodeBtn,
             onPressed: () async {
-              tapBtn(context); // ****************NewAdded********************
               // Validate the form
-              // if (_formKeyE.currentState!.validate()) {
-              //   _formKeyE.currentState!.save(); // Optionally save form data
+              if (_formKeyE.currentState!.validate()) {
+                _formKeyE.currentState!.save(); // Optionally save form data
+                final date = dateController1.text;
+                final time = timeController2.text;
+                final odometer = _parseToInt(_controller3.text.trim());
+                final fuelType = selectedValue;
+                final place = _controller4.text.trim();
+                final paymentMethod = selectedvalu2;
+                final reason = _controller5.text.trim();
 
-              //   final date = dateController1.text;
-              //   final time = timeController2.text;
-              //   final odometer = _parseToInt(_controller3.text.trim());
-              //   final fuelType = selectedValue;
-              //   final place = _controller4.text.trim();
-              //   final paymentMethod = selectedvalu2;
-              //   final reason = _controller5.text.trim();
+                // Create an instance of MainBoxUser with updated data
+                final updatedExpense = ExpenseModel(
+                  date: date,
+                  time: time,
+                  odometer: odometer,
+                  fuelType: fuelType,
+                  place: place,
+                  paymentMethod: paymentMethod,
+                  reason: reason,
+                );
 
-              //   // adding the Data
-              //   await expenseExpense.addExpense(
-              //     date: date,
-              //     time: time,
-              //     odometer: odometer,
-              //     fuelType: fuelType,
-              //     place: place,
-              //     paymentMethod: paymentMethod,
-              //     reason: reason,
-              //   );
-
-              //   // Navigation to the next page
-              //   // ignore: use_build_context_synchronously
-              //   tapBtn(context);
-              // }
+                // adding the Data
+                // await expenseExpense.updateUserExpense(updatedExpense);
+                // Navigation to the next page
+                // ignore: use_build_context_synchronously
+                tapBtn(context);
+              }
             },
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
@@ -216,7 +211,7 @@ class MyExpenseFormState extends State<MyExpenseForm> {
               backgroundColor: AppColors.orange,
             ),
             child: const Text(
-              'Done',
+              Constants.done,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
@@ -235,8 +230,7 @@ class MyExpenseFormState extends State<MyExpenseForm> {
   }
 
   void tapBtn(BuildContext context) {
-    stdout.write(
-        "Button tapped"); // Check if this message is stdout.writeed in the console
-    Navigator.pushReplacementNamed(context, AppRoutes.homeScreen);
+    // Navigator.pushReplacementNamed(context, AppRoutes.homeScreen);
+    Navigator.of(context).pop();
   }
 }

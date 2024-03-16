@@ -1,4 +1,3 @@
-import 'package:car_maintanance/widgets/home_screen/default_card_widget/default_card.dart';
 import 'package:flutter/material.dart';
 
 class CarDetailsList extends StatefulWidget {
@@ -26,7 +25,7 @@ class _CarDetailsListState extends State<CarDetailsList> {
                 return const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    DefaultCard(),
+                    // DefaultCard(),
                   ],
                 );
               },

@@ -1,3 +1,4 @@
+import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/presentation/home_main_four/home_main_four.dart';
 import 'package:car_maintanance/presentation/home_main_one/home_main_one.dart';
@@ -91,10 +92,10 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           children: const [
             // Page In
-            PageOne(head: 'CARCARE'),
-            PageTwo(head: 'Report'),
-            PageThree(head: 'Reminders'),
-            PageFour(head: 'More option'),
+            PageOne(head: Constants.mainCarName),
+            PageTwo(head: Constants.report),
+            PageThree(head: Constants.reminders),
+            PageFour(head: Constants.moreOption),
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

@@ -1,40 +1,40 @@
-import 'package:hive/hive.dart';
+// import 'package:hive/hive.dart';
 
-part 'route_db.g.dart';
+// part 'route_db.g.dart';
 
-@HiveType(typeId: 5)
+// @HiveType(typeId: 5)
 class RouteModel {
-  @HiveField(0)
+  // @HiveField(0)
   String? origin;
 
-  @HiveField(1)
+  // @HiveField(1)
   String? startDate;
 
-  @HiveField(2)
+  // @HiveField(2)
   String? startTime;
 
-  @HiveField(3)
+  // @HiveField(3)
   int? initialOdometer;
 
-  @HiveField(4)
+  // @HiveField(4)
   String? destination;
 
-  @HiveField(5)
+  // @HiveField(5)
   String? endDate;
 
-  @HiveField(6)
+  // @HiveField(6)
   String? endTime;
 
-  @HiveField(7)
+  // @HiveField(7)
   int? finalOdometer;
 
-  @HiveField(8)
+  // @HiveField(8)
   int? total;
 
-  @HiveField(9)
+  // @HiveField(9)
   String? paymentMethod;
 
-  @HiveField(10)
+  // @HiveField(10)
   String? reason;
 
   RouteModel({

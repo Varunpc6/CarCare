@@ -1,7 +1,7 @@
-import 'dart:io';
-
+import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:car_maintanance/core/utils/app_colors.dart';
-import 'package:car_maintanance/routes/app_routes.dart';
+import 'package:car_maintanance/hive_main/db/db_functions/user_from.dart';
+import 'package:car_maintanance/hive_main/db/models/route_db/route_db.dart';
 import 'package:car_maintanance/src/list/fuel_items.dart';
 import 'package:car_maintanance/widgets/dropdown_widget/dropdown_widget.dart';
 import 'package:car_maintanance/widgets/form/my_from_widget/custom_dropdown.dart';
@@ -44,8 +44,8 @@ class MyRoteFormState extends State<MyRoteForm> {
   final FocusNode _focusNode9 = FocusNode();
   final FocusNode _focusNodeBtn = FocusNode();
 
-  // // DataBase instance
-  // final RoutePlan routeRoute = RoutePlan();
+  // DataBase instance
+  final User routeRoute = User();
 
   // From field
   final GlobalKey<FormState> _formKeyR = GlobalKey<FormState>();
@@ -93,7 +93,7 @@ class MyRoteFormState extends State<MyRoteForm> {
     return DateFormat('HH:mm').format(dateTime);
   }
 
-// Function to format the date as per requirement
+  // Function to format the date as per requirement
   String _formatDate2(DateTime dateTime) {
     return DateFormat('yyyy-MM-dd').format(dateTime);
   }
@@ -115,7 +115,7 @@ class MyRoteFormState extends State<MyRoteForm> {
             controller: _controller1,
             focusNode: _focusNode1,
             prefixIcon: Icons.car_rental,
-            labelText: 'Orgin',
+            labelText: Constants.origin,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Please enter Origin';
@@ -124,52 +124,51 @@ class MyRoteFormState extends State<MyRoteForm> {
             },
           ),
           const SizedBox(height: 10.0),
-          Row(children: [
-            Expanded(
-              // Date Picker
-              child: MyDropdownField(
-                controller: dateController1,
-                focusNode: _focusNode2,
-                icon: Icons.calendar_today,
-                labelText: 'Example Dropdown',
-                items: const ['Option 1', 'Option 2'],
-                fieldType: FieldType.datePicker,
-                onDateSelected: (DateTime selectedDate) {
-                  // Update the date controller with the selected date
-                  setState(() {
-                    dateController1.text = _formatDate(selectedDate);
-                  });
-                  // Store the selected date in your Hive database
-                  // Assuming you have a function named storeDateInDatabase to handle this
-                  // storeDateInDatabase(selectedDate);
-                },
+          Row(
+            children: [
+              Expanded(
+                // Date Picker
+                child: MyDropdownField(
+                  controller: dateController1,
+                  focusNode: _focusNode2,
+                  icon: Icons.calendar_today,
+                  labelText: Constants.date,
+                  fieldType: FieldType.datePicker,
+                  onDateSelected: (DateTime selectedDate) {
+                    // Update the date controller with the selected date
+                    setState(() {
+                      dateController1.text = _formatDate(selectedDate);
+                    });
+                    // Store the selected date in your Hive database
+                    // Assuming you have a function named storeDateInDatabase to handle this
+                    // storeDateInDatabase(selectedDate);
+                  },
+                ),
               ),
-            ),
-            const SizedBox(width: 6.0),
-            Expanded(
-              child: MyDropdownField(
-                controller: timeController2,
-                focusNode: _focusNode3,
-                icon: Icons.access_time,
-                labelText: 'Time',
-                items: const ['Option 1', 'Option 2'],
-                fieldType: FieldType.timePicker,
-                onUpdateControllerText: (String formattedTime) {
-                  setState(() {
-                    timeController2.text = formattedTime;
-                  });
-                },
+              const SizedBox(width: 6.0),
+              Expanded(
+                child: MyDropdownField(
+                  controller: timeController2,
+                  focusNode: _focusNode3,
+                  icon: Icons.access_time,
+                  labelText: Constants.time,
+                  fieldType: FieldType.timePicker,
+                  onUpdateControllerText: (String formattedTime) {
+                    setState(() {
+                      timeController2.text = formattedTime;
+                    });
+                  },
+                ),
               ),
-            ),
-          ]),
-
+            ],
+          ),
           // Initial Odometer
           CustomTextField(
             keyboardType: TextInputType.number, // Specify keyboard type here
             controller: _controller2,
             focusNode: _focusNode2,
             prefixIcon: Icons.car_rental,
-            labelText: 'Initial odometer',
+            labelText: Constants.initialOdometer,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Please enter Initial odometer';
@@ -177,13 +176,12 @@ class MyRoteFormState extends State<MyRoteForm> {
               return null;
             },
           ),
-
           // Destination
           CustomTextField(
             controller: _controller3,
             focusNode: _focusNode4,
             prefixIcon: Icons.car_rental,
-            labelText: 'Destination',
+            labelText: Constants.destination,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Please enter Destination';
@@ -200,7 +198,7 @@ class MyRoteFormState extends State<MyRoteForm> {
                   controller: dateController3,
                   focusNode: _focusNode5,
                   icon: Icons.calendar_today,
-                  labelText: 'Example Dropdown',
+                  labelText: Constants.date,
                   items: const ['Option 1', 'Option 2'],
                   fieldType: FieldType.datePicker,
                   onDateSelected: (DateTime selectedDate) {
@@ -217,8 +215,7 @@ class MyRoteFormState extends State<MyRoteForm> {
                   controller: timeController4,
                   focusNode: _focusNode6,
                   icon: Icons.access_time,
-                  labelText: 'Time',
-                  items: const ['Option 1', 'Option 2'],
+                  labelText: Constants.time,
                   fieldType: FieldType.timePicker,
                   onUpdateControllerText: (String formattedTime) {
                     setState(() {
@@ -229,16 +226,14 @@ class MyRoteFormState extends State<MyRoteForm> {
               ),
             ],
           ),
-
           // Final Odometer
           CustomTextField(
             keyboardType: TextInputType.number,
             controller: _controller4,
             focusNode: _focusNode7,
             prefixIcon: Icons.car_rental,
-            labelText: 'Final Odometer',
+            labelText: Constants.finalDestination,
           ),
-
           Row(
             children: [
               Expanded(
@@ -247,7 +242,8 @@ class MyRoteFormState extends State<MyRoteForm> {
                   controller: _controller5,
                   focusNode: _focusNode8,
                   prefixIcon: Icons.car_rental,
-                  labelText: 'Total cost',
+                  labelText: Constants.totalCost,
+                  keyboardType: TextInputType.number,
                 ),
               ),
               const SizedBox(width: 5.0),
@@ -259,7 +255,7 @@ class MyRoteFormState extends State<MyRoteForm> {
                     items: cashM,
                     selectedValue: selectValue2,
                     prefixIcon: Icons.menu_outlined,
-                    labelText: 'Payment method',
+                    labelText: Constants.paymentMethod,
                     onChanged: (newValue) {
                       setState(() {
                         selectValue2 = newValue;
@@ -270,65 +266,55 @@ class MyRoteFormState extends State<MyRoteForm> {
               )
             ],
           ),
-
           // Reason
           CustomTextField(
             controller: _controller6,
             focusNode: _focusNode9,
             prefixIcon: Icons.car_rental,
-            labelText: 'Reason',
-            // validator: (value) {
-            //   if (value!.isEmpty) {
-            //     return 'Please enter Reason';
-            //   }
-            //   return null;
-            // },
+            labelText: Constants.reason,
           ),
           const SizedBox(height: 60.0),
           ConstrainedBox(
             constraints: const BoxConstraints.tightFor(height: 60),
             child: ElevatedButton(
               focusNode: _focusNodeBtn,
-              // Inside your onPressed callback
-              // Inside the onPressed callback of your ElevatedButton
               onPressed: () async {
-                tapBtn(context); // ****************NewAdded****************
-                // // Validate the form
-                // if (_formKeyR.currentState!.validate()) {
-                //   _formKeyR.currentState!.save(); // Optionally save form data
-                //   final origin = _controller1.text.trim();
-                //   final startDate = dateController1.text;
-                //   final startTime = timeController2.text;
-                //   final initialOdometer = _parseToInt(_controller2.text.trim());
-                //   final destination = _controller3.text.trim();
-                //   final endDate = dateController3.text;
-                //   final endTime = timeController4.text;
-                //   final finalOdometer = _parseToInt(_controller4.text.trim());
-                //   final total = _parseToInt(_controller5.text.trim());
-                //   final paymentMethod = selectValue2;
-                //   final reason = _controller6.text.trim();
+                // Validate the form
+                if (_formKeyR.currentState!.validate()) {
+                  _formKeyR.currentState!.save(); // Optionally save form data
+                  final origin = _controller1.text.trim();
+                  final startDate = dateController1.text;
+                  final startTime = timeController2.text;
+                  final initialOdometer = _parseToInt(_controller2.text.trim());
+                  final destination = _controller3.text.trim();
+                  final endDate = dateController3.text;
+                  final endTime = timeController4.text;
+                  final finalOdometer = _parseToInt(_controller4.text.trim());
+                  final total = _parseToInt(_controller5.text.trim());
+                  final paymentMethod = selectValue2;
+                  final reason = _controller6.text.trim();
 
-                //   // adding the Data
-                //   await routeRoute.addRoute(
-                //     origin: origin,
-                //     startDate: startDate,
-                //     startTime: startTime,
-                //     initialOdometer: initialOdometer,
-                //     destination: destination,
-                //     endDate: endDate,
-                //     endTime: endTime,
-                //     finalOdometer: finalOdometer,
-                //     total: total,
-                //     paymentMethod: paymentMethod,
-                //     reason: reason,
-                //   );
+                  final updatedRoute = RouteModel(
+                    origin: origin,
+                    startDate: startDate,
+                    startTime: startTime,
+                    initialOdometer: initialOdometer,
+                    destination: destination,
+                    endDate: endDate,
+                    endTime: endTime,
+                    finalOdometer: finalOdometer,
+                    total: total,
+                    paymentMethod: paymentMethod,
+                    reason: reason,
+                  );
 
-                //   // Navigation to the next page
-                //   // ignore: use_build_context_synchronously
-                //   tapBtn(context);
-                // }
+                  // adding the Data
+                  // await routeRoute.updateUserRoute(updatedRoute);
+                  // Navigation to the next page
+                  // ignore: use_build_context_synchronously
+                  tapBtn(context);
+                }
               },
-
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10), // Radius
@@ -337,7 +323,7 @@ class MyRoteFormState extends State<MyRoteForm> {
                 backgroundColor: AppColors.orange,
               ),
               child: const Text(
-                'Done',
+                Constants.done,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -357,7 +343,7 @@ class MyRoteFormState extends State<MyRoteForm> {
   }
 
   void tapBtn(BuildContext context) {
-    stdout.write("Button tapped"); // Check if this message is printed in the console
-    Navigator.pushReplacementNamed(context, AppRoutes.homeScreen);
+    // Navigator.pushReplacementNamed(context, AppRoutes.homeScreen);
+    Navigator.of(context).pop();
   }
 }
