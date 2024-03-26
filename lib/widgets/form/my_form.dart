@@ -76,7 +76,7 @@ class MyFormState extends State<MyForm> {
                     controller: _controller1,
                     focusNode: widget._focusNode1,
                     prefixIcon: Icons.car_rental,
-                    labelText: Constants.mainCarName,
+                    labelText: ConstName.mainCarName,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter a car name';
@@ -102,7 +102,7 @@ class MyFormState extends State<MyForm> {
                     controller: _controller3,
                     focusNode: widget._focusNode3,
                     prefixIcon: Icons.oil_barrel_outlined,
-                    labelText: Constants.model,
+                    labelText: ConstName.model,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter a model';
@@ -113,7 +113,7 @@ class MyFormState extends State<MyForm> {
                   const SizedBox(height: 15.0),
                   // Main Tank
                   const Text(
-                    Constants.mainTank,
+                    ConstName.mainTank,
                     style: TextStyle(
                       color: Colors.orange,
                       fontWeight: FontWeight.w700,
@@ -128,7 +128,7 @@ class MyFormState extends State<MyForm> {
                           items: items,
                           selectedValue: selectedValue,
                           prefixIcon: Icons.menu_outlined,
-                          labelText: Constants.fuletype,
+                          labelText: ConstName.fuletype,
                           onChanged: (newValue) {
                             setState(() {
                               selectedValue = newValue;
@@ -143,7 +143,7 @@ class MyFormState extends State<MyForm> {
                           controller: _controller5,
                           focusNode: widget._focusNode5,
                           prefixIcon: Icons.category,
-                          labelText: Constants.fuleCapacity,
+                          labelText: ConstName.fuleCapacity,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Please enter Fuel Capacity';
@@ -158,7 +158,7 @@ class MyFormState extends State<MyForm> {
                   Row(
                     children: [
                       const Text(
-                        Constants.secondaryTank,
+                        ConstName.secondaryTank,
                         style: TextStyle(
                           color: Colors.orange,
                           fontWeight: FontWeight.w700,
@@ -184,7 +184,7 @@ class MyFormState extends State<MyForm> {
                             selectedValue:
                                 items.first, // Set the initial selected value
                             prefixIcon: Icons.menu_outlined,
-                            labelText: Constants.fuletype,
+                            labelText: ConstName.fuletype,
                             onChanged: (newValue) {
                               // Handle the onChanged event here
                               stdout.write('Selected fuel type: $newValue');
@@ -198,7 +198,7 @@ class MyFormState extends State<MyForm> {
                             controller: _controller7,
                             focusNode: widget._focusNode7,
                             prefixIcon: Icons.category,
-                            labelText: Constants.fuleCapacity,
+                            labelText: ConstName.fuleCapacity,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Please enter Fuel Capacity';
@@ -216,7 +216,7 @@ class MyFormState extends State<MyForm> {
                     controller: _controller8,
                     focusNode: widget._focusNode8,
                     prefixIcon: Icons.note,
-                    labelText: Constants.note,
+                    labelText: ConstName.note,
                   ),
                   const SizedBox(height: 80.0),
                 ],
@@ -228,7 +228,7 @@ class MyFormState extends State<MyForm> {
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     // Validate dropdown selection
-                    if (selectedBrand == 'Brand' || selectedBrand!.isEmpty) {
+                    if (selectedBrand == ConstName.brand || selectedBrand!.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Please select a brand'),
@@ -280,7 +280,7 @@ class MyFormState extends State<MyForm> {
                   backgroundColor: AppColors.orange,
                 ),
                 child: const Text(
-                  Constants.done,
+                  ConstName.done,
                   style: TextStyle(
                     fontSize: 20,
                     letterSpacing: 1.2,

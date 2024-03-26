@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:car_maintanance/core/utils/image_constant.dart';
 import 'package:car_maintanance/routes/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class SplashScreenContentState extends State<SplashScreenContent> {
 // checking the SharedPreferences ***||User In||***
 Future<void> checkUser(BuildContext context) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  final userEntered = prefs.getString('nameUser');
+  final userEntered = prefs.getString(ConstName.prefText1);
   if (userEntered != null) {
     Navigator.pushReplacementNamed(context, AppRoutes.homeScreen);
   } else {

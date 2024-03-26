@@ -12,6 +12,7 @@ Future<void> main() async {
   await setupHive(); // Box & Adapters
   await User().fetchAllData();
   await SharedPref().getCarBrand();
+  await User().setAllList();
   runApp(const MyApp());
 }
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: Constants.appName,
+      title: ConstName.appName,
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.splashScreen,
       routes: AppRoutes.routes,

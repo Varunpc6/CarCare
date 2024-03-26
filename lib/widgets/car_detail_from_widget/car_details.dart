@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/widgets/form/my_from_widget/custom_brand_dropdown.dart';
 import 'package:car_maintanance/widgets/form/my_from_widget/custom_dropdown.dart';
@@ -42,29 +43,6 @@ class CarDetailState extends State<CarDetail> {
   // From field
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  // void saveFormDataToHive() async {
-  //   final carName = _controller1.text.trim();
-  //   final brandName = selectedBrand!;
-  //   final modelName = _controller3.text.trim();
-  //   final fuelType = _controller4.text.trim();
-  //   final fuelCapacity = _controller5.text.trim();
-  //   final sFuelType = _controller6.text.trim();
-  //   final sFuelCapacity = _controller7.text.trim();
-  //   final note = _controller8.text.trim();
-
-  //   // Call the addCarRegister function
-  //   await registerCar.userAdd(
-  //     carName: carName,
-  //     brandName: brandName,
-  //     modelName: modelName,
-  //     fuel: fuelType,
-  //     fuelCapacity: fuelCapacity,
-  //     sFuel: sFuelType,
-  //     sFuelCapacity: sFuelCapacity,
-  //     note: note,
-  //   );
-  // }
-
   @override
   void dispose() {
     _controller1.dispose();
@@ -95,7 +73,7 @@ class CarDetailState extends State<CarDetail> {
                     controller: _controller1,
                     focusNode: widget._focusNode1,
                     prefixIcon: Icons.car_rental,
-                    labelText: 'Car name',
+                    labelText: ConstName.mainCarName,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter a car name';
@@ -122,7 +100,7 @@ class CarDetailState extends State<CarDetail> {
                     controller: _controller3,
                     focusNode: widget._focusNode3,
                     prefixIcon: Icons.oil_barrel_outlined,
-                    labelText: 'Model',
+                    labelText: ConstName.brand,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter a model';
@@ -133,7 +111,7 @@ class CarDetailState extends State<CarDetail> {
                   const SizedBox(height: 15.0),
                   // Main Tank
                   const Text(
-                    'MAIN TANK',
+                    ConstName.mainTank,
                     style: TextStyle(
                       color: Colors.orange,
                       fontWeight: FontWeight.w700,
@@ -148,7 +126,7 @@ class CarDetailState extends State<CarDetail> {
                           items: items,
                           selectedValue: selectedValue,
                           prefixIcon: Icons.menu_outlined,
-                          labelText: 'Fuel type',
+                          labelText: ConstName.fuletype,
                           onChanged: (newValue) {
                             setState(() {
                               selectedValue = newValue;
@@ -204,7 +182,7 @@ class CarDetailState extends State<CarDetail> {
                             selectedValue:
                                 items.first, // Set the initial selected value
                             prefixIcon: Icons.menu_outlined,
-                            labelText: 'Fuel type',
+                            labelText: ConstName.fuletype,
                             onChanged: (newValue) {
                               // Handle the onChanged event here
                               stdout.write('Selected fuel type: $newValue');
@@ -218,7 +196,7 @@ class CarDetailState extends State<CarDetail> {
                             controller: _controller7,
                             focusNode: widget._focusNode7,
                             prefixIcon: Icons.category,
-                            labelText: 'Fuel Capaity',
+                            labelText: ConstName.fuleCapacity,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Please enter Fuel Capacity';
@@ -236,7 +214,7 @@ class CarDetailState extends State<CarDetail> {
                     controller: _controller8,
                     focusNode: widget._focusNode8,
                     prefixIcon: Icons.note,
-                    labelText: 'Note',
+                    labelText: ConstName.note,
                   ),
                   const SizedBox(height: 80.0),
                 ],
@@ -249,7 +227,7 @@ class CarDetailState extends State<CarDetail> {
                   onTap(context); // **********newADD********************
                   // if (_formKey.currentState!.validate()) {
                   //   // Validate dropdown selection
-                  //   if (selectedBrand == 'Brand' || selectedBrand!.isEmpty) {
+                  //   if (selectedBrand == ConstName.brand || selectedBrand!.isEmpty) {
                   //     ScaffoldMessenger.of(context).showSnackBar(
                   //       const SnackBar(
                   //         content: Text('Please select a brand'),
@@ -299,7 +277,7 @@ class CarDetailState extends State<CarDetail> {
                   backgroundColor: AppColors.orange,
                 ),
                 child: const Text(
-                  'Done',
+                  ConstName.done,
                   style: TextStyle(
                     fontSize: 20,
                     letterSpacing: 1.2,

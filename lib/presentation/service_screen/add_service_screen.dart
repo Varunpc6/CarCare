@@ -58,7 +58,7 @@ class AddServicePage extends StatelessWidget {
                 child: const Row(
                   children: [
                     Text(
-                      Constants.service,
+                      ConstName.service,
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 18.0,

@@ -1,3 +1,4 @@
+import 'package:car_maintanance/presentation/expantion_tile/expansion_container.dart';
 import 'package:flutter/material.dart';
 
 class CarDetailsList extends StatefulWidget {
@@ -22,12 +23,7 @@ class _CarDetailsListState extends State<CarDetailsList> {
             return ListView.builder(
               itemCount: carDetails.length,
               itemBuilder: (context, index) {
-                return const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // DefaultCard(),
-                  ],
-                );
+                return ExpansionTileControllerApp(head: 'Refuel');
               },
             );
           },

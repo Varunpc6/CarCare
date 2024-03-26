@@ -8,9 +8,17 @@ import 'package:car_maintanance/hive_main/db/models/refuel_db/refuel_db.dart';
 import 'package:car_maintanance/hive_main/db/models/route_db/route_db.dart';
 import 'package:car_maintanance/hive_main/db/models/service_db/service_db.dart';
 import 'package:car_maintanance/hive_main/db/models/user_db_reg/user_main_db.dart';
+import 'package:car_maintanance/shared_Pref/shared_class.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+ValueNotifier<List<RefuelModel>> refuelNotifier = ValueNotifier([]);
+ValueNotifier<List<ServiceModel>> serviceNotifier = ValueNotifier([]);
+ValueNotifier<List<IncomeModel>> incomeNotifier = ValueNotifier([]);
+ValueNotifier<List<ExpenseModel>> expenseNotifier = ValueNotifier([]);
+ValueNotifier<List<RouteModel>> routeNotifier = ValueNotifier([]);
+// ValueNotifier<List<MainBoxUser>> reminderNotifier = ValueNotifier([]);
 
 class User {
   //creating singleton for making the class instances common
@@ -68,10 +76,40 @@ class User {
       newUser.id = newId;
       await box.put(newId, newUser);
       await fetchAllData();
+      await SharedPref()
+          .setCarBrand(brandName: brandName, id: newId.toString());
     } catch (e) {
       // Handle the exception
       stdout.write('Error occurred while adding user: $e');
     }
+  }
+
+  // Refuel || Service || Income || Expenses || Route
+  Future<void> setAllList() async {
+    // data && sharedPrefrence instance taken the data from SharedPrefence
+    refuelNotifier.value.clear();
+    serviceNotifier.value.clear();
+    incomeNotifier.value.clear();
+    expenseNotifier.value.clear();
+    final box = await Hive.openBox<MainBoxUser>('user_box');
+    final shared = await SharedPreferences.getInstance();
+    List<String>? id = shared.getStringList(ConstName.carName);
+
+    Future.forEach(box.values, (element) {
+      if (element.id == int.parse(id![1])) {
+        refuelNotifier.value.addAll(element.refuels!);
+        serviceNotifier.value.addAll(element.services!);
+        incomeNotifier.value.addAll(element.income!);
+        expenseNotifier.value.addAll(element.expenses!);
+        routeNotifier.value.addAll(element.route!);
+      }
+    });
+
+    refuelNotifier.notifyListeners();
+    serviceNotifier.notifyListeners();
+    incomeNotifier.notifyListeners();
+    expenseNotifier.notifyListeners();
+    routeNotifier.notifyListeners();
   }
 
   // Get helper function
@@ -109,47 +147,44 @@ class User {
     } catch (e) {
       // Handle the exception
       stderr.write('Error occurred while displaying register details: $e');
-      return []; // Return an empty list or handle the error appropriately
+      throw Exception(e);
     }
   }
 
   // Update
+  // Refuel
   Future<void> updateUserRefuel(RefuelModel updatedUser) async {
-    log(updatedUser.toString());
-    log('keri');
     try {
       final box = await Hive.openBox<MainBoxUser>('user_box');
       log(box.values.toString());
       final pref = await SharedPreferences.getInstance();
-      final list = pref.getStringList(Constants.carName);
+      final list = pref.getStringList(ConstName.carName);
       List<RefuelModel> temp = [];
       MainBoxUser data = MainBoxUser();
 
       temp.add(updatedUser);
 
-      log(list![1]);
-      log('$temp');
+      // log(list![1]);
+      // log('$temp');
 
       for (var element in box.values) {
-        if (element.id.toString() == list[1]) {
-          log("Data Id: ${element.id.toString()} ; SharedId: ${list[1]} ");
+        if (element.id.toString() == list![1]) {
+          // log("Data Id: ${element.id.toString()} ; SharedId: ${list[1]} ");
           if (element.refuels != null) {
             temp.addAll(element.refuels!);
-            log("00000000000000");
           }
-          log("11111111111111");
 
           data = element;
           log(data.brandName!);
           break;
         }
       }
-      log(data.brandName!);
-      log('2nd temp log');
-      log('$temp');
+      // log(data.brandName!);
+      // log('2nd temp log');
+      // log('$temp');
       try {
         await box.put(
-          int.parse(list[1]),
+          int.parse(list![1]),
           MainBoxUser(
             userName: data.userName,
             brandName: data.brandName,
@@ -170,31 +205,186 @@ class User {
           ),
         );
       } catch (e) {
-        log('error 5');
+        // log('error 5');
         log(e.toString());
       }
-      log('keri 5');
+      // log('Refuel keri 5');
       await fetchAllData(); // Notify listeners after updating
       log('User details updated successfully');
       //   log("$index");
       // } else {
       //   log('Invalid index: $index');
       // }
+
+      await setAllList();
     } catch (e) {
       // Handle the exception
       stderr.write('Error occurred while updating user details: $e');
     }
   }
 
+  // count of the totalData
+  Future<int> getAllDataCount() async {
+    log('function keri');
+    final box = await Hive.openBox<MainBoxUser>('user_box');
+    log('function keri 2');
+    final pref = await SharedPreferences.getInstance();
+    log('function keri 3');
+    final list = pref.getStringList(ConstName.carName);
+    MainBoxUser? data;
+    int count = 0;
+    await Future.forEach(box.values, (element) {
+      if (element.id == int.parse(list![1])) {
+        data = element;
+      }
+    });
+
+    log('function keri 4');
+
+    await Future.forEach(data!.refuels!, (element) {
+      count = count + 1;
+    });
+    log('function keri 5');
+    await Future.forEach(data!.expenses!, (element) {
+      count = count + 1;
+    });
+
+    log('function keri 6');
+
+    await Future.forEach(data!.income!, (element) {
+      count = count + 1;
+    });
+
+    log('function keri 7');
+
+    await Future.forEach(data!.services!, (element) {
+      count = count + 1;
+    });
+
+    log('function keri 8');
+
+    // await Future.forEach(data!.route!, (element) {
+    //   count = count + 1;
+    // });
+
+    log('function keri 9');
+    // log(count.toString());
+    return count;
+  }
+
+  Future<void> checkDelete(RefuelModel data) async {
+    final box = await Hive.openBox<MainBoxUser>('user_box');
+    final pref = await SharedPreferences.getInstance();
+    final list = pref.getStringList(ConstName.carName);
+
+    MainBoxUser? value;
+    await Future.forEach(box.values, (element) {
+      if (element.id == int.parse(list![1])) {
+        value = element;
+      }
+    });
+
+    log('Index check');
+    int index = value!.refuels!.indexOf(data);
+    List<RefuelModel> temp = value!.refuels!;
+
+    temp.removeAt(index);
+
+    // RefuelModel tempList = temp[index];
+    // tempList.date = '1234132';
+
+    await box.put(
+        int.parse(list![1]),
+        MainBoxUser(
+          userName: value!.userName,
+          carName: value!.carName,
+          brandName: value!.brandName,
+          modelName: value!.modelName,
+          fuel: value!.fuel,
+          image: value!.image,
+          fuelCapacity: value!.fuelCapacity,
+          sFuel: value!.sFuel,
+          sFuelCapacity: value!.sFuel,
+          note: value!.note,
+          expenses: value!.expenses,
+          refuels: temp,
+          services: value!.services,
+          route: value!.route,
+          income: value!.income,
+          id: value!.id,
+        ));
+
+    await setAllList();
+  }
+
+  // Update the Current Data
+  Future<void> updateTheData(RefuelModel data) async {
+    final box = await Hive.openBox<MainBoxUser>('user_box');
+    final pref = await SharedPreferences.getInstance();
+    final list = pref.getStringList(ConstName.carName);
+
+    MainBoxUser? value;
+    await Future.forEach(box.values, (element) {
+      if (element.id == int.parse(list![1])) {
+        value = element;
+      }
+    });
+
+    log('Index check');
+    int index = value!.refuels!.indexOf(data);
+    List<RefuelModel> temp = value!.refuels!;
+
+    // temp.removeAt(index);
+
+    RefuelModel tempList = temp[index];
+    tempList.date = '1234132';
+  }
+
+  // Total Odometer
+  Future<int> getOdometerSum() async {
+    final box = await Hive.openBox<MainBoxUser>('user_box');
+    final pref = await SharedPreferences.getInstance();
+    final list = pref.getStringList(ConstName.carName);
+    MainBoxUser? data;
+    int sum = 0;
+    await Future.forEach(box.values, (element) {
+      if (element.id == int.parse(list![1])) {
+        data = element;
+      }
+    });
+
+    await Future.forEach(data!.refuels!, (element) {
+      sum = sum + element.odometer!;
+    });
+
+    await Future.forEach(data!.expenses!, (element) {
+      sum = sum + element.odometer!;
+    });
+
+    await Future.forEach(data!.income!, (element) {
+      sum = sum + element.odometer!;
+    });
+
+    await Future.forEach(data!.services!, (element) {
+      sum = sum + element.odometer!;
+    });
+
+    // await Future.forEach(data!.route!, (element) {
+    //   sum = sum + element.finalOdometer!;
+    // });
+    log(sum.toString());
+    return sum;
+  }
+
   // Service
   Future<void> updateUserService(ServiceModel updatedService) async {
     log(updatedService.toString());
-    log('keri');
+    log('Service keri');
     try {
       final box = await Hive.openBox<MainBoxUser>('user_box');
       log(box.values.toString());
       final pref = await SharedPreferences.getInstance();
-      final list = pref.getStringList(Constants.carName);
+      final list = pref.getStringList(ConstName.carName);
       List<ServiceModel> temp = [];
       MainBoxUser data = MainBoxUser();
 
@@ -205,12 +395,9 @@ class User {
 
       for (var element in box.values) {
         if (element.id.toString() == list[1]) {
-          log("Data Id: ${element.id.toString()} ; SharedId: ${list[1]} ");
           if (element.services != null) {
             temp.addAll(element.services!);
-            log("00000000000000");
           }
-          log("11111111111111");
 
           data = element;
           log(data.brandName!);
@@ -218,7 +405,6 @@ class User {
         }
       }
       log(data.brandName!);
-      log('2nd temp log');
       log('$temp');
       try {
         await box.put(
@@ -246,9 +432,216 @@ class User {
         log('error 5');
         log(e.toString());
       }
-      log('keri 5');
+      log('Service keri 5');
       await fetchAllData(); // Notify listeners after updating
-      log('User details updated successfully');
+      log('Service details updated successfully');
+      await setAllList();
+    } catch (e) {
+      // Handle the exception
+      stderr.write('Error occurred while updating user details: $e');
+    }
+  }
+
+  // Route
+  Future<void> updateUserRoute(RouteModel updatedRoute) async {
+    // log(updatedUser.toString());
+    // log('Refuel keri');
+    try {
+      final box = await Hive.openBox<MainBoxUser>('user_box');
+      log(box.values.toString());
+      final pref = await SharedPreferences.getInstance();
+      final list = pref.getStringList(ConstName.carName);
+      List<RouteModel> temp = [];
+      MainBoxUser data = MainBoxUser();
+
+      temp.add(updatedRoute);
+
+      // log(list![1]);
+      // log('$temp');
+
+      for (var element in box.values) {
+        if (element.id.toString() == list![1]) {
+          // log("Data Id: ${element.id.toString()} ; SharedId: ${list[1]} ");
+          if (element.route != null) {
+            temp.addAll(element.route!);
+          }
+
+          data = element;
+          log(data.brandName!);
+          break;
+        }
+      }
+      // log(data.brandName!);
+      // log('2nd temp log');
+      // log('$temp');
+      try {
+        await box.put(
+          int.parse(list![1]),
+          MainBoxUser(
+            userName: data.userName,
+            brandName: data.brandName,
+            carName: data.carName,
+            expenses: data.expenses,
+            fuel: data.fuel,
+            fuelCapacity: data.fuelCapacity,
+            sFuel: data.sFuel,
+            sFuelCapacity: data.sFuelCapacity,
+            image: data.image,
+            modelName: data.modelName,
+            services: data.services,
+            income: data.income,
+            note: data.note,
+            id: data.id,
+            refuels: data.refuels,
+            route: temp,
+          ),
+        );
+      } catch (e) {
+        // log('error 5');
+        log(e.toString());
+      }
+      // log('Refuel keri 5');
+      await fetchAllData(); // Notify listeners after updating
+      log('Route details updated successfully');
+      //   log("$index");
+      // } else {
+      //   log('Invalid index: $index');
+      // }
+      await setAllList();
+    } catch (e) {
+      // Handle the exception
+      stderr.write('Error occurred while updating user details: $e');
+    }
+  }
+
+  // Income
+  Future<void> updateUserIncome(IncomeModel updatedIncome) async {
+    try {
+      final box = await Hive.openBox<MainBoxUser>('user_box');
+      log(box.values.toString());
+      final pref = await SharedPreferences.getInstance();
+      final list = pref.getStringList(ConstName.carName);
+      List<IncomeModel> temp = [];
+      MainBoxUser data = MainBoxUser();
+
+      temp.add(updatedIncome);
+
+      // log(list![1]);
+      // log('$temp');
+
+      for (var element in box.values) {
+        if (element.id.toString() == list![1]) {
+          // log("Data Id: ${element.id.toString()} ; SharedId: ${list[1]} ");
+          if (element.income != null) {
+            temp.addAll(element.income!);
+          }
+
+          data = element;
+          log(data.brandName!);
+          break;
+        }
+      }
+      // log(data.brandName!);
+      // log('2nd temp log');
+      // log('$temp');
+      try {
+        await box.put(
+          int.parse(list![1]),
+          MainBoxUser(
+            userName: data.userName,
+            brandName: data.brandName,
+            carName: data.carName,
+            expenses: data.expenses,
+            fuel: data.fuel,
+            fuelCapacity: data.fuelCapacity,
+            sFuel: data.sFuel,
+            sFuelCapacity: data.sFuelCapacity,
+            image: data.image,
+            modelName: data.modelName,
+            services: data.services,
+            note: data.note,
+            id: data.id,
+            refuels: data.refuels,
+            route: data.route,
+            income: temp,
+          ),
+        );
+      } catch (e) {
+        // log('error 5');
+        log(e.toString());
+      }
+      // log('Refuel keri 5');
+      await setAllList();
+      await fetchAllData(); // Notify listeners after updating
+      log('Income details updated successfully');
+      //   log("$index");
+      // } else {
+      //   log('Invalid index: $index');
+      // }
+    } catch (e) {
+      // Handle the exception
+      stderr.write('Error occurred while updating user details: $e');
+    }
+  }
+
+  // Expense
+  Future<void> updateUserExpense(ExpenseModel updatedExpense) async {
+    try {
+      final box = await Hive.openBox<MainBoxUser>('user_box');
+      log(box.values.toString());
+      final pref = await SharedPreferences.getInstance();
+      final list = pref.getStringList(ConstName.carName);
+      List<ExpenseModel> temp = [];
+      MainBoxUser data = MainBoxUser();
+
+      temp.add(updatedExpense);
+
+      for (var element in box.values) {
+        if (element.id.toString() == list![1]) {
+          // log("Data Id: ${element.id.toString()} ; SharedId: ${list[1]} ");
+          if (element.expenses != null) {
+            temp.addAll(element.expenses!);
+          }
+
+          data = element;
+          log(data.brandName!);
+          break;
+        }
+      }
+      try {
+        await box.put(
+          int.parse(list![1]),
+          MainBoxUser(
+            id: data.id,
+            userName: data.userName,
+            brandName: data.brandName,
+            carName: data.carName,
+            fuel: data.fuel,
+            fuelCapacity: data.fuelCapacity,
+            sFuel: data.sFuel,
+            sFuelCapacity: data.sFuelCapacity,
+            image: data.image,
+            modelName: data.modelName,
+            services: data.services,
+            note: data.note,
+            refuels: data.refuels,
+            route: data.route,
+            income: data.income,
+            expenses: temp,
+          ),
+        );
+      } catch (e) {
+        // log('error 5');
+        log(e.toString());
+      }
+      // log('Refuel keri 5');
+      await fetchAllData(); // Notify listeners after updating
+      log('Epenses details updated successfully');
+      //   log("$index");
+      // } else {
+      //   log('Invalid index: $index');
+      // }
+      await setAllList();
     } catch (e) {
       // Handle the exception
       stderr.write('Error occurred while updating user details: $e');
@@ -273,29 +666,3 @@ class User {
     }
   }
 }
-
-
-//  // Add Details || income || Service || Refuel || Route || Expense
-//   Future<void> carMaintenanceAdd({
-//     List<ExpenseModel>? expenses,
-//     List<RefuelModel>? refuels,
-//     List<ServiceModel>? services,
-//     List<RouteModel>? route,
-//     List<IncomeModel>? income,
-//   }) async {
-//     try {
-//       final newCar = MainBoxUser(
-//         expenses: expenses,
-//         refuels: refuels,
-//         services: services,
-//         route: route,
-//       );
-//       await carsBox.add(newCar);
-//     } catch (e) {
-//       // Handle the exception
-//       stderr.write('Error occurred while adding car maintenance details: $e');
-//     }
-//   }
-
-
-

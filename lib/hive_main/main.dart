@@ -19,19 +19,19 @@ Future<void> setupHive() async {
   if (!Hive.isAdapterRegistered(MainBoxUserAdapter().typeId)) {
     Hive.registerAdapter(MainBoxUserAdapter());
   }
-  // if (!Hive.isAdapterRegistered(ExpenseModelAdapter().typeId)) {
-  //   Hive.registerAdapter(ExpenseModelAdapter());
-  // }
-  // if (!Hive.isAdapterRegistered(ServiceModelAdapter().typeId)) {
-  //   Hive.registerAdapter(ServiceModelAdapter());
-  // }
+  if (!Hive.isAdapterRegistered(ExpenseModelAdapter().typeId)) {
+    Hive.registerAdapter(ExpenseModelAdapter());
+  }
+  if (!Hive.isAdapterRegistered(ServiceModelAdapter().typeId)) {
+    Hive.registerAdapter(ServiceModelAdapter());
+  }
   if (!Hive.isAdapterRegistered(RefuelModelAdapter().typeId)) {
     Hive.registerAdapter(RefuelModelAdapter());
   }
-  // if (!Hive.isAdapterRegistered(RouteModelAdapter().typeId)) {
-  //   Hive.registerAdapter(RouteModelAdapter());
-  // }
-  // if (!Hive.isAdapterRegistered(IncomeModelAdapter().typeId)) {
-  //   Hive.registerAdapter(IncomeModelAdapter());
-  // }
+  if (!Hive.isAdapterRegistered(RouteModelAdapter().typeId)) {
+    Hive.registerAdapter(RouteModelAdapter());
+  }
+  if (!Hive.isAdapterRegistered(IncomeModelAdapter().typeId)) {
+    Hive.registerAdapter(IncomeModelAdapter());
+  }
 }

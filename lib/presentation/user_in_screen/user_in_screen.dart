@@ -48,13 +48,12 @@ class _UserInScreenState extends State<UserInScreen> {
   Future<void> savedUser({required brandName}) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     // -for Login time-
-    await prefs.setString("nameUser", userNameController.text);
+    await prefs.setString(ConstName.prefText1, userNameController.text);
     // -first car Activation-
-    await prefs.setStringList(Constants.firtCar, ['1', brandName]);
+    await prefs.setStringList(ConstName.firtCar, ['1', brandName]);
 
     carNameNotifier.value = brandName;
     carNameNotifier.notifyListeners();
-
   }
 
   @override
@@ -65,19 +64,17 @@ class _UserInScreenState extends State<UserInScreen> {
         child: Scaffold(
           // Background Image Rising on TextField click time
           resizeToAvoidBottomInset: false,
-          body: Center(
-            child: Stack(
-              children: [
-                // Background Image
-                buildBackgroundImage(context),
-                // Content session
-                buildFromContainer(context),
-                // Circular Image
-                buildCircularImage(context),
-                // Elevated button
-                _buildElevatedButton(context),
-              ],
-            ),
+          body: Stack(
+            children: [
+              // Background Image
+              buildBackgroundImage(context),
+              // Content session
+              buildFromContainer(context),
+              // Circular Image
+              buildCircularImage(context),
+              // Elevated button
+              _buildElevatedButton(context),
+            ],
           ),
         ),
       ),
@@ -92,198 +89,195 @@ class _UserInScreenState extends State<UserInScreen> {
         children: [
           // Container Hovering over the Image
           Positioned(
-            top: ResSize.top20(context),
+            top: ResSize.top18(context),
             left: ResSize.left05(context),
-            bottom: ResSize.dotBottom4(context),
             child: Container(
               width: ResSize.width8(context),
-              height: ResSize.height55(context),
+              height: ResSize.height50(context),
               decoration: AppDecorations.customDecoration, // decoration widget
               child: Center(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        // UserName
-                        customTextFormField(
-                          controller: userNameController,
-                          labelText: "Username",
-                          prefixIcon: Icons.person,
-                          focusNode: focusOne,
-                          nextFocusNode: focusTwo,
-                          context: context,
-                        ),
-                        const SizedBox(height: 16.0),
-                        // Car number
-                        customTextFormField(
-                          controller: carNameController,
-                          labelText: "Car Name",
-                          prefixIcon: Icons.directions_car,
-                          focusNode: focusTwo,
-                          nextFocusNode: focusThree,
-                          context: context,
-                        ),
-                        const SizedBox(height: 16.0),
-                        // Brand Dropdown
-                        InputDecorator(
-                          decoration: const InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.no_crash_sharp,
-                              color: AppColors.white,
-                              size: 30,
-                            ),
-                            filled: true,
-                            fillColor: Colors.transparent,
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: AppColors.primary,
-                                width: 2.0,
-                              ),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: AppColors.primary,
-                                width: 2.0,
-                              ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // UserName
+                      customTextFormField(
+                        controller: userNameController,
+                        labelText: ConstName.userName,
+                        prefixIcon: Icons.person,
+                        focusNode: focusOne,
+                        nextFocusNode: focusTwo,
+                        context: context,
+                      ),
+                      const SizedBox(height: 10.0),
+                      // Car number
+                      customTextFormField(
+                        controller: carNameController,
+                        labelText: ConstName.mainCarName,
+                        prefixIcon: Icons.directions_car,
+                        focusNode: focusTwo,
+                        nextFocusNode: focusThree,
+                        context: context,
+                      ),
+                      const SizedBox(height: 10.0),
+                      // Brand Dropdown
+                      InputDecorator(
+                        decoration: const InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.no_crash_sharp,
+                            color: AppColors.white,
+                            size: 30,
+                          ),
+                          filled: true,
+                          fillColor: Colors.transparent,
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppColors.primary,
+                              width: 2.0,
                             ),
                           ),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton2<String>(
-                              isExpanded: true,
-                              hint: const Column(
-                                children: [
-                                  SizedBox(
-                                    height: 12,
-                                  ),
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        'Brand', // Change the hint text here
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          color: AppColors.ddownBg,
-                                        ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppColors.primary,
+                              width: 2.0,
+                            ),
+                          ),
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton2<String>(
+                            isExpanded: true,
+                            hint: const Column(
+                              children: [
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      ConstName
+                                          .brand, // Change the hint text here
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: AppColors.ddownBg,
                                       ),
-                                    ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            items: brands.map((brand) {
+                              return DropdownMenuItem<String>(
+                                value: brand,
+                                child: Text(
+                                  brand,
+                                  style: const TextStyle(
+                                    color: AppColors.txtColor,
                                   ),
-                                ],
+                                ),
+                              );
+                            }).toList(),
+                            value: selectedBrand,
+                            onChanged: (newValue) {
+                              setState(() {
+                                selectedBrand = newValue!;
+                              });
+                            },
+                            buttonStyleData: const ButtonStyleData(
+                              padding: EdgeInsets.symmetric(horizontal: 16),
+                              height: 40,
+                              width: 200,
+                              elevation: 0,
+                            ),
+                            dropdownStyleData: DropdownStyleData(
+                              maxHeight: 200,
+                              elevation: 2,
+                              decoration: BoxDecoration(
+                                color: AppColors.dpdBg,
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                              items: brands.map((brand) {
-                                return DropdownMenuItem<String>(
-                                  value: brand,
-                                  child: Text(
-                                    brand,
-                                    style: const TextStyle(
-                                      color: AppColors.txtColor,
+                            ),
+                            menuItemStyleData: const MenuItemStyleData(
+                              height: 40,
+                            ),
+                            dropdownSearchData: DropdownSearchData(
+                              searchController: brandNameController,
+                              searchInnerWidgetHeight: 50,
+                              searchInnerWidget: Container(
+                                height: 50,
+                                padding: const EdgeInsets.only(
+                                  top: 8,
+                                  bottom: 4,
+                                  right: 8,
+                                  left: 8,
+                                ),
+                                child: TextFormField(
+                                  focusNode: focusThree,
+                                  onFieldSubmitted: (value) {
+                                    FocusScope.of(context)
+                                        .requestFocus(focusFour);
+                                  },
+                                  expands: true,
+                                  maxLines: null,
+                                  controller: brandNameController,
+                                  decoration: InputDecoration(
+                                    isDense: true,
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 8,
+                                    ),
+                                    hintText: ConstName.searchHint,
+                                    hintStyle: const TextStyle(fontSize: 12),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
+                                  style: const TextStyle(
+                                    color: AppColors.black,
+                                  ),
+                                ),
+                              ),
+                              searchMatchFn: (item, searchValue) {
+                                return item.value
+                                    .toString()
+                                    .contains(searchValue);
+                              },
+                            ),
+                            onMenuStateChange: (isOpen) {
+                              if (!isOpen) {
+                                brandNameController.clear();
+                              }
+                            },
+                            // Define selectedItemBuilder to set the style of the selected value
+                            selectedItemBuilder: (BuildContext context) {
+                              return brands.map<Widget>((String value) {
+                                return Text(
+                                  value,
+                                  style: const TextStyle(
+                                    height: 2.2,
+                                    color: AppColors.white,
+                                  ), // Set the color of the selected value
                                 );
-                              }).toList(),
-                              value: selectedBrand,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  selectedBrand = newValue!;
-                                });
-                              },
-                              buttonStyleData: const ButtonStyleData(
-                                padding: EdgeInsets.symmetric(horizontal: 16),
-                                height: 40,
-                                width: 200,
-                                elevation: 0,
-                              ),
-                              dropdownStyleData: DropdownStyleData(
-                                maxHeight: 200,
-                                elevation: 2,
-                                decoration: BoxDecoration(
-                                  color: AppColors.dpdBg,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                              ),
-                              menuItemStyleData: const MenuItemStyleData(
-                                height: 40,
-                              ),
-                              dropdownSearchData: DropdownSearchData(
-                                searchController: brandNameController,
-                                searchInnerWidgetHeight: 50,
-                                searchInnerWidget: Container(
-                                  height: 50,
-                                  padding: const EdgeInsets.only(
-                                    top: 8,
-                                    bottom: 4,
-                                    right: 8,
-                                    left: 8,
-                                  ),
-                                  child: TextFormField(
-                                    focusNode: focusThree,
-                                    onFieldSubmitted: (value) {
-                                      FocusScope.of(context)
-                                          .requestFocus(focusFour);
-                                    },
-                                    expands: true,
-                                    maxLines: null,
-                                    controller: brandNameController,
-                                    decoration: InputDecoration(
-                                      isDense: true,
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                        horizontal: 10,
-                                        vertical: 8,
-                                      ),
-                                      hintText: 'Search for a brand...',
-                                      hintStyle: const TextStyle(fontSize: 12),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                    ),
-                                    style: const TextStyle(
-                                      color: AppColors.black,
-                                    ),
-                                  ),
-                                ),
-                                searchMatchFn: (item, searchValue) {
-                                  return item.value
-                                      .toString()
-                                      .contains(searchValue);
-                                },
-                              ),
-                              onMenuStateChange: (isOpen) {
-                                if (!isOpen) {
-                                  brandNameController.clear();
-                                }
-                              },
-                              // Define selectedItemBuilder to set the style of the selected value
-                              selectedItemBuilder: (BuildContext context) {
-                                return brands.map<Widget>((String value) {
-                                  return Text(
-                                    value,
-                                    style: const TextStyle(
-                                      height: 2.2,
-                                      color: AppColors.white,
-                                    ), // Set the color of the selected value
-                                  );
-                                }).toList();
-                              },
-                              barrierLabel:
-                                  'Select Brand', // Adding barrier label
-                            ),
+                              }).toList();
+                            },
+                            barrierLabel:
+                                ConstName.brandHint, // Adding barrier label
                           ),
                         ),
-                        const SizedBox(height: 16.0),
-                        // Model
-                        customTextFormField(
-                          controller: modelNameController,
-                          labelText: "Model",
-                          prefixIcon: Icons.menu_rounded,
-                          focusNode: focusFour,
-                          nextFocusNode: focusBtn,
-                          context: context,
-                        ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(height: 10.0),
+                      // Model
+                      customTextFormField(
+                        controller: modelNameController,
+                        labelText: ConstName.model,
+                        prefixIcon: Icons.menu_rounded,
+                        focusNode: focusFour,
+                        nextFocusNode: focusBtn,
+                        context: context,
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -308,7 +302,7 @@ class _UserInScreenState extends State<UserInScreen> {
           // Validate the form
           if (_formKey.currentState!.validate()) {
             // Check if a brand has been selected
-            if (selectedBrand != null && selectedBrand != 'Brand') {
+            if (selectedBrand != null && selectedBrand != ConstName.brand) {
               // If the form is valid and a brand has been selected, proceed with form submission
               _formKey.currentState!.save(); // Optionally save form data
 
@@ -335,7 +329,7 @@ class _UserInScreenState extends State<UserInScreen> {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   backgroundColor: AppColors.red,
-                  content: Text('Please select a brand'),
+                  content: Text(ConstName.text7),
                 ),
               );
             }
@@ -343,7 +337,7 @@ class _UserInScreenState extends State<UserInScreen> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 backgroundColor: AppColors.red,
-                content: Text('Please fill in the form'),
+                content: Text(ConstName.text8),
               ),
             );
           }
@@ -356,7 +350,7 @@ class _UserInScreenState extends State<UserInScreen> {
             backgroundColor: AppColors.orange),
         child: const Center(
           child: Text(
-            'Create',
+            ConstName.create,
             style: TextStyle(
               color: AppColors.white,
               fontSize: 18,

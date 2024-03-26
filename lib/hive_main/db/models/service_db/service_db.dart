@@ -25,6 +25,9 @@ class ServiceModel {
   @HiveField(6)
   String? reason;
 
+  @HiveField(7)
+  int? value;
+
   ServiceModel({
     required this.date,
     required this.time,
@@ -33,5 +36,6 @@ class ServiceModel {
     this.place,
     this.paymentMethod,
     this.reason,
+    this.value,
   });
 }

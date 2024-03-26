@@ -18,8 +18,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int selectedTab = 0;
   late PageController pageController;
+  int selectedTab = 0;
 
   @override
   void initState() {
@@ -35,21 +35,21 @@ class _HomeScreenState extends State<HomeScreen> {
             style: TextStyle(color: AppColors.black),
             children: [
               TextSpan(
-                text: 'Welcome to',
+                text: ConstName.text9,
                 style: TextStyle(
                     color: AppColors.black,
                     fontSize: 23,
                     fontWeight: FontWeight.w800),
               ),
               TextSpan(
-                text: ' CARCARE',
+                text: ConstName.appName,
                 style: TextStyle(
                     color: AppColors.orange,
                     fontSize: 23,
                     fontWeight: FontWeight.w500),
               ),
               TextSpan(
-                text: "\nLet's Go Forward",
+                text: ConstName.text10,
                 style: TextStyle(
                     color: AppColors.subtitleGray,
                     fontSize: 16,
@@ -60,17 +60,17 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       case 1:
         return const Text(
-          'Report',
+          ConstName.report,
           style: textStyle,
         );
       case 2:
         return const Text(
-          'Reminders',
+          ConstName.reminders,
           style: textStyle,
         );
       case 3:
         return const Text(
-          'More option',
+          ConstName.moreOption,
           style: textStyle,
         );
       default:
@@ -92,10 +92,10 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           children: const [
             // Page In
-            PageOne(head: Constants.mainCarName),
-            PageTwo(head: Constants.report),
-            PageThree(head: Constants.reminders),
-            PageFour(head: Constants.moreOption),
+            PageOne(head: ConstName.mainCarName),
+            PageTwo(head: ConstName.report),
+            PageThree(head: ConstName.reminders),
+            PageFour(head: ConstName.moreOption),
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return AppBar(
       backgroundColor: AppColors.white1,
       elevation: 0,
-      titleSpacing: 0, // Adjust as needed
+      titleSpacing: 0, 
       flexibleSpace: Padding(
         padding: const EdgeInsets.only(left: 20),
         child: Column(

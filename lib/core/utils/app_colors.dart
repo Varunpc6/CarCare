@@ -23,6 +23,7 @@ class AppColors {
 
   // Shade Color
   static Color ornages500 = Colors.orange.shade500;
+  static Color blackSh1 = Colors.black26;
 }
 
 // Gradtients colors

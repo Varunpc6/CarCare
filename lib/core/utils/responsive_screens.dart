@@ -7,6 +7,10 @@ class ResSize {
     return MediaQuery.of(context).size.width;
   }
 
+  static double width1(BuildContext context) {
+    return MediaQuery.of(context).size.width * 0.1;
+  }
+
   static double width14(BuildContext context) {
     return MediaQuery.of(context).size.width * 0.14;
   }
@@ -33,6 +37,10 @@ class ResSize {
 
   static double width8(BuildContext context) {
     return MediaQuery.of(context).size.width * 0.8;
+  }
+
+  static double width85(BuildContext context) {
+    return MediaQuery.of(context).size.width * 0.85;
   }
 
   // Left
@@ -184,6 +192,10 @@ class ResSize {
     return MediaQuery.of(context).size.height * 0.15;
   }
 
+  static double height18(BuildContext context) {
+    return MediaQuery.of(context).size.height * 0.18;
+  }
+
   static double height25(BuildContext context) {
     return MediaQuery.of(context).size.height * 0.25;
   }
@@ -192,12 +204,24 @@ class ResSize {
     return MediaQuery.of(context).size.height * 0.3;
   }
 
+  static double height35(BuildContext context) {
+    return MediaQuery.of(context).size.height * 0.35;
+  }
+
   static double height40(BuildContext context) {
     return MediaQuery.of(context).size.height * 0.40;
   }
 
+  static double height50(BuildContext context) {
+    return MediaQuery.of(context).size.height * 0.50;
+  }
+
   static double height55(BuildContext context) {
     return MediaQuery.of(context).size.height * 0.55;
+  }
+
+  static double height68(BuildContext context) {
+    return MediaQuery.of(context).size.height * 0.68;
   }
 
   // Top size 0
@@ -221,12 +245,24 @@ class ResSize {
     return MediaQuery.of(context).size.height * 0.1;
   }
 
+  static double top105(BuildContext context) {
+    return MediaQuery.of(context).size.height * 0.105;
+  }
+
   static double top125(BuildContext context) {
     return MediaQuery.of(context).size.height * 0.125;
   }
 
-  static double top25(BuildContext context) {
+  static double top14(BuildContext context) {
     return MediaQuery.of(context).size.height * 0.14;
+  }
+
+  static double top18(BuildContext context) {
+    return MediaQuery.of(context).size.height * 0.18;
+  }
+
+  static double top25(BuildContext context) {
+    return MediaQuery.of(context).size.height * 0.25;
   }
 
   static double top20(BuildContext context) {

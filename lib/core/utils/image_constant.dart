@@ -65,6 +65,25 @@ class ImageConstant {
   // Current Car Screen Image
   static String currentCar = '$imagePath/current_car_white.jpg';
 
+  // Home Services Page
+  //---Expense---image---
+  static String expensesImg = '$imagePath/car_expenses.jpg';
+
+  //----Income---image---
+  static String incomeImg = '$imagePath/income_car.jpg';
+
+  //----service---image---
+  static String serviceImg = '$imagePath/service_car.jpg';
+
+  //----refuel---image----
+  static String refuelImg = '$imagePath/refuel_car.jpg';
+
+  //----route----image----
+  static String routeImg = '$imagePath/route_car.jpg';
+
+  //----reminder---image----
+  static String reminderImg = '$imagePath/car_reminder_img.jpg';
+
   //----------------------------------------------------------------------------
 
   // Brand Image Path

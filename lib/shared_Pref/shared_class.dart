@@ -16,7 +16,7 @@ class SharedPref {
     try {
       // Get an Instance of SharedPreferences
       final SharedPreferences carActive = await SharedPreferences.getInstance();
-      carActive.setStringList(Constants.carName, [brandName, id]);
+      carActive.setStringList(ConstName.carName, [brandName, id]);
       //  NotifierListeners are notified of the change
       carNameNotifier.value = brandName;
       // carNameNotifier.notifyListeners();
@@ -29,8 +29,8 @@ class SharedPref {
   Future<void> getCarBrand() async {
     try {
       final SharedPreferences carActive = await SharedPreferences.getInstance();
-      if (carActive.getStringList(Constants.carName) != null) {
-        List<String>? data = carActive.getStringList(Constants.carName);
+      if (carActive.getStringList(ConstName.carName) != null) {
+        List<String>? data = carActive.getStringList(ConstName.carName);
 
         carNameNotifier.value = data![0];
       }

@@ -1,3 +1,4 @@
+import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/core/utils/image_constant.dart';
 import 'package:car_maintanance/core/utils/responsive_screens.dart';
@@ -48,12 +49,12 @@ class OnBoardingOneScreen extends StatelessWidget {
               ),
               // Content Stack
               Positioned(
-                left: ResSize.left15(context), // Adjusted for responsiveness
-                top: ResSize.top34(context),
+                top: ResSize.top25(context),
                 right: ResSize.right15(context),
+                left: ResSize.left15(context), // Adjusted for responsiveness
                 child: SizedBox(
                   width: ResSize.width7(context), // Adjusted for responsiveness
-                  height: ResSize.height3(context),
+                  height: ResSize.height55(context),
                   child: Stack(
                     children: [
                       // Main Container
@@ -62,7 +63,7 @@ class OnBoardingOneScreen extends StatelessWidget {
                         top: ResSize.height05(context),
                         child: Container(
                           width: ResSize.width7(context),
-                          height: ResSize.height25(context),
+                          height: ResSize.height35(context),
                           decoration: ShapeDecoration(
                             color: AppColors.bgWhite,
                             shape: RoundedRectangleBorder(
@@ -72,6 +73,31 @@ class OnBoardingOneScreen extends StatelessWidget {
                               ),
                               borderRadius: BorderRadius.circular(16),
                             ),
+                          ),
+                          // Head Text
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                ConstName.text1,
+                                style: TextStyle(
+                                  color: AppColors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                ConstName.text2,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: AppColors.black,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                                  height: 1.2,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -122,34 +148,6 @@ class OnBoardingOneScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // Head Text
-                      Positioned(
-                        left: ResSize.left02(context),
-                        top: ResSize.top25(context),
-                        child: const Text(
-                          'Let’s Work with Carcare',
-                          style: TextStyle(
-                            color: AppColors.black,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                      ),
-                      // Sub Title
-                      Positioned(
-                        left: ResSize.left07(context),
-                        top: ResSize.top20(context),
-                        child: const Text(
-                          'Now you can more quickly and easily\ntrack the expenses of your\nvehicle.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: AppColors.black,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                            height: 1.2,
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -178,7 +176,7 @@ class OnBoardingOneScreen extends StatelessWidget {
                     ),
                     child: const Center(
                       child: Text(
-                        'Skip',
+                        ConstName.skip,
                         style: TextStyle(
                           color: AppColors.primary,
                           fontSize: 16,

@@ -31,6 +31,9 @@ class RefuelModel {
   @HiveField(8)
   String? reason;
 
+  @HiveField(9)
+  String? gasStation;
+
   RefuelModel({
     required this.date,
     required this.time,
@@ -39,6 +42,7 @@ class RefuelModel {
     this.price,
     this.totalCost,
     this.gallon,
+    this.gasStation,
     this.paymentMethod,
     this.reason,
   });

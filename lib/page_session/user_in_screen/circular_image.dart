@@ -11,7 +11,7 @@ buildCircularImage(BuildContext context) {
         children: [
           Positioned(
             left: ResSize.left36(context),
-            top: ResSize.top125(context),
+            top: ResSize.top105(context),
             right: ResSize.right33(context),
             child: SizedBox(
               width: ResSize.width14(context),

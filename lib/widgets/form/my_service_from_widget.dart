@@ -26,12 +26,14 @@ class MyServiceFormState extends State<MyServiceForm> {
   final TextEditingController _controller3 = TextEditingController();
   final TextEditingController _controller4 = TextEditingController();
   final TextEditingController _controller5 = TextEditingController();
+  final TextEditingController _controller6 = TextEditingController();
 
   final FocusNode _focusNode1 = FocusNode();
   final FocusNode _focusNode2 = FocusNode();
   final FocusNode _focusNode3 = FocusNode();
   final FocusNode _focusNode4 = FocusNode();
   final FocusNode _focusNode5 = FocusNode();
+  final FocusNode _focusNode6 = FocusNode();
   final FocusNode _focusNodeBtn = FocusNode();
 
   // DataBase instance
@@ -56,11 +58,13 @@ class MyServiceFormState extends State<MyServiceForm> {
     _controller3.dispose();
     _controller4.dispose();
     _controller5.dispose();
+    _controller6.dispose();
     _focusNode1.dispose();
     _focusNode2.dispose();
     _focusNode3.dispose();
     _focusNode4.dispose();
     _focusNode5.dispose();
+    _focusNode6.dispose();
     _focusNodeBtn.dispose();
     super.dispose();
   }
@@ -90,7 +94,7 @@ class MyServiceFormState extends State<MyServiceForm> {
                   controller: dateController1,
                   focusNode: _focusNode1,
                   icon: Icons.calendar_today,
-                  labelText: Constants.date,
+                  labelText: ConstName.date,
                   fieldType: FieldType.datePicker,
                   onDateSelected: (DateTime selectedDate) {
                     // Update the date controller with the selected date
@@ -106,7 +110,7 @@ class MyServiceFormState extends State<MyServiceForm> {
                   controller: timeController2,
                   focusNode: _focusNode2,
                   icon: Icons.access_time,
-                  labelText: Constants.time,
+                  labelText: ConstName.time,
                   fieldType: FieldType.timePicker,
                   onUpdateControllerText: (String formattedTime) {
                     setState(() {
@@ -122,7 +126,7 @@ class MyServiceFormState extends State<MyServiceForm> {
             controller: _controller3,
             focusNode: _focusNode3,
             prefixIcon: Icons.car_rental,
-            labelText: Constants.odometer,
+            labelText: ConstName.odometer,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Please enter Odometer';
@@ -131,24 +135,45 @@ class MyServiceFormState extends State<MyServiceForm> {
             },
           ),
           const SizedBox(height: 10.0),
-          // Service type
-          CustomDropdown(
-            items: service,
-            selectedValue: selectedValue,
-            prefixIcon: Icons.menu_outlined,
-            labelText: Constants.typeService,
-            onChanged: (newValue) {
-              setState(() {
-                selectedValue = newValue;
-              });
-            },
+          // Service type & value
+          Row(
+            children: [
+              Expanded(
+                flex: 2,
+                child: CustomDropdown(
+                  items: service,
+                  selectedValue: selectedValue,
+                  prefixIcon: Icons.menu_outlined,
+                  labelText: ConstName.typeService,
+                  onChanged: (newValue) {
+                    setState(() {
+                      selectedValue = newValue;
+                    });
+                  },
+                ),
+              ),
+              Expanded(
+                child: CustomTextField(
+                  controller: _controller6,
+                  focusNode: _focusNode6,
+                  prefixIcon: Icons.attach_money,
+                  labelText: ConstName.value,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter Value';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+            ],
           ),
           // Place
           CustomTextField(
             controller: _controller4,
             focusNode: _focusNode4,
             prefixIcon: Icons.attach_money,
-            labelText: Constants.place,
+            labelText: ConstName.place,
           ),
           const SizedBox(height: 10.0),
           // Payment method
@@ -156,7 +181,7 @@ class MyServiceFormState extends State<MyServiceForm> {
             items: cashM,
             selectedValue: selectedValue2,
             prefixIcon: Icons.menu_outlined,
-            labelText: Constants.paymentMethod,
+            labelText: ConstName.paymentMethod,
             onChanged: (newValue) {
               setState(() {
                 selectedValue2 = newValue;
@@ -169,7 +194,7 @@ class MyServiceFormState extends State<MyServiceForm> {
             controller: _controller5,
             focusNode: _focusNode5,
             prefixIcon: Icons.attach_money,
-            labelText: Constants.reason,
+            labelText: ConstName.reason,
           ),
           const SizedBox(height: 60.0),
           ElevatedButton(
@@ -185,6 +210,7 @@ class MyServiceFormState extends State<MyServiceForm> {
                 final place = _controller4.text.trim();
                 final paymentMethod = selectedValue2;
                 final reason = _controller5.text.trim();
+                final value = _parseToInt(_controller6.text.trim());
 
                 final updatedService = ServiceModel(
                   date: date,
@@ -194,6 +220,7 @@ class MyServiceFormState extends State<MyServiceForm> {
                   place: place,
                   paymentMethod: paymentMethod,
                   reason: reason,
+                  value: value,
                 );
 
                 // adding the Data
@@ -211,7 +238,7 @@ class MyServiceFormState extends State<MyServiceForm> {
               backgroundColor: AppColors.orange,
             ),
             child: const Text(
-              Constants.reason,
+              ConstName.reason,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,

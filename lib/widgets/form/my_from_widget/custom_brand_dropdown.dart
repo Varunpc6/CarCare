@@ -1,3 +1,4 @@
+import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:car_maintanance/widgets/user_in_widget/user_in_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +31,7 @@ class BrandDropdownState extends State<BrandDropdown> {
             Icons.assignment_sharp,
             color: Colors.black,
           ),
-          labelText: 'Brand',
+          labelText: ConstName.brand,
           labelStyle: const TextStyle(color: Colors.black),
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.orange),
@@ -55,7 +56,7 @@ class BrandDropdownState extends State<BrandDropdown> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      'Brand',
+                      ConstName.brand,
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,

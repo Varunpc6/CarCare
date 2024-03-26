@@ -58,7 +58,7 @@ class AddIncomePage extends StatelessWidget {
                 child: const Row(
                   children: [
                     Text(
-                      Constants.income,
+                      ConstName.income,
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 18.0,

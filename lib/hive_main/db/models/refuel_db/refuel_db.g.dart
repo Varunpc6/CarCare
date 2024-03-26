@@ -24,6 +24,7 @@ class RefuelModelAdapter extends TypeAdapter<RefuelModel> {
       price: fields[4] as int?,
       totalCost: fields[5] as int?,
       gallon: fields[6] as int?,
+      gasStation: fields[9] as String?,
       paymentMethod: fields[7] as String?,
       reason: fields[8] as String?,
     );
@@ -32,7 +33,7 @@ class RefuelModelAdapter extends TypeAdapter<RefuelModel> {
   @override
   void write(BinaryWriter writer, RefuelModel obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.date)
       ..writeByte(1)
@@ -50,7 +51,9 @@ class RefuelModelAdapter extends TypeAdapter<RefuelModel> {
       ..writeByte(7)
       ..write(obj.paymentMethod)
       ..writeByte(8)
-      ..write(obj.reason);
+      ..write(obj.reason)
+      ..writeByte(9)
+      ..write(obj.gasStation);
   }
 
   @override

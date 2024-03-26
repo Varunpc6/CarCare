@@ -15,7 +15,6 @@ class CarCard extends StatefulWidget {
 // Globel type ValueNotifier for CarName Showing the Homepage
 ValueNotifier<String> carNameNotifier = ValueNotifier<String>('');
 
-
 class _CarCardState extends State<CarCard> {
   String? carName;
 

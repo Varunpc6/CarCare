@@ -1,7 +1,9 @@
 // constants.dart
 
+import 'package:car_maintanance/constants/constants_cust.dart';
+
 List<String> brands = [
-  'Brand',
+  ConstName.brand,
   'AstonMartin',
   'Audi',
   'BMW',

@@ -23,9 +23,6 @@ class MyCarFormState extends State<MyCarForm> {
   String? selectedValue;
   String? selectedvalu2;
 
-  // // DataBase instance
-  // final RefuelPlan refuelRefuel = RefuelPlan();
-
   // DataBase instance
   final User refuleRefule = User();
 
@@ -60,7 +57,7 @@ class MyCarFormState extends State<MyCarForm> {
 
   Future<int> getCarData() async {
     SharedPreferences carActive = await SharedPreferences.getInstance();
-    List<String>? storedData = carActive.getStringList(Constants.carName);
+    List<String>? storedData = carActive.getStringList(ConstName.carName);
     if (storedData != null) {
       setState(() {
         carData = storedData;
@@ -121,7 +118,7 @@ class MyCarFormState extends State<MyCarForm> {
                     controller: dateController1,
                     focusNode: FocusNode(),
                     icon: Icons.calendar_today,
-                    labelText: Constants.date,
+                    labelText: ConstName.date,
                     fieldType: FieldType.datePicker,
                     onDateSelected: (DateTime selectedDate) {
                       // Update the date controller with the selected date
@@ -137,7 +134,7 @@ class MyCarFormState extends State<MyCarForm> {
                     controller: timeController2,
                     focusNode: _focusNode2,
                     icon: Icons.access_time,
-                    labelText: Constants.time,
+                    labelText: ConstName.time,
                     fieldType: FieldType.timePicker,
                     onUpdateControllerText: (String formattedTime) {
                       setState(() {
@@ -154,7 +151,7 @@ class MyCarFormState extends State<MyCarForm> {
               focusNode: _focusNode1,
               keyboardType: TextInputType.number,
               prefixIcon: Icons.car_rental,
-              labelText: Constants.odometer,
+              labelText: ConstName.odometer,
               validator: (value) {
                 if (value!.isEmpty) {
                   return 'Please enter Odometer';
@@ -168,7 +165,7 @@ class MyCarFormState extends State<MyCarForm> {
               items: items,
               selectedValue: selectedValue,
               prefixIcon: Icons.menu_outlined,
-              labelText: Constants.fuletype,
+              labelText: ConstName.fuletype,
               onChanged: (newValue) {
                 setState(() {
                   selectedValue = newValue;
@@ -184,7 +181,7 @@ class MyCarFormState extends State<MyCarForm> {
                     focusNode: _focusNode2,
                     keyboardType: TextInputType.number,
                     prefixIcon: Icons.car_rental,
-                    labelText: Constants.price,
+                    labelText: ConstName.price,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter Price';
@@ -200,7 +197,7 @@ class MyCarFormState extends State<MyCarForm> {
                     focusNode: _focusNode3,
                     keyboardType: TextInputType.number,
                     prefixIcon: Icons.car_rental,
-                    labelText: Constants.totalCost,
+                    labelText: ConstName.totalCost,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter Total price';
@@ -216,7 +213,7 @@ class MyCarFormState extends State<MyCarForm> {
                     focusNode: _focusNode4,
                     keyboardType: TextInputType.number,
                     prefixIcon: Icons.car_rental,
-                    labelText: Constants.gallon,
+                    labelText: ConstName.gallon,
                   ),
                 ),
               ],
@@ -226,7 +223,7 @@ class MyCarFormState extends State<MyCarForm> {
               controller: _controller7,
               focusNode: _focusNode5,
               prefixIcon: Icons.attach_money,
-              labelText: Constants.gasStation,
+              labelText: ConstName.gasStation,
             ),
             const SizedBox(height: 6.0),
             // Payment method
@@ -234,7 +231,7 @@ class MyCarFormState extends State<MyCarForm> {
               items: cashM,
               selectedValue: selectedvalu2,
               prefixIcon: Icons.menu_outlined,
-              labelText: Constants.paymentMethod,
+              labelText: ConstName.paymentMethod,
               onChanged: (newValue) {
                 setState(() {
                   selectedvalu2 = newValue;
@@ -246,7 +243,7 @@ class MyCarFormState extends State<MyCarForm> {
               controller: _controller8,
               focusNode: _focusNode6,
               prefixIcon: Icons.attach_money,
-              labelText: Constants.reason,
+              labelText: ConstName.reason,
             ),
             const SizedBox(height: 25.0),
             // Button
@@ -261,6 +258,7 @@ class MyCarFormState extends State<MyCarForm> {
                   final odometer = _parseToInt(_controller3.text.trim());
                   final typeFuel = selectedValue;
                   final price = _parseToInt(_controller4.text.trim());
+                  final gasStation = _controller7.text;
                   final paymentMethod = selectedvalu2;
                   final reason = _controller5.text.trim();
 
@@ -271,12 +269,12 @@ class MyCarFormState extends State<MyCarForm> {
                     odometer: odometer,
                     typeFuel: typeFuel,
                     price: price,
+                    gasStation: gasStation,
                     paymentMethod: paymentMethod,
                     reason: reason,
                   );
 
                   // adding the Data
-                  // int carDataValue = await getCarData();
                   await refuleRefule.updateUserRefuel(updatedRefuel);
 
                   // Navigation to the next page
@@ -292,7 +290,7 @@ class MyCarFormState extends State<MyCarForm> {
                 backgroundColor: AppColors.orange,
               ),
               child: const Text(
-                Constants.done,
+                ConstName.done,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,

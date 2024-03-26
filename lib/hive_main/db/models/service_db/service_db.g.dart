@@ -24,13 +24,14 @@ class ServiceModelAdapter extends TypeAdapter<ServiceModel> {
       place: fields[4] as String?,
       paymentMethod: fields[5] as String?,
       reason: fields[6] as String?,
+      value: fields[7] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ServiceModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.date)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class ServiceModelAdapter extends TypeAdapter<ServiceModel> {
       ..writeByte(5)
       ..write(obj.paymentMethod)
       ..writeByte(6)
-      ..write(obj.reason);
+      ..write(obj.reason)
+      ..writeByte(7)
+      ..write(obj.value);
   }
 
   @override

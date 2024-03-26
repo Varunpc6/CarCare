@@ -1,3 +1,4 @@
+import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/core/utils/image_constant.dart';
 import 'package:car_maintanance/core/utils/responsive_screens.dart';
@@ -46,13 +47,11 @@ class OnBoardingThirdScreen extends StatelessWidget {
               ),
               // Content Stack
               Positioned(
-                // Adjusted for responsiveness
-                left: ResSize.left15(context), // Adjusted for responsiveness
-                top: ResSize.top34(context),
+                left: ResSize.left15(context),
+                top: ResSize.top25(context),
                 child: SizedBox(
-                  // Adjusted for responsiveness
-                  width: ResSize.width7(context), // Adjusted for responsiveness
-                  height: ResSize.height3(context),
+                  width: ResSize.width7(context),
+                  height: ResSize.height55(context),
                   child: Stack(
                     children: [
                       // Main Container
@@ -60,9 +59,8 @@ class OnBoardingThirdScreen extends StatelessWidget {
                         left: ResSize.left(context),
                         top: ResSize.height05(context),
                         child: Container(
-                          // Adjusted for responsiveness
                           width: ResSize.width7(context),
-                          height: ResSize.height25(context),
+                          height: ResSize.height35(context),
                           decoration: ShapeDecoration(
                             color: AppColors.bgWhite,
                             shape: RoundedRectangleBorder(
@@ -72,6 +70,32 @@ class OnBoardingThirdScreen extends StatelessWidget {
                               ),
                               borderRadius: BorderRadius.circular(16),
                             ),
+                          ),
+                          // Head Text
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                ConstName.text5,
+                                style: TextStyle(
+                                  color: AppColors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              // Sub text
+                              Text(
+                                ConstName.text6,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: AppColors.black,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                                  height: 1.2,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -87,60 +111,21 @@ class OnBoardingThirdScreen extends StatelessWidget {
                               Container(
                                 width: ResSize.width40(context),
                                 height: ResSize.height40(context),
-                                decoration: const ShapeDecoration(
+                                decoration: ShapeDecoration(
                                   color: AppColors.circleBgWhite,
-                                  shape: OvalBorder(
+                                  shape: const OvalBorder(
                                     side: BorderSide(
                                       width: 2,
                                       color: AppColors.primary,
                                     ),
                                   ),
-                                ),
-                              ),
-                              // Rotated Image
-                              Positioned(
-                                right: ResSize.right04(context),
-                                bottom: ResSize.dotBottom02(context),
-                                child: Container(
-                                  width: ResSize.width14(context),
-                                  height: ResSize.height09(context),
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage(ImageConstant.imgR3),
-                                      fit: BoxFit.fill,
-                                    ),
+                                  image: DecorationImage(
+                                    image: AssetImage(ImageConstant.imgR3),
+                                    fit: BoxFit.none,
                                   ),
                                 ),
                               ),
                             ],
-                          ),
-                        ),
-                      ),
-                      // Head Text
-                      Positioned(
-                        left: ResSize.left06(context),
-                        top: ResSize.top25(context),
-                        child: const Text(
-                          'Control expenses',
-                          style: TextStyle(
-                            color: AppColors.black,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                      ),
-                      // Sub Title
-                      Positioned(
-                        left: ResSize.left07(context),
-                        top: ResSize.top20(context),
-                        child: const Text(
-                          'Record all refueling, expenses, income\nand any other costs related to your\nvehicle.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: AppColors.black,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                            height: 1.2,
                           ),
                         ),
                       ),
@@ -172,7 +157,7 @@ class OnBoardingThirdScreen extends StatelessWidget {
                     ),
                     child: const Center(
                       child: Text(
-                        'Skip',
+                        ConstName.skip,
                         style: TextStyle(
                           color: AppColors.primary,
                           fontSize: 16,

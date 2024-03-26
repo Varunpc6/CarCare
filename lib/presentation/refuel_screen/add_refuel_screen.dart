@@ -58,7 +58,7 @@ class AddRefuelPage extends StatelessWidget {
                 child: const Row(
                   children: [
                     Text(
-                      Constants.refule,
+                      ConstName.refule,
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 22.0,

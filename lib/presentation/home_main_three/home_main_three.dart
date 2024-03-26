@@ -1,3 +1,4 @@
+import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:flutter/material.dart';
 
 class PageThree extends StatefulWidget {
@@ -121,7 +122,7 @@ class _PageThreeState extends State<PageThree> {
                           backgroundColor: Colors.orange,
                         ),
                         child: const Text(
-                          'Done',
+                          ConstName.done,
                           style: TextStyle(fontSize: 18),
                         ),
                       ),

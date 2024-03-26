@@ -47,6 +47,15 @@ class DataCar extends StatelessWidget {
                     DataColumn(
                       label: Text("Services"),
                     ),
+                    DataColumn(
+                      label: Text("Route"),
+                    ),
+                    DataColumn(
+                      label: Text("Income"),
+                    ),
+                    DataColumn(
+                      label: Text("Expense"),
+                    ),
                   ],
                   rows: users.map((user) {
                     return DataRow(
@@ -78,6 +87,21 @@ class DataCar extends StatelessWidget {
                         DataCell(
                           Text(user.services != null
                               ? user.services!.length.toString()
+                              : 'no'),
+                        ),
+                        DataCell(
+                          Text(user.route != null
+                              ? user.route!.length.toString()
+                              : 'no'),
+                        ),
+                        DataCell(
+                          Text(user.income != null
+                              ? user.income!.length.toString()
+                              : 'no'),
+                        ),
+                        DataCell(
+                          Text(user.expenses != null
+                              ? user.expenses!.length.toString()
                               : 'no'),
                         ),
                       ],

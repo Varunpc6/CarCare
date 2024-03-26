@@ -1,3 +1,4 @@
+import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:car_maintanance/core/utils/image_constant.dart';
 import 'package:car_maintanance/hive_main/db/db_functions/user_from.dart';
 import 'package:car_maintanance/hive_main/db/models/user_db_reg/user_main_db.dart';
@@ -163,9 +164,9 @@ class _PageFourState extends State<PageFour> {
     );
   }
 
-  // Remove data for the 'nameUser' key from SharedPreferences
+  // Remove data for the ConstName.prefText1 key from SharedPreferences
   Future<void> removeNameUserFromSharedPreferences() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove('nameUser');
+    await prefs.remove(ConstName.prefText1);
   }
 }
