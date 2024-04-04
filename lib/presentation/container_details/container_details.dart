@@ -86,12 +86,6 @@ class DetailsScreen extends StatelessWidget {
                             Text("$refuelDate : $refuelTime"),
                           ]),
                         ),
-                        // IconButton(
-                        //     onPressed: () {},
-                        //     icon: const Icon(
-                        //       Icons.arrow_forward_ios,
-                        //       color: AppColors.orange,
-                        //     )),
                       ],
                     ),
                   ]),

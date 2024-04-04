@@ -74,7 +74,7 @@ class _RefuelListScreenState extends State<RefuelListScreen> {
       ConstName.refule: refuelModel,
     };
 
-    Navigator.pushNamed(
+    Navigator.pushReplacementNamed(
       context,
       AppRoutes.containerDetailsScreen,
       arguments: arguments,

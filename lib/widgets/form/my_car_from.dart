@@ -105,10 +105,10 @@ class MyCarFormState extends State<MyCarForm> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             //-*-----------------------------*-
-            Text(
-              carNameNotifier.value,
-              style: TextStyle(color: AppColors.red),
-            ),
+            // Text(
+            //   carNameNotifier.value,
+            //   style: TextStyle(color: AppColors.red),
+            // ),
             //-*-----------------------------*-
             Row(
               children: [

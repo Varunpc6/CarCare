@@ -102,14 +102,13 @@ class User {
         incomeNotifier.value.addAll(element.income!);
         expenseNotifier.value.addAll(element.expenses!);
         routeNotifier.value.addAll(element.route!);
+        refuelNotifier.notifyListeners();
+        serviceNotifier.notifyListeners();
+        incomeNotifier.notifyListeners();
+        expenseNotifier.notifyListeners();
+        routeNotifier.notifyListeners();
       }
     });
-
-    refuelNotifier.notifyListeners();
-    serviceNotifier.notifyListeners();
-    incomeNotifier.notifyListeners();
-    expenseNotifier.notifyListeners();
-    routeNotifier.notifyListeners();
   }
 
   // Get helper function
