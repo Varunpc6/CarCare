@@ -33,7 +33,8 @@ class ConstName {
   static const fuletype = 'Fuel type';
   static const mainTank = 'MAIN TANK';
   static const odometer = 'Odometer';
-  static const userName = "Username";
+  static const user = 'User';
+  static const userName = "${user}name";
   static const carName = 'Carvalue';
   static const firtCar = 'firstCar';
   static const service = 'Service';
@@ -57,4 +58,22 @@ class ConstName {
   static const skip = 'skip';
   static const brand = 'Brand';
   static const volume = 'Volume';
+  static const empty = "empty";
+  static const refuelEmpty = '$refule $empty';
+  static const serviceEmpty = '$service $empty';
+  static const incomeEmpty = '$income $empty';
+  static const expenseEmpty = '$expense $empty';
+  static const documentEmpty = '$document $empty';
+  static const routeEmpty = '$route $empty';
+  static const remindeEmpty = "$reminders $empty";
+  static const carDetails = 'carDetails';
+  static const totalOdometer = 'Total Odometer';
+  static const editText = "Edit Your";
+  static const editName = '$editText Name';
+  static const editCarName = "$editText Carname";
+  static const editBrandName = '$editText Brandname';
+  static const editModel = '$editText Car Model';
+  static const cancel = 'Cancel';
+  static const vehicle = 'Vehicle';
+  static const document = 'Document';
 }

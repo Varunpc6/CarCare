@@ -1,11 +1,13 @@
+import 'package:car_maintanance/hive_main/db/models/documents_db/document_db.dart';
 import 'package:car_maintanance/hive_main/db/models/expense_db/expense_db.dart';
 import 'package:car_maintanance/hive_main/db/models/income_db/income_db.dart';
 import 'package:car_maintanance/hive_main/db/models/refuel_db/refuel_db.dart';
+import 'package:car_maintanance/hive_main/db/models/reminder_db/reminder_db.dart';
 import 'package:car_maintanance/hive_main/db/models/route_db/route_db.dart';
 import 'package:car_maintanance/hive_main/db/models/service_db/service_db.dart';
 import 'package:hive/hive.dart';
 
-part 'user_main_db.g.dart';
+ part 'user_main_db.g.dart';
 
 @HiveType(typeId: 1)
 class MainBoxUser extends HiveObject {
@@ -57,6 +59,12 @@ class MainBoxUser extends HiveObject {
   @HiveField(15)
   int? id;
 
+  @HiveField(16)
+  List<ReminderModel>? reminder = [];
+
+  @HiveField(17)
+  List<DocumentModel>? document = [];
+
   MainBoxUser({
     this.userName,
     this.carName,
@@ -73,6 +81,8 @@ class MainBoxUser extends HiveObject {
     this.services,
     this.route,
     this.income,
+    this.reminder,
+    this.document,
     this.id,
   });
 }

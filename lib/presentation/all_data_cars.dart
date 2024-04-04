@@ -3,7 +3,7 @@ import 'package:car_maintanance/hive_main/db/db_functions/user_from.dart';
 import 'package:car_maintanance/hive_main/db/models/user_db_reg/user_main_db.dart';
 
 class DataCar extends StatelessWidget {
-  const DataCar({Key? key});
+  const DataCar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +56,9 @@ class DataCar extends StatelessWidget {
                     DataColumn(
                       label: Text("Expense"),
                     ),
+                    DataColumn(
+                      label: Text("Document"),
+                    ),
                   ],
                   rows: users.map((user) {
                     return DataRow(
@@ -102,6 +105,11 @@ class DataCar extends StatelessWidget {
                         DataCell(
                           Text(user.expenses != null
                               ? user.expenses!.length.toString()
+                              : 'no'),
+                        ),
+                        DataCell(
+                          Text(user.document != null
+                              ? user.document!.length.toString()
                               : 'no'),
                         ),
                       ],

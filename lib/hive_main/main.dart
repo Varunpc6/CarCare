@@ -1,9 +1,11 @@
-import 'package:car_maintanance/hive_main/db/models/user_db_reg/user_main_db.dart';
+
+import 'package:car_maintanance/hive_main/db/models/documents_db/document_db.dart';
 import 'package:car_maintanance/hive_main/db/models/expense_db/expense_db.dart';
 import 'package:car_maintanance/hive_main/db/models/income_db/income_db.dart';
 import 'package:car_maintanance/hive_main/db/models/refuel_db/refuel_db.dart';
 import 'package:car_maintanance/hive_main/db/models/route_db/route_db.dart';
 import 'package:car_maintanance/hive_main/db/models/service_db/service_db.dart';
+import 'package:car_maintanance/hive_main/db/models/user_db_reg/user_main_db.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 Future<void> setupHive() async {
@@ -34,4 +36,8 @@ Future<void> setupHive() async {
   if (!Hive.isAdapterRegistered(IncomeModelAdapter().typeId)) {
     Hive.registerAdapter(IncomeModelAdapter());
   }
+  if (!Hive.isAdapterRegistered(DocumentModelAdapter().typeId)) {
+    Hive.registerAdapter(DocumentModelAdapter());
+  }
+  
 }

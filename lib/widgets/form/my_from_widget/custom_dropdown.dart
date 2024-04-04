@@ -20,6 +20,12 @@ class CustomDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
+      validator: (value) {
+        if (value ==null) {
+          return 'Please enter Odometer';
+        }
+        return null;
+      },
       value: selectedValue,
       items: items.map((String value) {
         return DropdownMenuItem<String>(

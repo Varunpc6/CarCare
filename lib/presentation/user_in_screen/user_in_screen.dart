@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/core/utils/responsive_screens.dart';
@@ -8,7 +6,7 @@ import 'package:car_maintanance/page_session/user_in_screen/background_image.dar
 import 'package:car_maintanance/page_session/user_in_screen/circular_image.dart';
 import 'package:car_maintanance/page_session/user_in_screen/text_field_model.dart';
 import 'package:car_maintanance/routes/app_routes.dart';
-import 'package:car_maintanance/widgets/home_screen/car_card/current_car_widget.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/car_card/current_car_widget.dart';
 import 'package:car_maintanance/widgets/on_bording_screens/box_decoration_widget.dart';
 import 'package:car_maintanance/widgets/user_in_widget/user_in_widget.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -29,17 +27,17 @@ class _UserInScreenState extends State<UserInScreen> {
   final User registerUser = User();
 
   // Text controller
-  final TextEditingController userNameController = TextEditingController();
-  final TextEditingController carNameController = TextEditingController();
-  final TextEditingController brandNameController = TextEditingController();
-  final TextEditingController modelNameController = TextEditingController();
+  final userNameController = TextEditingController();
+  final carNameController = TextEditingController();
+  final brandNameController = TextEditingController();
+  final modelNameController = TextEditingController();
 
   // TextField focus Auto jump
-  FocusNode focusOne = FocusNode();
-  FocusNode focusTwo = FocusNode();
-  FocusNode focusThree = FocusNode();
-  FocusNode focusFour = FocusNode();
-  FocusNode focusBtn = FocusNode();
+  final focusOne = FocusNode();
+  final focusTwo = FocusNode();
+  final focusThree = FocusNode();
+  final focusFour = FocusNode();
+  final focusBtn = FocusNode();
 
   // From field
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -50,7 +48,7 @@ class _UserInScreenState extends State<UserInScreen> {
     // -for Login time-
     await prefs.setString(ConstName.prefText1, userNameController.text);
     // -first car Activation-
-    await prefs.setStringList(ConstName.firtCar, ['1', brandName]);
+    await prefs.setStringList(ConstName.firtCar, [brandName, '1']);
 
     carNameNotifier.value = brandName;
     carNameNotifier.notifyListeners();

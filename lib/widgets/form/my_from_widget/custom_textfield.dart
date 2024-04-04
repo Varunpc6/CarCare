@@ -7,6 +7,8 @@ class CustomTextField extends StatelessWidget {
   final String labelText;
   final TextInputType? keyboardType; // Change to TextInputType
   final String? Function(String?)? validator;
+  final ValueChanged<String>? onChange; // New property for onChanged callback
+  // final bool? readOnly; // New property for readOnly
 
   const CustomTextField({
     super.key,
@@ -16,6 +18,8 @@ class CustomTextField extends StatelessWidget {
     required this.labelText,
     this.keyboardType, // Change to TextInputType
     this.validator,
+    this.onChange,
+    // this.readOnly,
   });
 
   @override
@@ -45,6 +49,9 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         validator: validator,
+        onChanged: onChange, // Pass onChanged callback to TextFormField
+        // readOnly: readOnly ??
+        //     false, // Set readOnly property of TextFormField based on the provided value, defaulting to false if not provided
       ),
     );
   }

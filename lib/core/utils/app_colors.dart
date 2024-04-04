@@ -15,6 +15,7 @@ class AppColors {
   static const Color bgWhite = Color(0xCCD3D3D3);
   static const Color whitesf5 = Color(0xFFF5F5F5);
   static const Color orange225 = Color.fromARGB(225, 43, 26, 0);
+  static const Color bgShd1 = Color.fromARGB(114, 67, 65, 62);
 
   // DropDown
   static const Color ddownBg = Color.fromARGB(255, 255, 255, 255);
@@ -24,6 +25,8 @@ class AppColors {
   // Shade Color
   static Color ornages500 = Colors.orange.shade500;
   static Color blackSh1 = Colors.black26;
+  static Color? grey525 = Colors.grey[525];
+  static const Color blackSh2 = Color.fromARGB(255, 0, 0, 0);
 }
 
 // Gradtients colors

@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:car_maintanance/constants/constants_cust.dart';
-import 'package:car_maintanance/widgets/home_screen/car_card/current_car_widget.dart';
+import 'package:car_maintanance/hive_main/db/db_functions/user_from.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/car_card/current_car_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
@@ -20,6 +21,7 @@ class SharedPref {
       //  NotifierListeners are notified of the change
       carNameNotifier.value = brandName;
       // carNameNotifier.notifyListeners();
+      User().setAllList();
     } catch (e) {
       log('Error in carBrand function: $e');
     }

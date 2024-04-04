@@ -1,24 +1,28 @@
 import 'package:car_maintanance/presentation/about_screen/about_screen.dart';
-import 'package:car_maintanance/presentation/container_Expense_Details_page/container_Expense_Details_page.dart';
-import 'package:car_maintanance/presentation/container_details/container_details.dart';
-import 'package:car_maintanance/presentation/container_income_details_page/container_income_details_page.dart';
-import 'package:car_maintanance/presentation/container_route_details_page/container_route_details_page.dart';
-import 'package:car_maintanance/presentation/container_service_details_page/container_service_details_page.dart';
-import 'package:car_maintanance/presentation/current_car_screen/current_car_screen.dart';
-import 'package:car_maintanance/presentation/edit_car_screen/edit_car_screen.dart';
-import 'package:car_maintanance/presentation/expense_list_screen%20copy/expense_list_page.dart';
-import 'package:car_maintanance/presentation/expense_screen/add_expense_screen.dart';
-import 'package:car_maintanance/presentation/home_page/home_screen.dart';
-import 'package:car_maintanance/presentation/income_list_screen%20copy/income_list_page.dart';
-import 'package:car_maintanance/presentation/income_screen/add_income_screen.dart';
-import 'package:car_maintanance/presentation/my_account_screen/my_account_screen.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/list_side/document_list_screen/document_list_page.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/list_side/document_list_screen/document_showing_page/document_showing_screen.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/list_side/document_list_screen/floating_button_document_add/add_document_page.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/sub_list_side/container_details/container_details.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/sub_list_side/container_expense_details_page/container_expense_details_page.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/sub_list_side/container_income_details_page/container_income_details_page.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/sub_list_side/container_route_details_page/container_route_details_page.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/sub_list_side/container_service_details_page/container_service_details_page.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/car_card/current_car_screen/current_car_screen.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/car_card/current_car_screen/multi_car_screen/edit_car_screen/edit_car_screen.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/list_side/expense_list_screen/expense_list_page.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/home_page/forms_screen/expense_screen/add_expense_screen.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/home_page/forms_screen/reminder_screen/add_reminder_screen.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/home_page/home_screen.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/list_side/income_list_screen/income_list_page.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/home_page/forms_screen/income_screen/add_income_screen.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/fourth_screen/home_main_four/my_account_screen/my_account_screen.dart';
 import 'package:car_maintanance/presentation/on_boarding_screen_main.dart/on_boarding_screen_main.dart';
-import 'package:car_maintanance/presentation/refuel_list_page/refuel_list_screen.dart';
-import 'package:car_maintanance/presentation/refuel_screen/add_refuel_screen.dart';
-import 'package:car_maintanance/presentation/route_list_screen/route_list_page.dart';
-import 'package:car_maintanance/presentation/route_screen/add_route_screen.dart';
-import 'package:car_maintanance/presentation/service_list_screen/service_list_page.dart';
-import 'package:car_maintanance/presentation/service_screen/add_service_screen.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/list_side/refuel_list_page/refuel_list_screen.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/home_page/forms_screen/refuel_screen/add_refuel_screen.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/list_side/route_list_screen/route_list_page.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/home_page/forms_screen/route_screen/add_route_screen.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/list_side/service_list_screen/service_list_page.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/home_page/forms_screen/service_screen/add_service_screen.dart';
 import 'package:car_maintanance/presentation/settings_screen/settings_screen_main.dart';
 import 'package:car_maintanance/presentation/show_car_screen/show_car_detail_screen.dart';
 import 'package:car_maintanance/presentation/splash_screen/splash_screen.dart';
@@ -54,6 +58,8 @@ class AppRoutes {
 
   static String addRouteScreen = '/add_route_screen';
 
+  static String addReminderScreen = '/add_reminder_screen';
+
   static String showCarDetailScreen = '/show_car_detail_screen';
 
   static String containerDetailsScreen = '/container_details';
@@ -78,6 +84,12 @@ class AppRoutes {
 
   static const containerRouteDetailsScreen = '/container_route_details_page';
 
+  static const documentListScreen = '/container_document_details_page';
+
+  static const addDocumentScreen = '/add_document_page';
+
+  static const documentShowScreen = '/document_showing_screen';
+
   static Map<String, WidgetBuilder> routes = {
     splashScreen: (context) => const SplashScreen(),
     onBordingScreen: (context) => OnboardingPageState(),
@@ -93,6 +105,7 @@ class AppRoutes {
     addIncomeScreen: (context) => const AddIncomePage(),
     addServiceScreen: (context) => const AddServicePage(),
     addRouteScreen: (context) => const AddRoutePage(),
+    addReminderScreen: (context) => const AddReminderPage(),
     showCarDetailScreen: (context) => const ShowCarDetails(),
     containerDetailsScreen: (context) => const DetailsScreen(),
     refuelListScreen: (context) => const RefuelListScreen(),
@@ -100,9 +113,12 @@ class AppRoutes {
     expenseListScreen: (context) => const ExpenseListScreen(),
     incomeListScreen: (context) => const IncomeListScreen(),
     routeListScreen: (context) => const RouteListScreen(),
+    documentListScreen: (context) => const DocumentListScreen(),
     containerExpenseDetailsScreen: (context) => const ExpenseDetailsScreen(),
     containerServiceDetailsScreen: (context) => const ServiceDetailsScreen(),
     containerIncomeDetailsScreen: (context) => const IncomeDetailsScreen(),
     containerRouteDetailsScreen: (context) => const RouteDetailsScreen(),
+    addDocumentScreen: (context) => const AddDocumentScreen(),
+    documentShowScreen: (context) => const DocumentShowPage(),
   };
 }
