@@ -89,24 +89,7 @@ class _CarCardState extends State<CarCard> {
     );
   }
 
-  // Future<void> firstCar() async {
-  //   try {
-  //     final prefs = await SharedPreferences.getInstance();
-  //     List<String>? data = prefs.getStringList(Constants.firtCar);
-
-  //     if (data != null && data.length > 1) {
-  //       String brandName = data[1];
-  //       log("Brand name retrieved from shared preferences: $brandName");
-  //       // carNameNotifier.value = brandName;
-  //       // carNameNotifier.notifyListeners();
-  //     } else {
-  //       log('Error: No or insufficient data found in shared preferences');
-  //       // Handle the case where there are no elements or only one element in the list
-  //     }
-  //   } catch (e) {
-  //     log('Error in firstCar function: $e');
-  //   }
-  // }
+ 
 
   Future<void> showCarName() async {
     try {
@@ -127,21 +110,7 @@ class _CarCardState extends State<CarCard> {
     }
   }
 
-  // Future<void> firstCar() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   List<String>? data1 = await prefs.getStringList(Constants.firtCar);
-  //   final String carCar = data1![0];
-  // }
-
-  // Future<void> showCarName() async {
-  //   final String storedCarName = SharedPref().toString();
-  //   setState(() {
-  //     carName = storedCarName;
-  //   });
-
-  //   // Handle any errors that occur during SharedPreferences access
-  //   print('Error in showCarName function: $carName');
-  // }
+  
 
   /// click Next Button
   onTapNext(BuildContext context) {

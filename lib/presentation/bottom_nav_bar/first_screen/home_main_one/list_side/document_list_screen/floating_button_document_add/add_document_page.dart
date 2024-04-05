@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:car_maintanance/core/utils/app_colors.dart';
-import 'package:car_maintanance/hive_main/db/db_functions/document_form.dart';
 import 'package:car_maintanance/hive_main/db/db_functions/user_from.dart';
 import 'package:car_maintanance/hive_main/db/models/documents_db/document_db.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +42,7 @@ class _AddDocumentScreenState extends State<AddDocumentScreen> {
         const SnackBar(content: Text('Please add an image.')),
       );
     } else {
+      // Extract required variables outside the async function
       final updatedDocument = DocumentModel(
         nameDoc: selectedDocumentType,
         imageDoc: _imageString,
@@ -50,6 +50,7 @@ class _AddDocumentScreenState extends State<AddDocumentScreen> {
 
       // store the data
       await documentData.updateUserDocument(updatedDocument);
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
     }
   }

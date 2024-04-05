@@ -2,7 +2,7 @@ import 'package:car_maintanance/constants/constants_cust.dart';
 import 'package:car_maintanance/core/utils/app_colors.dart';
 import 'package:car_maintanance/core/utils/image_constant.dart';
 import 'package:car_maintanance/core/utils/responsive_screens.dart';
-import 'package:car_maintanance/presentation/all_data_cars.dart';
+// import 'package:car_maintanance/presentation/all_data_cars.dart';
 import 'package:car_maintanance/routes/app_routes.dart';
 import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/car_card/current_car_widget.dart';
 import 'package:flutter/material.dart';
@@ -68,14 +68,14 @@ class _PageOneState extends State<PageOne> {
                 onPressed: _toggleView,
                 icon: Icon(_isListView ? Icons.grid_view : Icons.list),
               ),
-              // Data inputShowing
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => const DataCar()));
-                },
-                child: const Text('Car Details'),
-              ),
+              // // Data inputShowing
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.of(context).push(
+              //         MaterialPageRoute(builder: (context) => const DataCar()));
+              //   },
+              //   child: const Text('Car Details'),
+              // ),
             ],
           ),
           const SizedBox(

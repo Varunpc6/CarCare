@@ -25,8 +25,8 @@ ValueNotifier<List<DocumentModel>> documentNotifier = ValueNotifier([]);
 
 class User {
   //creating singleton for making the class instances common
-  User._internal();
-  static User instance = User._internal();
+  User.internal();
+  static User instance = User.internal();
   factory User() {
     return instance;
   }
@@ -347,6 +347,7 @@ class User {
     final list = pref.getStringList(ConstName.carName);
     MainBoxUser? data;
     int sum = 0;
+    int routeOdometer = 0;
     await Future.forEach(box.values, (element) {
       if (element.id == int.parse(list![1])) {
         data = element;
@@ -369,9 +370,11 @@ class User {
       sum = sum + element.odometer!;
     });
 
-    // await Future.forEach(data!.route!, (element) {
-    //   sum = sum + element.finalOdometer!;
-    // });
+    await Future.forEach(data!.route!, (element) {
+      routeOdometer = element.finalOdometer! - element.initialOdometer!;
+      sum = sum + routeOdometer;
+    });
+    log(routeOdometer.toString());
     log(sum.toString());
     return sum;
   }
@@ -702,9 +705,7 @@ class User {
 // count of the totalData
   Future<int> getAllDataCount() async {
     final box = await Hive.openBox<MainBoxUser>('user_box');
-
     final pref = await SharedPreferences.getInstance();
-
     final list = pref.getStringList(ConstName.carName);
     MainBoxUser? data;
     int count = 0;
@@ -730,9 +731,9 @@ class User {
       count = count + 1;
     });
 
-    // await Future.forEach(data!.route!, (element) {
-    //   count = count + 1;
-    // });
+    await Future.forEach(data!.route!, (element) {
+      count = count + 1;
+    });
 
     // log(count.toString());
     return count;
@@ -785,9 +786,8 @@ class User {
     await setAllList();
   }
 
-
 // Document Delete
-Future<void> checkDeleteDocument(DocumentModel data) async {
+  Future<void> checkDeleteDocument(DocumentModel data) async {
     final box = await Hive.openBox<MainBoxUser>('user_box');
     final pref = await SharedPreferences.getInstance();
     final list = pref.getStringList(ConstName.carName);
