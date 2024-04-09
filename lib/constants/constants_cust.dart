@@ -1,5 +1,5 @@
 class ConstName {
-  static const appName = 'CARCARE';
+  static const appName = 'AutoAura';
   static const text1 = 'Let’s Work with Carcare';
   static const text2 =
       'Now you can more quickly and easily track the expenses of your vehicle.';

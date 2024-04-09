@@ -702,42 +702,7 @@ class User {
     }
   }
 
-// count of the totalData
-  Future<int> getAllDataCount() async {
-    final box = await Hive.openBox<MainBoxUser>('user_box');
-    final pref = await SharedPreferences.getInstance();
-    final list = pref.getStringList(ConstName.carName);
-    MainBoxUser? data;
-    int count = 0;
-    await Future.forEach(box.values, (element) {
-      if (element.id == int.parse(list![1])) {
-        data = element;
-      }
-    });
 
-    await Future.forEach(data!.refuels!, (element) {
-      count = count + 1;
-    });
-
-    await Future.forEach(data!.expenses!, (element) {
-      count = count + 1;
-    });
-
-    await Future.forEach(data!.income!, (element) {
-      count = count + 1;
-    });
-
-    await Future.forEach(data!.services!, (element) {
-      count = count + 1;
-    });
-
-    await Future.forEach(data!.route!, (element) {
-      count = count + 1;
-    });
-
-    // log(count.toString());
-    return count;
-  }
 
 // Delete function
   // Refuel Delete
