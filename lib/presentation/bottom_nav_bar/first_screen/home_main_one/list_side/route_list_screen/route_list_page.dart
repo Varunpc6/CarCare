@@ -53,7 +53,7 @@ class _RefuelListScreenState extends State<RouteListScreen> {
               itemCount: list.length,
               itemBuilder: (context, index) {
                 final data = list[index];
-                final count = index.toString();
+                final count = index + 1;
                 final origin = data.origin.toString();
                 final loc = data.destination.toString();
                 final date = data.startDate.toString();
@@ -80,7 +80,7 @@ class _RefuelListScreenState extends State<RouteListScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            count,
+                            count.toString(),
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w600,

@@ -10,6 +10,8 @@ import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_ma
 import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/car_card/current_car_screen/current_car_screen.dart';
 import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/car_card/current_car_screen/multi_car_screen/edit_car_screen/edit_car_screen.dart';
 import 'package:car_maintanance/presentation/bottom_nav_bar/first_screen/home_main_one/list_side/expense_list_screen/expense_list_page.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/fourth_screen/home_main_four/about_screen/privacy_policy/privacy_policy_screen.dart';
+import 'package:car_maintanance/presentation/bottom_nav_bar/fourth_screen/home_main_four/about_screen/terms_and_conditions/screen_termsconditions.dart';
 import 'package:car_maintanance/presentation/bottom_nav_bar/home_page/forms_screen/expense_screen/add_expense_screen.dart';
 import 'package:car_maintanance/presentation/bottom_nav_bar/home_page/forms_screen/reminder_screen/add_reminder_screen.dart';
 import 'package:car_maintanance/presentation/bottom_nav_bar/home_page/home_screen.dart';
@@ -90,6 +92,10 @@ class AppRoutes {
 
   static const documentShowScreen = '/document_showing_screen';
 
+  static const termsAndConditionScreen = 'screen_termsconditions';
+
+  static const privacyPolicyScreen = 'privacy_policy_screen';
+
   static Map<String, WidgetBuilder> routes = {
     splashScreen: (context) => const SplashScreen(),
     onBordingScreen: (context) => OnboardingPageState(),
@@ -98,6 +104,8 @@ class AppRoutes {
     myAccountScreen: (context) => const MyAccountScreen(),
     settingsScreen: (context) => const SettingsScreen(),
     aboutScreen: (context) => const AboutScreen(),
+    termsAndConditionScreen: (context) => const TermsAndConditions(),
+    privacyPolicyScreen: (context) => const PrivacyPolicyScreen(),
     currentCarScreen: (context) => const CurrentCarScreen(),
     editCarScreen: (context) => const EditCarScreen(),
     addRefuelScreen: (context) => const AddRefuelPage(),

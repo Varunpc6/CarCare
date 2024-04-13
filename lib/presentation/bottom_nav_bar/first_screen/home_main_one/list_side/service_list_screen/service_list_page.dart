@@ -53,7 +53,7 @@ class _RefuelListScreenState extends State<ServiceListScreen> {
               itemCount: list.length,
               itemBuilder: (context, index) {
                 final data = list[index];
-                final count = index.toString();
+                final count = index + 1;
                 final date = data.date.toString();
                 final service = data.service.toString();
                 final time = data.time.toString();
@@ -80,7 +80,7 @@ class _RefuelListScreenState extends State<ServiceListScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            count,
+                            count.toString(),
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w600,

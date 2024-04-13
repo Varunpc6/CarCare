@@ -65,7 +65,7 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
               itemCount: list.length,
               itemBuilder: (context, index) {
                 final data = list[index];
-                final count = index.toString();
+                final count = index + 1;
                 final name = data.nameDoc.toString();
 
                 return GestureDetector(
@@ -90,7 +90,7 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            count,
+                            count.toString(),
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w600,

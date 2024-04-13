@@ -53,7 +53,7 @@ class _RefuelListScreenState extends State<IncomeListScreen> {
               itemCount: list.length,
               itemBuilder: (context, index) {
                 final data = list[index];
-                final count = index.toString();
+                final count = index + 1;
                 final date = data.date.toString();
                 final time = data.time.toString();
                 final value = data.value.toString();
@@ -79,7 +79,7 @@ class _RefuelListScreenState extends State<IncomeListScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            count,
+                            count.toString(),
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w600,

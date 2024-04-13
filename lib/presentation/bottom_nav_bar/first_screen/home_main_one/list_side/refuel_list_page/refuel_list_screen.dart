@@ -58,7 +58,7 @@ class _RefuelListScreenState extends State<RefuelListScreen> {
                 final data = list[index];
                 final time = data.time.toString();
                 final date = data.date;
-                final count = index.toString();
+                final count = index + 1;
                 final odometer = data.odometer.toString();
                 final price = data.price.toString();
 
@@ -82,7 +82,7 @@ class _RefuelListScreenState extends State<RefuelListScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            count,
+                            count.toString(),
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w600,
