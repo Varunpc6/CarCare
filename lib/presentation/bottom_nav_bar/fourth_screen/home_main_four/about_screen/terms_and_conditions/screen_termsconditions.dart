@@ -6,6 +6,7 @@ class TermsAndConditions extends StatelessWidget {
   const TermsAndConditions({super.key});
 
   // Replace this String with the actual text content from your image
+
   final String extractedText = '''
   Last updated April 13, 2024
 
@@ -14,7 +15,7 @@ class TermsAndConditions extends StatelessWidget {
   This is a sample agreement outlining the terms and conditions for using our app. By using our app, you agree to be bound by these terms.
 
   1. Scope of Agreement
-     These terms and conditions govern your use of our mobile application AutoAura.
+     These terms and conditions govern your use of our mobile application ERMUDE.
 
   2. User Conduct
      You agree to use the App in a lawful and respectful manner. Prohibited activities include:
@@ -41,7 +42,7 @@ class TermsAndConditions extends StatelessWidget {
      We may update these terms and conditions from time to time. Your continued use of the App following any such update constitutes your agreement to the revised terms.
 
   Please read these terms and conditions carefully before using the App. If you do not agree to these terms, you may not use the App.
-  ''';
+''';
 
   @override
   Widget build(BuildContext context) {
